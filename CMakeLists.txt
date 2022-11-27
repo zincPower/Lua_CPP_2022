@@ -3,7 +3,14 @@ project(Lua_CPP_2022)
 
 set(CMAKE_CXX_STANDARD 17)
 
+# 将 lua_lib/lua-5.4.4 目录添加至编译器的搜索目录中
+# 这样使用 Lua 的源文件时，#include 的文件路径就不需要使用 "lua_lib/lua-5.4.4" 了
+# 如果没有这一句，使用 "lua.hpp" ，就需要 #include "lua_lib/lua-5.4.4/lua.hpp"
+# 有了这一句，就只需要 #include "lua.hpp"
 include_directories(lua_lib/lua-5.4.4)
+# 将子目录添加到构建中
+# 参数 source_dir（ 即这里的 lua_lib ）指定源 CMakeLists.txt 和代码文件所在的目录
+# 这样就会把 lua_lib/CMakeLists.txt 加入到构建中
 add_subdirectory(lua_lib)
 
 add_executable(

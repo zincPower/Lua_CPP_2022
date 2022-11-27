@@ -1,5 +1,7 @@
+# 设置 LUA_DIR 指向 lua-5.4.4 目录
 set(LUA_DIR ${CMAKE_CURRENT_SOURCE_DIR}/lua-5.4.4)
 
+# 设置 Lua 源码
 set(LUA_RUNTIME_SOURCES
         "${LUA_DIR}/lapi.c"
         "${LUA_DIR}/lauxlib.c"
