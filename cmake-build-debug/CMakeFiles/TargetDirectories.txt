@@ -1,0 +1,6 @@
+/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/cmake-build-debug/CMakeFiles/Lua_CPP_2022.dir
+/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/cmake-build-debug/lua_lib/CMakeFiles/rebuild_cache.dir
+/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/cmake-build-debug/lua_lib/CMakeFiles/edit_cache.dir
+/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/cmake-build-debug/lua_lib/CMakeFiles/LuaLib.dir
