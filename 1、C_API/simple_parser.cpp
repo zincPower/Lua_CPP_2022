@@ -5,7 +5,6 @@
 #include "lua.hpp"
 
 void simpleParser() {
-
     char buff[256];
     int error;
     lua_State *L = luaL_newstate();

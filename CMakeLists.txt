@@ -16,12 +16,7 @@ add_subdirectory(lua_lib)
 add_executable(
         Lua_CPP_2022
         lua_study_main.cpp
-        simple_parser.cpp simple_parser.h
-        LuaStack.cpp
-        LuaSecureFun.cpp
-        extend/ConfigParser.cpp
         调用Lua函数/调用Lua函数.cpp
-        Error.cpp
         通用调用lua函数/call_va.cpp
         lua调用c/lua调用c.cpp
         lua调用c/LuaCallCDemo.cpp
@@ -43,3 +38,16 @@ add_executable(
 
 # 添加链接库
 target_link_libraries(Lua_CPP_2022 LuaLib)
+
+add_executable(
+        C_API
+        1、C_API/c_api_main.cpp
+        1、C_API/stack.cpp)
+target_link_libraries(C_API LuaLib)
+
+add_executable(
+        extend_application
+        2、扩展应用/config_parser.cpp
+        2、扩展应用/扩展应用_main.cpp
+)
+target_link_libraries(extend_application LuaLib)

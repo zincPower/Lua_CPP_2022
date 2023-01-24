@@ -4,7 +4,7 @@
 
 #include "newarray.h"
 #include "lua.hpp"
-#include "../../Error.h"
+#include "../../1、C_API/Error.h"
 #include <limits.h>
 #include <string>
 

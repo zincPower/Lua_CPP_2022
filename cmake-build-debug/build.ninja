@@ -64,6 +64,86 @@ build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
 build edit_cache: phony CMakeFiles/edit_cache.util
 
 # =============================================================================
+# Object build statements for EXECUTABLE target C_API
+
+
+#############################################
+# Order-only phony target for C_API
+
+build cmake_object_order_depends_target_C_API: phony || cmake_object_order_depends_target_LuaLib
+
+build CMakeFiles/C_API.dir/1、C_API/c_api_main.cpp.o: CXX_COMPILER__C_API_Debug /Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/1、C_API/c_api_main.cpp || cmake_object_order_depends_target_C_API
+  DEP_FILE = CMakeFiles/C_API.dir/1、C_API/c_api_main.cpp.o.d
+  FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk -std=gnu++17
+  INCLUDES = -I/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/lua_lib/lua-5.4.4
+  OBJECT_DIR = CMakeFiles/C_API.dir
+  OBJECT_FILE_DIR = CMakeFiles/C_API.dir/1、C_API
+
+build CMakeFiles/C_API.dir/1、C_API/stack.cpp.o: CXX_COMPILER__C_API_Debug /Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/1、C_API/stack.cpp || cmake_object_order_depends_target_C_API
+  DEP_FILE = CMakeFiles/C_API.dir/1、C_API/stack.cpp.o.d
+  FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk -std=gnu++17
+  INCLUDES = -I/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/lua_lib/lua-5.4.4
+  OBJECT_DIR = CMakeFiles/C_API.dir
+  OBJECT_FILE_DIR = CMakeFiles/C_API.dir/1、C_API
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target C_API
+
+
+#############################################
+# Link the executable C_API
+
+build C_API: CXX_EXECUTABLE_LINKER__C_API_Debug CMakeFiles/C_API.dir/1、C_API/c_api_main.cpp.o CMakeFiles/C_API.dir/1、C_API/stack.cpp.o | lua_lib/libLuaLib.dylib || lua_lib/libLuaLib.dylib
+  FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk
+  LINK_LIBRARIES = -Wl,-rpath,/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/cmake-build-debug/lua_lib  lua_lib/libLuaLib.dylib
+  OBJECT_DIR = CMakeFiles/C_API.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = C_API
+  TARGET_PDB = C_API.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target extend_application
+
+
+#############################################
+# Order-only phony target for extend_application
+
+build cmake_object_order_depends_target_extend_application: phony || cmake_object_order_depends_target_LuaLib
+
+build CMakeFiles/extend_application.dir/2、扩展应用/ConfigParser.cpp.o: CXX_COMPILER__extend_application_Debug /Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/2、扩展应用/ConfigParser.cpp || cmake_object_order_depends_target_extend_application
+  DEP_FILE = CMakeFiles/extend_application.dir/2、扩展应用/ConfigParser.cpp.o.d
+  FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk -std=gnu++17
+  INCLUDES = -I/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/lua_lib/lua-5.4.4
+  OBJECT_DIR = CMakeFiles/extend_application.dir
+  OBJECT_FILE_DIR = CMakeFiles/extend_application.dir/2、扩展应用
+
+build CMakeFiles/extend_application.dir/2、扩展应用/扩展应用_main.cpp.o: CXX_COMPILER__extend_application_Debug /Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/2、扩展应用/扩展应用_main.cpp || cmake_object_order_depends_target_extend_application
+  DEP_FILE = CMakeFiles/extend_application.dir/2、扩展应用/扩展应用_main.cpp.o.d
+  FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk -std=gnu++17
+  INCLUDES = -I/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/lua_lib/lua-5.4.4
+  OBJECT_DIR = CMakeFiles/extend_application.dir
+  OBJECT_FILE_DIR = CMakeFiles/extend_application.dir/2、扩展应用
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target extend_application
+
+
+#############################################
+# Link the executable extend_application
+
+build extend_application: CXX_EXECUTABLE_LINKER__extend_application_Debug CMakeFiles/extend_application.dir/2、扩展应用/ConfigParser.cpp.o CMakeFiles/extend_application.dir/2、扩展应用/扩展应用_main.cpp.o | lua_lib/libLuaLib.dylib || lua_lib/libLuaLib.dylib
+  FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk
+  LINK_LIBRARIES = -Wl,-rpath,/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/cmake-build-debug/lua_lib  lua_lib/libLuaLib.dylib
+  OBJECT_DIR = CMakeFiles/extend_application.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = extend_application
+  TARGET_PDB = extend_application.dbg
+
+# =============================================================================
 # Object build statements for EXECUTABLE target Lua_CPP_2022
 
 
@@ -79,47 +159,12 @@ build CMakeFiles/Lua_CPP_2022.dir/lua_study_main.cpp.o: CXX_COMPILER__Lua_CPP_20
   OBJECT_DIR = CMakeFiles/Lua_CPP_2022.dir
   OBJECT_FILE_DIR = CMakeFiles/Lua_CPP_2022.dir
 
-build CMakeFiles/Lua_CPP_2022.dir/simple_parser.cpp.o: CXX_COMPILER__Lua_CPP_2022_Debug /Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/simple_parser.cpp || cmake_object_order_depends_target_Lua_CPP_2022
-  DEP_FILE = CMakeFiles/Lua_CPP_2022.dir/simple_parser.cpp.o.d
-  FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk -std=gnu++17
-  INCLUDES = -I/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/lua_lib/lua-5.4.4
-  OBJECT_DIR = CMakeFiles/Lua_CPP_2022.dir
-  OBJECT_FILE_DIR = CMakeFiles/Lua_CPP_2022.dir
-
-build CMakeFiles/Lua_CPP_2022.dir/LuaStack.cpp.o: CXX_COMPILER__Lua_CPP_2022_Debug /Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/LuaStack.cpp || cmake_object_order_depends_target_Lua_CPP_2022
-  DEP_FILE = CMakeFiles/Lua_CPP_2022.dir/LuaStack.cpp.o.d
-  FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk -std=gnu++17
-  INCLUDES = -I/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/lua_lib/lua-5.4.4
-  OBJECT_DIR = CMakeFiles/Lua_CPP_2022.dir
-  OBJECT_FILE_DIR = CMakeFiles/Lua_CPP_2022.dir
-
-build CMakeFiles/Lua_CPP_2022.dir/LuaSecureFun.cpp.o: CXX_COMPILER__Lua_CPP_2022_Debug /Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/LuaSecureFun.cpp || cmake_object_order_depends_target_Lua_CPP_2022
-  DEP_FILE = CMakeFiles/Lua_CPP_2022.dir/LuaSecureFun.cpp.o.d
-  FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk -std=gnu++17
-  INCLUDES = -I/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/lua_lib/lua-5.4.4
-  OBJECT_DIR = CMakeFiles/Lua_CPP_2022.dir
-  OBJECT_FILE_DIR = CMakeFiles/Lua_CPP_2022.dir
-
-build CMakeFiles/Lua_CPP_2022.dir/extend/ConfigParser.cpp.o: CXX_COMPILER__Lua_CPP_2022_Debug /Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/extend/ConfigParser.cpp || cmake_object_order_depends_target_Lua_CPP_2022
-  DEP_FILE = CMakeFiles/Lua_CPP_2022.dir/extend/ConfigParser.cpp.o.d
-  FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk -std=gnu++17
-  INCLUDES = -I/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/lua_lib/lua-5.4.4
-  OBJECT_DIR = CMakeFiles/Lua_CPP_2022.dir
-  OBJECT_FILE_DIR = CMakeFiles/Lua_CPP_2022.dir/extend
-
 build CMakeFiles/Lua_CPP_2022.dir/调用Lua函数/调用Lua函数.cpp.o: CXX_COMPILER__Lua_CPP_2022_Debug /Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/调用Lua函数/调用Lua函数.cpp || cmake_object_order_depends_target_Lua_CPP_2022
   DEP_FILE = CMakeFiles/Lua_CPP_2022.dir/调用Lua函数/调用Lua函数.cpp.o.d
   FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk -std=gnu++17
   INCLUDES = -I/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/lua_lib/lua-5.4.4
   OBJECT_DIR = CMakeFiles/Lua_CPP_2022.dir
   OBJECT_FILE_DIR = CMakeFiles/Lua_CPP_2022.dir/调用Lua函数
-
-build CMakeFiles/Lua_CPP_2022.dir/Error.cpp.o: CXX_COMPILER__Lua_CPP_2022_Debug /Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/Error.cpp || cmake_object_order_depends_target_Lua_CPP_2022
-  DEP_FILE = CMakeFiles/Lua_CPP_2022.dir/Error.cpp.o.d
-  FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk -std=gnu++17
-  INCLUDES = -I/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/lua_lib/lua-5.4.4
-  OBJECT_DIR = CMakeFiles/Lua_CPP_2022.dir
-  OBJECT_FILE_DIR = CMakeFiles/Lua_CPP_2022.dir
 
 build CMakeFiles/Lua_CPP_2022.dir/通用调用lua函数/call_va.cpp.o: CXX_COMPILER__Lua_CPP_2022_Debug /Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/通用调用lua函数/call_va.cpp || cmake_object_order_depends_target_Lua_CPP_2022
   DEP_FILE = CMakeFiles/Lua_CPP_2022.dir/通用调用lua函数/call_va.cpp.o.d
@@ -220,7 +265,7 @@ build CMakeFiles/Lua_CPP_2022.dir/管理资源/file.cpp.o: CXX_COMPILER__Lua_CPP
 #############################################
 # Link the executable Lua_CPP_2022
 
-build Lua_CPP_2022: CXX_EXECUTABLE_LINKER__Lua_CPP_2022_Debug CMakeFiles/Lua_CPP_2022.dir/lua_study_main.cpp.o CMakeFiles/Lua_CPP_2022.dir/simple_parser.cpp.o CMakeFiles/Lua_CPP_2022.dir/LuaStack.cpp.o CMakeFiles/Lua_CPP_2022.dir/LuaSecureFun.cpp.o CMakeFiles/Lua_CPP_2022.dir/extend/ConfigParser.cpp.o CMakeFiles/Lua_CPP_2022.dir/调用Lua函数/调用Lua函数.cpp.o CMakeFiles/Lua_CPP_2022.dir/Error.cpp.o CMakeFiles/Lua_CPP_2022.dir/通用调用lua函数/call_va.cpp.o CMakeFiles/Lua_CPP_2022.dir/lua调用c/lua调用c.cpp.o CMakeFiles/Lua_CPP_2022.dir/lua调用c/LuaCallCDemo.cpp.o CMakeFiles/Lua_CPP_2022.dir/协程/CoroutineDemo.cpp.o CMakeFiles/Lua_CPP_2022.dir/库/库.cpp.o CMakeFiles/Lua_CPP_2022.dir/编写C函数技巧/LuaArray.cpp.o CMakeFiles/Lua_CPP_2022.dir/编写C函数技巧/LuaString.cpp.o CMakeFiles/Lua_CPP_2022.dir/编写C函数技巧/注册表.cpp.o CMakeFiles/Lua_CPP_2022.dir/编写C函数技巧/上值/上值.cpp.o CMakeFiles/Lua_CPP_2022.dir/编写C函数技巧/tuple/tuplelib.cpp.o CMakeFiles/Lua_CPP_2022.dir/编写C函数技巧/共享上值/共享上值.cpp.o CMakeFiles/Lua_CPP_2022.dir/用户自定义类型/用户数据/newarray.cpp.o CMakeFiles/Lua_CPP_2022.dir/管理资源/file.cpp.o | lua_lib/libLuaLib.dylib || lua_lib/libLuaLib.dylib
+build Lua_CPP_2022: CXX_EXECUTABLE_LINKER__Lua_CPP_2022_Debug CMakeFiles/Lua_CPP_2022.dir/lua_study_main.cpp.o CMakeFiles/Lua_CPP_2022.dir/调用Lua函数/调用Lua函数.cpp.o CMakeFiles/Lua_CPP_2022.dir/通用调用lua函数/call_va.cpp.o CMakeFiles/Lua_CPP_2022.dir/lua调用c/lua调用c.cpp.o CMakeFiles/Lua_CPP_2022.dir/lua调用c/LuaCallCDemo.cpp.o CMakeFiles/Lua_CPP_2022.dir/协程/CoroutineDemo.cpp.o CMakeFiles/Lua_CPP_2022.dir/库/库.cpp.o CMakeFiles/Lua_CPP_2022.dir/编写C函数技巧/LuaArray.cpp.o CMakeFiles/Lua_CPP_2022.dir/编写C函数技巧/LuaString.cpp.o CMakeFiles/Lua_CPP_2022.dir/编写C函数技巧/注册表.cpp.o CMakeFiles/Lua_CPP_2022.dir/编写C函数技巧/上值/上值.cpp.o CMakeFiles/Lua_CPP_2022.dir/编写C函数技巧/tuple/tuplelib.cpp.o CMakeFiles/Lua_CPP_2022.dir/编写C函数技巧/共享上值/共享上值.cpp.o CMakeFiles/Lua_CPP_2022.dir/用户自定义类型/用户数据/newarray.cpp.o CMakeFiles/Lua_CPP_2022.dir/管理资源/file.cpp.o | lua_lib/libLuaLib.dylib || lua_lib/libLuaLib.dylib
   FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk
   LINK_LIBRARIES = -Wl,-rpath,/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/cmake-build-debug/lua_lib  lua_lib/libLuaLib.dylib
   OBJECT_DIR = CMakeFiles/Lua_CPP_2022.dir
@@ -565,7 +610,7 @@ build libLuaLib.dylib: phony lua_lib/libLuaLib.dylib
 #############################################
 # Folder: /Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/cmake-build-debug
 
-build all: phony Lua_CPP_2022 lua_lib/all
+build all: phony C_API extend_application Lua_CPP_2022 lua_lib/all
 
 # =============================================================================
 

@@ -5,7 +5,7 @@
 #include <string>
 #include "上值.h"
 #include "lua.hpp"
-#include "../../Error.h"
+#include "../../1、C_API/Error.h"
 
 static int counter(lua_State *L) {
     int value = lua_tointeger(L, lua_upvalueindex(1));

@@ -5,7 +5,7 @@
 #include "XmlParser.h"
 #include "expat.h"
 #include "lua.hpp"
-#include "../Error.h"
+#include "../1、C_API/Error.h"
 #include <iostream>
 
 typedef struct lxp_userdata {

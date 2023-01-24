@@ -3,25 +3,6 @@
 //
 #include "iostream"
 #include "string"
-#include "LuaStack.h"
-#include "LuaSecureFun.h"
-#include "extend/ConfigParser.h"
-#include "调用Lua函数/调用Lua函数.h"
-#include "通用调用lua函数/call_va.h"
-#include "lua调用c/LuaCallCDemo.h"
-#include "协程/CoroutineDemo.h"
-#include "库/库.h"
-#include "编写C函数技巧/LuaArray.h"
-#include "编写C函数技巧/LuaString.h"
-#include "编写C函数技巧/注册表.h"
-#include "编写C函数技巧/上值/上值.h"
-#include "编写C函数技巧/tuple/tuplelib.h"
-#include "编写C函数技巧/共享上值/共享上值.h"
-#include "用户自定义类型/用户数据/newarray.h"
-#include "管理资源/file.h"
-#include "管理资源/XmlParser.h"
-#include "线程和状态/ThreadDemo.h"
-#include "simple_parser.h"
 
 void printDivide(std::string title) {
     std::cout << std::endl;
@@ -31,7 +12,6 @@ void printDivide(std::string title) {
 int main() {
 
     printDivide("Lua");
-    simpleParser();
 
 //    printDivide("lua stack");
 //    stackDemo();
@@ -42,7 +22,7 @@ int main() {
 //    lua_close(L);
 //
 //    printDivide("lua config");
-//    std::string fname1 = "/Users/jiangpengyong/Desktop/code/CPP/CPP2022/lua/extend/config.lua";
+//    std::string fname1 = "/Users/jiangpengyong/Desktop/code/CPP/CPP2022/lua/2、扩展应用/config.lua";
 //    lua_State *L1 = luaL_newstate();
 //    // 需要使用 lua_openlibs 进行开启库，否则 lua 中无法使用
 //    luaL_openlibs(L1);

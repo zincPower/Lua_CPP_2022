@@ -5,7 +5,7 @@
 #include <cstdlib>
 #include <cstring>
 #include "lua.hpp"
-#include "../Error.h"
+#include "../1、C_API/Error.h"
 
 #define MAX_COLOR 255
 

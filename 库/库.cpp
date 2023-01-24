@@ -4,7 +4,7 @@
 
 #include <string>
 #include "库.h"
-#include "../Error.h"
+#include "../1、C_API/Error.h"
 
 extern void libDemo() {
     lua_State *L = luaL_newstate();
