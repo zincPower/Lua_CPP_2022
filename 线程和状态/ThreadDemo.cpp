@@ -4,7 +4,7 @@
 
 #include "ThreadDemo.h"
 #include "lua.hpp"
-#include "../1、C_API/Error.h"
+#include "../utils/lua_error.h"
 #include <iostream>
 
 void threadDemo() {

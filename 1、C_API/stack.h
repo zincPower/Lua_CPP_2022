@@ -5,10 +5,6 @@
 #ifndef CPP2022_LUASTACK_H
 #define CPP2022_LUASTACK_H
 
-#include "lua.hpp"
-
-extern void stackDump(lua_State *L);
-
 extern void stackDemo();
 
 #endif //CPP2022_LUASTACK_H

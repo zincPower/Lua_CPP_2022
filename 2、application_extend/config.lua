@@ -1,4 +1,4 @@
-io.write("jiang pengyong")
+io.write("jiang pengyong\n")
 
 if os.getenv("DISPLAY") == ":0.0" then
     width = 200

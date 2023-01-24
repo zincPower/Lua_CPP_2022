@@ -3,7 +3,7 @@
 //
 
 #include "tuplelib.h"
-#include "../../1、C_API/Error.h"
+#include "../../utils/lua_error.h"
 #include <iostream>
 
 extern "C" int t_tuple(lua_State *L) {

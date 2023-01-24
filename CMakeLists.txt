@@ -32,8 +32,8 @@ add_executable(
         管理资源/file.cpp 管理资源/file.h
         #        管理资源/XmlParser.cpp
         #        管理资源/expat.h
-#        线程和状态/ThreadDemo.cpp
-#        线程和状态/lproc.cpp
+        #        线程和状态/ThreadDemo.cpp
+        #        线程和状态/lproc.cpp
 )
 
 # 添加链接库
@@ -42,12 +42,16 @@ target_link_libraries(Lua_CPP_2022 LuaLib)
 add_executable(
         C_API
         1、C_API/c_api_main.cpp
-        1、C_API/stack.cpp)
+        1、C_API/stack.cpp
+        utils/stack_dump.cpp
+)
 target_link_libraries(C_API LuaLib)
 
 add_executable(
         extend_application
-        2、扩展应用/config_parser.cpp
-        2、扩展应用/扩展应用_main.cpp
+        2、application_extend/application_extend_main.cpp
+        2、application_extend/config_parser.cpp
+        utils/lua_error.cpp
+        utils/stack_dump.cpp
 )
 target_link_libraries(extend_application LuaLib)

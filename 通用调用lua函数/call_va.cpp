@@ -4,7 +4,7 @@
 
 #include <cstring>
 #include "lua.hpp"
-#include "../1、C_API/Error.h"
+#include "../utils/lua_error.h"
 
 void call_va(lua_State *L, const char *func, const char *sig, ...) {
     va_list vl;

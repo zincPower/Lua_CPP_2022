@@ -6,7 +6,7 @@
 #include "lua.hpp"
 #include "lua调用c.cpp"
 #include "../extend/ConfigParser.h"
-#include "../1、C_API/Error.h"
+#include "../utils/lua_error.h"
 
 void luaCallCDemo() {
     lua_State *L = luaL_newstate();

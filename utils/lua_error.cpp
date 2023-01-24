@@ -2,9 +2,8 @@
 // Created by 江澎涌 on 2022/5/1.
 //
 
-#include "Error.h"
-
 #include <cstdlib>
+#include "lua_error.h"
 #include "lua.hpp"
 
 // 错误

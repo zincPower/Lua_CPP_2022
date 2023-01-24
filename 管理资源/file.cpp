@@ -3,7 +3,7 @@
 //
 
 #include "file.h"
-#include "../1、C_API/Error.h"
+#include "../utils/lua_error.h"
 
 
 static const std::string DIR_METE_TABLE = "Jiang.dir";

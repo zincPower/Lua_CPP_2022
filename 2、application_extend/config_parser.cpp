@@ -2,10 +2,9 @@
 // Created by 江澎涌 on 2022/4/29.
 //
 
-#include <cstdlib>
 #include <cstring>
 #include "lua.hpp"
-#include "../1、C_API/Error.h"
+#include "../utils/lua_error.h"
 
 #define MAX_COLOR 255
 
@@ -36,14 +35,16 @@ int getGlobInt(lua_State *L, const char *var) {
 int getColorField(lua_State *L, const char *key) {
     int result, isNum;
 
+
+
     // 第一种做法
-//    lua_pushstring(L, key);
-//    lua_gettable(L, -2);
+    lua_pushstring(L, key);
+    lua_gettable(L, -2);
 
     // 第二种做法（lua_getfield 和 lua_gettable 都会返回类型）
-    if (lua_getfield(L, -1, key) == LUA_TNUMBER) {
-        error(L, "invalid component in background color");
-    }
+//    if (lua_getfield(L, -1, key) == LUA_TNUMBER) {
+//        error(L, "invalid component in background color");
+//    }
 
     result = (int) (lua_tonumberx(L, -1, &isNum) * MAX_COLOR);
     if (!isNum) {
@@ -83,6 +84,7 @@ void load(lua_State *L, const char *fname) {
     if (luaL_loadfile(L, fname) || lua_pcall(L, 0, 0, 0)) {
         error(L, "can't run config. file: %s", lua_tostring(L, -1));
     }
+
     int w = getGlobInt(L, "width");
     int h = getGlobInt(L, "height");
     printf("size: %d x %d\n", w, h);
@@ -119,6 +121,5 @@ void load(lua_State *L, const char *fname) {
     } else {
         error(L, "'background' is not a table.");
     }
-
 
 }

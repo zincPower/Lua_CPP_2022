@@ -2,8 +2,8 @@
 // Created by 江澎涌 on 2023/1/21.
 //
 
-#import "lua.hpp"
-#import "stack.h"
+#include "lua.hpp"
+#include "stack.h"
 
 /**
  * 验证 Lua 集成是否成功

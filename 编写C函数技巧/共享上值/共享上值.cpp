@@ -5,7 +5,7 @@
 #include <string>
 #include "共享上值.h"
 #include "lua.hpp"
-#include "../../1、C_API/Error.h"
+#include "../../utils/lua_error.h"
 
 int showInfo(lua_State *L) {
     long long age = lua_tointeger(L, lua_upvalueindex(1));

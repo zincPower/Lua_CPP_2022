@@ -22,7 +22,7 @@ int main() {
 //    lua_close(L);
 //
 //    printDivide("lua config");
-//    std::string fname1 = "/Users/jiangpengyong/Desktop/code/CPP/CPP2022/lua/2、扩展应用/config.lua";
+//    std::string fname1 = "/Users/jiangpengyong/Desktop/code/CPP/CPP2022/lua/2、application_extend/config.lua";
 //    lua_State *L1 = luaL_newstate();
 //    // 需要使用 lua_openlibs 进行开启库，否则 lua 中无法使用
 //    luaL_openlibs(L1);
