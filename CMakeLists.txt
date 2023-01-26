@@ -16,8 +16,8 @@ add_subdirectory(lua_lib)
 add_executable(
         Lua_CPP_2022
         lua_study_main.cpp
-        调用Lua函数/调用Lua函数.cpp
-        通用调用lua函数/call_va.cpp
+        2、application_extend/调用Lua函数/调用Lua函数.cpp
+        2、application_extend/通用调用lua函数/call_va.cpp
         lua调用c/lua调用c.cpp
         lua调用c/LuaCallCDemo.cpp
         协程/CoroutineDemo.cpp
@@ -51,6 +51,8 @@ add_executable(
         extend_application
         2、application_extend/application_extend_main.cpp
         2、application_extend/config_parser.cpp
+        2、application_extend/调用Lua函数/调用Lua函数.cpp
+        2、application_extend/通用调用lua函数/call_va.cpp
         utils/lua_error.cpp
         utils/stack_dump.cpp
 )

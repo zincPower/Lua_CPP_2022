@@ -3,7 +3,7 @@
 //
 
 #include "lua.hpp"
-#include "../utils/lua_error.h"
+#include "../../utils/lua_error.h"
 
 double f(lua_State *L, double x, double y) {
     int isNum;
