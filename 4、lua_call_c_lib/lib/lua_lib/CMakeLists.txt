@@ -1,14 +1,5 @@
 # 设置 LUA_DIR 指向 lua-5.4.4 目录
-set(LUA_DIR ${CMAKE_CURRENT_SOURCE_DIR}/lua-5.4.4)
-
-# 如果需要使用自己的 c lib ，则需要配置这个
-# Mac: LUA_USE_MACOSX
-# Linux: LUA_USE_LINUX
-# Windows: LUA_USE_WIN
-add_definitions(-DLUA_USE_MACOSX)
-# 在 lua 中，定义了 LUA_USE_MACOSX 则会定义 LUA_USE_POSIX 和 LUA_USE_DLOPEN
-# 所以两者是一样的
-#add_definitions(-DLUA_USE_POSIX -DLUA_USE_DLOPEN)
+set(LUA_DIR lua-5.4.4)
 
 # 设置 Lua 源码
 set(LUA_RUNTIME_SOURCES
@@ -48,7 +39,7 @@ set(LUA_RUNTIME_SOURCES
         )
 
 add_library(
-        LuaLib
+        LuaLibForLib
         SHARED
         ${LUA_RUNTIME_SOURCES}
 )

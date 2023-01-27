@@ -251,7 +251,7 @@ static void *lsys_load (lua_State *L, const char *path, int seeglb) {
 
 static lua_CFunction lsys_sym (lua_State *L, void *lib, const char *sym) {
   (void)(lib); (void)(sym);  /* not used */
-//  lua_pushliteral(L, DLMSG);
+  lua_pushliteral(L, DLMSG);
   return NULL;
 }
 

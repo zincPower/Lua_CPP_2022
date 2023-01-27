@@ -20,35 +20,7 @@ int main() {
 //    lua_State *L = luaL_newstate();
 //    printf("secureFoo result: %d", secureFoo(L));
 //    lua_close(L);
-//
-//    printDivide("lua config");
-//    std::string fname1 = "/Users/jiangpengyong/Desktop/code/CPP/CPP2022/lua/2、application_extend/config.lua";
-//    lua_State *L1 = luaL_newstate();
-//    // 需要使用 lua_openlibs 进行开启库，否则 lua 中无法使用
-//    luaL_openlibs(L1);
-//    load(L1, fname1.c_str());
-//    lua_close(L1);
-//
-//    printDivide("lua config");
-//    std::string fname2 = "/Users/jiangpengyong/Desktop/code/CPP/CPP2022/lua/调用Lua函数/调用Lua函数.lua";
-//    lua_State *L2 = luaL_newstate();
-//    // 需要使用 lua_openlibs 进行开启库，否则 lua 中无法使用
-//    luaL_openlibs(L2);
-//    loadForFunction(L2, fname2.c_str());
-//    printf("f: %f\n", f(L2, 2, 34));
-//    lua_close(L2);
-//
-//    printDivide("lua call_va");
-//    std::string fname3 = "/Users/jiangpengyong/Desktop/code/CPP/CPP2022/lua/调用Lua函数/调用Lua函数.lua";
-//    lua_State *L3 = luaL_newstate();
-//    // 需要使用 lua_openlibs 进行开启库，否则 lua 中无法使用
-//    luaL_openlibs(L3);
-//    loadForFunction(L3, fname3.c_str());
-//    double z;
-//    call_va(L3, "f", "dd>d", 2.0, 34.0, &z);
-//    printf("f: %f\n", z);
-//    lua_close(L3);
-//
+
 //    printDivide("lua lua call c");
 //    luaCallCDemo();
 

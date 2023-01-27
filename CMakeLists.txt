@@ -18,10 +18,9 @@ add_executable(
         lua_study_main.cpp
         2、application_extend/调用Lua函数/调用Lua函数.cpp
         2、application_extend/通用调用lua函数/call_va.cpp
-        lua调用c/lua调用c.cpp
-        lua调用c/LuaCallCDemo.cpp
+        3、lua_call_c/lua_call_c.cpp
+        3、lua_call_c/lua_call_c_main.cpp
         协程/CoroutineDemo.cpp
-        库/库.cpp
         编写C函数技巧/LuaArray.cpp
         编写C函数技巧/LuaString.cpp
         编写C函数技巧/注册表.cpp
@@ -39,6 +38,7 @@ add_executable(
 # 添加链接库
 target_link_libraries(Lua_CPP_2022 LuaLib)
 
+# c api
 add_executable(
         C_API
         1、C_API/c_api_main.cpp
@@ -47,6 +47,7 @@ add_executable(
 )
 target_link_libraries(C_API LuaLib)
 
+# c 调用 lua 函数
 add_executable(
         extend_application
         2、application_extend/application_extend_main.cpp
@@ -57,3 +58,22 @@ add_executable(
         utils/stack_dump.cpp
 )
 target_link_libraries(extend_application LuaLib)
+
+# lua 调用 c 函数
+add_executable(
+        lua_call_c
+        3、lua_call_c/lua_call_c_main.cpp
+        utils/lua_error.cpp
+        utils/stack_dump.cpp
+)
+target_link_libraries(lua_call_c LuaLib)
+
+# 调用 4、lua_call_c_lib
+add_executable(
+        lua_call_c_lib
+        4、lua_call_c_lib/c_lib_main.cpp
+        utils/lua_error.cpp
+        utils/stack_dump.cpp
+)
+target_link_libraries(lua_call_c_lib LuaLib)
+
