@@ -4,6 +4,7 @@
 
 #include "注册表.h"
 #include "lua.hpp"
+#include "../utils/stack_dump.h"
 
 // 用静态属性 Key 地址作为键
 void registerTable(lua_State *L) {
@@ -26,7 +27,7 @@ void registerTable(lua_State *L) {
 //    lua_gettable(L, LUA_REGISTRYINDEX);
 //    printf("content1: %s", lua_tostring(L, -1));
     lua_rawgetp(L, LUA_REGISTRYINDEX, (void *) &Key);
-    printf("content: %s", lua_tostring(L, -1));
+    printf("content: %s\n", lua_tostring(L, -1));
 
 }
 
@@ -44,7 +45,8 @@ void refDemo() {
     luaL_openlibs(L);
 
     // 1、为 "jiang pengyong" 创建唯一的键
-    lua_pushstring(L, "jiang pengyong\n");
+    lua_pushstring(L, "jiang pengyong");
+    // 将栈顶弹出然后设置值
     int ref = luaL_ref(L, LUA_REGISTRYINDEX);
     printf("ref: %d\n", ref);
     // 3、获取值

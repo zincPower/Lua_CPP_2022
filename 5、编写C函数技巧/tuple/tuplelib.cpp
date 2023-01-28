@@ -3,10 +3,11 @@
 //
 
 #include "tuplelib.h"
-#include "../../utils/lua_error.h"
 #include <iostream>
+#include "../../utils/lua_error.h"
+#include "../../utils/stack_dump.h"
 
-extern "C" int t_tuple(lua_State *L) {
+int t_tuple(lua_State *L) {
     // 获取第一个值，是否为整型，不是的话就返回 0
     lua_Integer op = luaL_optinteger(L, 1, 0);
     printf("t_tuple: %lld\n", op);
@@ -28,7 +29,8 @@ extern "C" int t_tuple(lua_State *L) {
     }
 }
 
-extern "C" int t_new(lua_State *L) {
+int t_new(lua_State *L) {
+    // 是 lua 中携带过来的函数
     int top = lua_gettop(L);
     printf("new top: %d\n", top);
     luaL_argcheck(L, top < 256, top, "too many fields");
@@ -44,9 +46,10 @@ static const struct luaL_Reg tuplelib[] = {
 };
 
 int luaopen_tuple(lua_State *L) {
-    printf("stack: %d\n", lua_gettop(L));
+    // 将 tuple lib 加载为 table
     luaL_newlib(L, tuplelib);
-    printf("stack: %d\n", lua_gettop(L));
+    // 将新的 table 设置为 tuple
+    // tuple = table
     lua_setglobal(L, "tuple");
     return 1;
 }
@@ -56,7 +59,7 @@ void tupleDemo() {
     luaL_openlibs(L);
     luaopen_tuple(L);
 
-    std::string filename = "/Users/jiangpengyong/Desktop/code/CPP/CPP2022/lua/编写C函数技巧/tuple/tuple.lua";
+    std::string filename = "/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/5、编写C函数技巧/tuple/tuple.lua";
     if (luaL_loadfile(L, filename.c_str()) || lua_pcall(L, 0, 0, 0)) {
         error(L, "can't run config. file: %s", lua_tostring(L, -1));
     }

@@ -4,8 +4,6 @@
 --- DateTime: 2022/5/8 12:05
 ---
 
---local tuple = require "tuplelib"
-
 x, name = tuple.new(10, "hi", {}, 3)
 print(x, name)
 print(x(1))

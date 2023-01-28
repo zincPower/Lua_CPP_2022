@@ -28,10 +28,13 @@ static const struct luaL_Reg luaLReg[] = {
 void upValueDemo() {
     lua_State *L = luaL_newstate();
     luaL_openlibs(L);
+
+    // 设置一个 lib
     luaL_newlib(L, luaLReg);
+    // Counter = lib
     lua_setglobal(L, "Counter");
 
-    std::string fileName = "/Users/jiangpengyong/Desktop/code/CPP/CPP2022/lua/编写C函数技巧/上值/上值.lua";
+    std::string fileName = "/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/5、编写C函数技巧/上值/上值.lua";
     if (luaL_loadfile(L, fileName.c_str()) || lua_pcall(L, 0, 0, 0)) {
         error(L, "can't run config. file: %s", lua_tostring(L, -1));
     }

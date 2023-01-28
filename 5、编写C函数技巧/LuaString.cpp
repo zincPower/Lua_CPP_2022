@@ -59,7 +59,6 @@ void luaConcatDemo() {
 
     printf("stack top: %d\n", lua_gettop(L));
     printf("concat: %s\n", lua_tostring(L, -1));
-    printf("stack top: %d\n", lua_gettop(L));
 
     lua_close(L);
 }
@@ -70,8 +69,7 @@ void luaPushFStringDemo() {
     lua_pushfstring(L, "%d-%s%s%s", 29, "江", "澎", "涌");
 
     printf("stack top: %d\n", lua_gettop(L));
-    printf("num: %s\n", lua_tostring(L, -1));
-    printf("stack top: %d\n", lua_gettop(L));
+    printf("fstring: %s\n", lua_tostring(L, -1));
 
     lua_close(L);
 }

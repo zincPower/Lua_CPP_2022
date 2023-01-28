@@ -4,9 +4,9 @@
 
 #include "LuaArray.h"
 #include "lua.hpp"
+#include "../utils/stack_dump.h"
 
 void luaArrayDemo() {
-
     lua_State *L = luaL_newstate();
 
     // 创建并押入一个新表
@@ -37,22 +37,25 @@ void luaArrayDemo() {
 //    lua_pop(L, -1);
 
     long long n = luaL_len(L, 1);
-    printf("lua table length: %lld", n);
+    printf("lua table length: %lld\n", n);
 
     lua_close(L);
 }
 
 static int showName(lua_State *L) {
-    printf("江澎涌!!! %s\n", lua_tostring(L, 1));
+    printf("value: %s\n", lua_tostring(L, 1));
     return 100;
 }
 
 int l_map(lua_State *L) {
     long long i, n;
 
+    // 检查第一个参数是否为 table
     luaL_checktype(L, 1, LUA_TTABLE);
+    // 检查第二个参数是否为函数
     luaL_checktype(L, 2, LUA_TFUNCTION);
 
+    // 获取表的长度
     n = luaL_len(L, 1);
     printf("lua table length: %lld\n", n);
 
@@ -81,6 +84,18 @@ void luaMapFunctionDemo() {
     lua_pushnumber(L, 1);
     lua_pushstring(L, "江澎涌!!!!!ha");
     lua_settable(L, 1);
+
+    // 添加元素 t[2] = "小朋友"
+    // lua_seti 的第二个参数 idx 指定的是 table 在栈中的索引
+    // n 指定的是 value 在 table 中所在的索引
+    lua_pushstring(L, "小朋友");
+    lua_seti(L, 1, 2);
+
+    // 添加元素 t[3] = "zinc power"
+    // lua_rawseti 的第二个参数 idx 指定的是 table 在栈中的索引
+    // n 指定的是 value 在 table 中所在的索引
+    lua_pushstring(L, "zinc power");
+    lua_rawseti(L, 1, 3);
 
     l_map(L);
 
