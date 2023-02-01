@@ -27,7 +27,7 @@ add_executable(
         5、编写C函数技巧/上值/上值.cpp
         5、编写C函数技巧/tuple/tuplelib.cpp
         5、编写C函数技巧/共享上值/共享上值.cpp
-        用户自定义类型/用户数据/newarray.cpp
+        6、userdata/用户数据/newarray.cpp
         管理资源/file.cpp 管理资源/file.h
         #        管理资源/XmlParser.cpp
         #        管理资源/expat.h
@@ -44,7 +44,7 @@ add_executable(
         1、C_API/c_api_main.cpp
         1、C_API/stack.cpp
         utils/stack_dump.cpp
-)
+        6、userdata/main.cpp)
 target_link_libraries(1_C_API LuaLib)
 
 # 2、 c 调用 lua 函数
@@ -92,4 +92,16 @@ add_executable(
         utils/stack_dump.cpp
 )
 target_link_libraries(5_c_function_skill LuaLib)
+
+# 6、userdata
+add_executable(
+        6_userdata
+        6、userdata/main.cpp
+        6、userdata/用户数据/newarray.cpp
+        6、userdata/用户数据_面向对象/newarray.cpp
+        6、userdata/用户数据_数组访问/newarray.cpp
+        utils/lua_error.cpp
+        utils/stack_dump.cpp
+)
+target_link_libraries(6_userdata LuaLib)
 

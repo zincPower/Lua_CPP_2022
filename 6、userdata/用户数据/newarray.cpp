@@ -2,32 +2,53 @@
 // Created by 江澎涌 on 2022/5/8.
 //
 
-#include "newarray.h"
-#include "lua.hpp"
-#include "../../utils/lua_error.h"
-#include <limits.h>
+#include <limits>
 #include <string>
+#include "lua.hpp"
+#include "newarray.h"
+#include "../../utils/lua_error.h"
+#include "../../utils/stack_dump.h"
 
+// CHAR_BIT 用于表示一个 char 占用的位数，现在的架构基本上都是 8 位，以前旧设备有些是 7 位
+// https://stackoverflow.com/questions/3200954/what-is-char-bit
+// 1 字节 = 8 位（具体是由 CHAR_BIT 决定）
+// BITS_PER_WORD 一个无符号整型数的位数，即 "CHAR_BIT 的位数" 乘以 "无符号整型数" 的尺寸
+// I_WORD 用于根据指定的索引来计算存放相应比特位的字，即存放在哪个字节中（存放该比特位的字节索引）
+// I_BIT 用于计算访问这个字中相应比特位要用的掩码，即在一个字节中的第几个位
 #define BITS_PER_WORD (CHAR_BIT * sizeof(unsigned int))
-#define I_WORD(i) ((unsigned int)(i) / BITS_PER_WORD)
-#define I_BIT(i) (1<< ((unsigned int) (i) %BITS_PER_WORD))
-#define checkarray(L) (BitArray *)luaL_checkudata(L,1,METE.c_str())
+#define I_WORD(i) ((unsigned int) (i) / BITS_PER_WORD)
+#define I_BIT(i) (1 << ((unsigned int) (i) % BITS_PER_WORD))
+
+// 检查第一个参数是否是一个有效的数组
+// 如果元表类型不对，则会抛出
+// .../Lua/Lua_CPP_2022/6、userdata/用户数据/newarray_数组访问.lua:15: bad argument #1 to 'get' (df expected, got Jiang.array)
+#define checkarray(L) (BitArray *)luaL_checkudata(L, 1, METE.c_str())
 
 static const std::string METE = "Jiang.array";
 
 typedef struct BitArray {
     int size;
+    // 因为 C89 不允许分配长度位零的数组，所以申明为一
     unsigned int values[1];
 } BitArray;
 
+/**
+ * 创建数组
+ * @param L
+ * @return
+ */
 static int newarray(lua_State *L) {
     int i;
     size_t nbytes;
     BitArray *a;
 
+    // lua 传递过来的参数，
     int n = (int) luaL_checkinteger(L, 1);
     luaL_argcheck(L, n >= 1, 1, "invalid size");
+
+    // 计算所需要的存储长度
     nbytes = sizeof(BitArray) + I_WORD(n - 1) * sizeof(unsigned int);
+    // 生成一个 user data 并压入栈中
     a = (BitArray *) lua_newuserdata(L, nbytes);
     a->size = n;
     for (i = 0; i < I_WORD(n - 1); ++i) {
@@ -42,7 +63,7 @@ static int newarray(lua_State *L) {
 }
 
 static unsigned int *getparams(lua_State *L, unsigned int *mask) {
-    BitArray *a = checkarray(L);
+    auto *a = checkarray(L);
     int index = (int) luaL_checkinteger(L, 2) - 1;
 
     luaL_argcheck(L, 0 <= index && index < a->size, 2, "index out of range");
@@ -51,7 +72,7 @@ static unsigned int *getparams(lua_State *L, unsigned int *mask) {
 }
 
 //static int setarray(lua_State *L) {
-//    BitArray *a = (BitArray *) lua_touserdata(L, 1);
+//    auto *a = (BitArray *) lua_touserdata(L, 1);
 //    int index = (int) luaL_checkinteger(L, 2) - 1;
 //    luaL_argcheck(L, a != nullptr, 1, "'array' expected");
 //    luaL_argcheck(L, 0 <= index && index < a->size, 2, "index out of range");
@@ -77,13 +98,13 @@ static int setarray(lua_State *L) {
         *entry |= mask;
     } else {
         // 复位
-        *entry &= mask;
+        *entry &= ~mask;
     }
     return 0;
 }
 
 //static int getarray(lua_State *L) {
-//    BitArray *a = (BitArray *) lua_touserdata(L, 1);
+//    auto *a = (BitArray *) lua_touserdata(L, 1);
 //    int index = (int) luaL_checkinteger(L, 2) - 1;
 //
 //    luaL_argcheck(L, a != nullptr, 1, "'array' expected");
@@ -100,9 +121,9 @@ static int getarray(lua_State *L) {
 }
 
 static int getsize(lua_State *L) {
-//    BitArray *a = (BitArray *) lua_touserdata(L, 1);
+//    auto *a = (BitArray *) lua_touserdata(L, 1);
 //    luaL_argcheck(L, a != nullptr, 1, "'array' expected");
-    BitArray *a = checkarray(L);
+    auto *a = checkarray(L);
     lua_pushinteger(L, a->size);
     return 1;
 }
@@ -116,19 +137,31 @@ static const struct luaL_Reg arraylib[] = {
 };
 
 int luaopen_array(lua_State *L) {
-    luaL_newmetatable(L, "Jiang.array");
+    luaL_newmetatable(L, METE.c_str());
     luaL_newlib(L, arraylib);
     return 1;
 }
 
 void arrayDemo() {
+    printf("BITS_PER_WORD: %lu\n", BITS_PER_WORD);
+    printf("CHAR_BIT: %d\n", CHAR_BIT);
+    printf("sizeof(unsigned int): %lu\n", sizeof(unsigned int));
+
+    printf("I_WORD(10): %lu\n", I_WORD(10));
+    printf("I_WORD(1): %lu\n", I_WORD(1));
+    printf("I_WORD(41): %lu\n", I_WORD(41));
+
+    printf("I_BIT(10): %d\n", I_BIT(10));
+    printf("I_BIT(1): %d\n", I_BIT(1));
+    printf("I_BIT(41): %d\n", I_BIT(41));
+
     lua_State *L = luaL_newstate();
 
     luaL_openlibs(L);
     luaopen_array(L);
     lua_setglobal(L, "array");
 
-    std::string fileName = "/Users/jiangpengyong/Desktop/code/CPP/CPP2022/lua/用户自定义类型/用户数据/newarray.lua";
+    std::string fileName = "/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/6、userdata/用户数据/newarray.lua";
     if (luaL_loadfile(L, fileName.c_str()) || lua_pcall(L, 0, 0, 0)) {
         error(L, "can't run config. file: %s", lua_tostring(L, -1));
     }
