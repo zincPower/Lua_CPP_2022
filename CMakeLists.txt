@@ -13,30 +13,30 @@ include_directories(lua_lib/lua-5.4.4)
 # 这样就会把 lua_lib/CMakeLists.txt 加入到构建中
 add_subdirectory(lua_lib)
 
-add_executable(
-        Lua_CPP_2022
-        lua_study_main.cpp
-        2、application_extend/调用Lua函数/调用Lua函数.cpp
-        2、application_extend/通用调用lua函数/call_va.cpp
-        3、lua_call_c/lua_call_c.cpp
-        3、lua_call_c/lua_call_c_main.cpp
-        协程/CoroutineDemo.cpp
-        5、编写C函数技巧/LuaArray.cpp
-        5、编写C函数技巧/LuaString.cpp
-        5、编写C函数技巧/注册表.cpp
-        5、编写C函数技巧/上值/上值.cpp
-        5、编写C函数技巧/tuple/tuplelib.cpp
-        5、编写C函数技巧/共享上值/共享上值.cpp
-        6、userdata/用户数据/newarray.cpp
-        管理资源/file.cpp 管理资源/file.h
-        #        管理资源/XmlParser.cpp
-        #        管理资源/expat.h
-        #        线程和状态/ThreadDemo.cpp
-        #        线程和状态/lproc.cpp
-        5、编写C函数技巧/main.cpp)
+#add_executable(
+#        Lua_CPP_2022
+#        lua_study_main.cpp
+#        2、application_extend/调用Lua函数/调用Lua函数.cpp
+#        2、application_extend/通用调用lua函数/call_va.cpp
+#        3、lua_call_c/lua_call_c.cpp
+#        3、lua_call_c/lua_call_c_main.cpp
+#        协程/CoroutineDemo.cpp
+#        5、编写C函数技巧/LuaArray.cpp
+#        5、编写C函数技巧/LuaString.cpp
+#        5、编写C函数技巧/注册表.cpp
+#        5、编写C函数技巧/上值/上值.cpp
+#        5、编写C函数技巧/tuple/tuplelib.cpp
+#        5、编写C函数技巧/共享上值/共享上值.cpp
+#        6、userdata/用户数据/newarray.cpp
+#        管理资源/file.cpp 管理资源/file.h
+#        #        管理资源/XmlParser.cpp
+#        #        管理资源/expat.h
+#        #        线程和状态/ThreadDemo.cpp
+#        #        线程和状态/lproc.cpp
+#        5、编写C函数技巧/main.cpp)
 
 # 添加链接库
-target_link_libraries(Lua_CPP_2022 LuaLib)
+#target_link_libraries(Lua_CPP_2022 LuaLib)
 
 # 1、 c api
 add_executable(
@@ -105,3 +105,14 @@ add_executable(
 )
 target_link_libraries(6_userdata LuaLib)
 
+# 7、管理资源
+add_executable(
+        7_manage_resource
+        7、管理资源/main.cpp
+        7、管理资源/file/file.cpp
+#        7、管理资源/xml/xml_parser.cpp
+#        7、管理资源/xml/expat.h
+        utils/lua_error.cpp
+        utils/stack_dump.cpp
+)
+target_link_libraries(7_manage_resource LuaLib)

@@ -2,10 +2,10 @@
 // Created by 江澎涌 on 2022/5/9.
 //
 
-#include "XmlParser.h"
+#include "xml_parser.h"
 #include "expat.h"
 #include "lua.hpp"
-#include "../utils/lua_error.h"
+#include "../../utils/lua_error.h"
 #include <iostream>
 
 typedef struct lxp_userdata {
@@ -159,7 +159,7 @@ void xmlParserDemo() {
     luaL_openlibs(L);
     luaopen_lxp(L);
 
-    std::string fileName = "/Users/jiangpengyong/Desktop/code/CPP/CPP2022/lua/管理资源/XmlParser.lua";
+    std::string fileName = "/Users/jiangpengyong/Desktop/code/CPP/CPP2022/lua/7、管理资源/xml_parser.lua";
     if (luaL_loadfile(L, fileName.c_str()) || lua_pcall(L, 0, 0, 0)) {
         error(L, "can't run file. file: %s", lua_tostring(L, -1));
     }

@@ -6,8 +6,8 @@
 #define CPP2022_FILE_H
 
 #include <dirent.h>
-#include <errno.h>
-#include <string.h>
+#include <cerrno>
+#include <cstring>
 #include <string>
 
 #include "lua.hpp"
