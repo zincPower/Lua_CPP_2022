@@ -2,11 +2,13 @@
 // Created by 江澎涌 on 2022/5/9.
 //
 
+#include <iostream>
+
 #include "xml_parser.h"
 #include "expat.h"
 #include "lua.hpp"
+
 #include "../../utils/lua_error.h"
-#include <iostream>
 
 typedef struct lxp_userdata {
     XML_Parser parser;
@@ -22,7 +24,7 @@ static void f_EndElement(void *ud, const char *name);
 static int lxp_make_parser(lua_State *L) {
     XML_Parser p;
 
-    lxp_userdata *xpu = (lxp_userdata *) lua_newuserdata(L, sizeof(lxp_userdata));
+    auto *xpu = (lxp_userdata *) lua_newuserdata(L, sizeof(lxp_userdata));
 
     xpu->parser = nullptr;
 
@@ -68,7 +70,7 @@ static int lxp_parse(lua_State *L) {
 }
 
 static void f_CharData(void *ud, const char *s, int len) {
-    lxp_userdata *xpu = (lxp_userdata *) ud;
+    auto *xpu = (lxp_userdata *) ud;
     lua_State *L = xpu->L;
 
     lua_getfield(L, 3, "CharacterData");
@@ -84,7 +86,7 @@ static void f_CharData(void *ud, const char *s, int len) {
 }
 
 static void f_EndElement(void *ud, const char *name) {
-    lxp_userdata *xpu = (lxp_userdata *) ud;
+    auto *xpu = (lxp_userdata *) ud;
     lua_State *L = xpu->L;
 
     lua_getfield(L, 3, "EndElement");
@@ -99,7 +101,7 @@ static void f_EndElement(void *ud, const char *name) {
 }
 
 static void f_StartElement(void *ud, const char *name, const char **atts) {
-    lxp_userdata *xpu = (lxp_userdata *) ud;
+    auto *xpu = (lxp_userdata *) ud;
     lua_State *L = xpu->L;
 
     lua_getfield(L, 3, "StartElement");
@@ -121,7 +123,7 @@ static void f_StartElement(void *ud, const char *name, const char **atts) {
 }
 
 static int lxp_close(lua_State *L) {
-    lxp_userdata *xpu = (lxp_userdata *) luaL_checkudata(L, 1, "Expat");
+    auto *xpu = (lxp_userdata *) luaL_checkudata(L, 1, "Expat");
 
     if (xpu->parser) {
         XML_ParserFree(xpu->parser);
@@ -150,6 +152,8 @@ int luaopen_lxp(lua_State *L) {
     luaL_setfuncs(L, lxp_meths, 0);
 
     luaL_newlib(L, lxp_funcs);
+    lua_setglobal(L, "lxp");
+
     return 1;
 }
 
@@ -159,7 +163,7 @@ void xmlParserDemo() {
     luaL_openlibs(L);
     luaopen_lxp(L);
 
-    std::string fileName = "/Users/jiangpengyong/Desktop/code/CPP/CPP2022/lua/7、管理资源/xml_parser.lua";
+    std::string fileName = "/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/7、管理资源/xml/xml_parser.lua";
     if (luaL_loadfile(L, fileName.c_str()) || lua_pcall(L, 0, 0, 0)) {
         error(L, "can't run file. file: %s", lua_tostring(L, -1));
     }

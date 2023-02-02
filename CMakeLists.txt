@@ -30,9 +30,9 @@ add_subdirectory(lua_lib)
 #        6、userdata/用户数据/newarray.cpp
 #        管理资源/file.cpp 管理资源/file.h
 #        #        管理资源/XmlParser.cpp
-#        #        管理资源/expat.h
-#        #        线程和状态/ThreadDemo.cpp
-#        #        线程和状态/lproc.cpp
+#        #        管理资源/expat_lib.h
+#        #        8、线程和状态/ThreadDemo.cpp
+#        #        8、线程和状态/lproc.cpp
 #        5、编写C函数技巧/main.cpp)
 
 # 添加链接库
@@ -44,7 +44,7 @@ add_executable(
         1、C_API/c_api_main.cpp
         1、C_API/stack.cpp
         utils/stack_dump.cpp
-        6、userdata/main.cpp)
+        6、userdata/main.cpp 8、线程和状态/main.cpp)
 target_link_libraries(1_C_API LuaLib)
 
 # 2、 c 调用 lua 函数
@@ -106,13 +106,27 @@ add_executable(
 target_link_libraries(6_userdata LuaLib)
 
 # 7、管理资源
+# https://github.com/libexpat/libexpat/tree/R_2_5_0
+find_package(EXPAT 2.4.8 MODULE REQUIRED)
 add_executable(
         7_manage_resource
         7、管理资源/main.cpp
         7、管理资源/file/file.cpp
-#        7、管理资源/xml/xml_parser.cpp
-#        7、管理资源/xml/expat.h
+        7、管理资源/xml/xml_parser.cpp
         utils/lua_error.cpp
         utils/stack_dump.cpp
 )
-target_link_libraries(7_manage_resource LuaLib)
+target_link_libraries(7_manage_resource PUBLIC LuaLib EXPAT::EXPAT)
+target_include_directories(7_manage_resource PRIVATE ${EXPAT_INCLUDE_DIRS})
+target_link_libraries(7_manage_resource PUBLIC ${EXPAT_LIBRARIES})
+
+# 8、线程和状态
+add_executable(
+        8_thread_and_state
+        8、线程和状态/main.cpp
+        8、线程和状态/ThreadDemo.cpp
+#        8、线程和状态/lproc.cpp
+        utils/lua_error.cpp
+        utils/stack_dump.cpp
+)
+target_link_libraries(8_thread_and_state LuaLib)

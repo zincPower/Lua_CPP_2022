@@ -12,3 +12,7 @@ function foo1(x)
     foo(x + 1)
     return 3
 end
+
+function foo2(x)
+    return x * x
+end
