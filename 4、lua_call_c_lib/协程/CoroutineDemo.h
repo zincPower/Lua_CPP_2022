@@ -6,7 +6,7 @@
 #define CPP2022_COROUTINEDEMO_H
 
 #include "lua.hpp"
-#include "../utils/lua_error.h"
+#include "../../utils/lua_error.h"
 #include <string>
 
 extern void coroutineDemo();

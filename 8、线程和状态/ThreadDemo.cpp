@@ -53,14 +53,16 @@ void threadDemo() {
     lua_getglobal(L1, "foo1");
     // 压入 integer
     lua_pushinteger(L1, 20);
+    printf("第一次调用：\n");
     // nres 是结果个数
     printf("lua_resume: %d\n", lua_resume(L1, L, 1, &result));
     printf("LUA_YIELD: %d\n", LUA_YIELD);
     printf("result: %d\n", result);
     printf("top: %d\n", lua_gettop(L1));
-    printf("num1: %lld\n", lua_tointeger(L1, 1));
-    printf("num2: %lld\n", lua_tointeger(L1, 2));
+    printf("yield 返回 num1: %lld\n", lua_tointeger(L1, 1));
+    printf("yield 返回 num2: %lld\n", lua_tointeger(L1, 2));
 
+    printf("第二次调用：\n");
     printf("lua_resume: %d\n", lua_resume(L1, L, 0, &result));
     printf("LUA_OK: %d\n", LUA_OK);
     printf("result: %d\n", result);
