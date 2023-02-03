@@ -7,15 +7,23 @@
 local count = 0
 
 callbacks = {
-    StartElement = function(parser, tagname)
-        io.write("+ ", string.rep("  ", count), tagname, "\n")
+    StartElement = function(parser, tagname, attrs)
+        io.write("+ ", string.rep("  ", count), tagname, "attrs:")
+        for k, v in pairs(attrs) do
+            io.write(k, '-->', v, ' ')
+        end
+        io.write("\n")
         count = count + 1
     end,
 
     EndElement = function(parser, tagname)
         count = count - 1
         io.write("- ", string.rep("  ", count), tagname, "\n")
-    end
+    end,
+
+    --CharacterData = function(parser, content)
+    --    io.write("content ", string.rep("  ", count), content, "\n")
+    --end
 }
 
 p = lxp.new(callbacks)
