@@ -3,9 +3,12 @@
 //
 
 #include "ThreadDemo.h"
+#include "lproc.h"
 
 int main(){
     threadDemo();
+
+//    lprocDemo();
 
     return 1;
 }

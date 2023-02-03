@@ -125,7 +125,7 @@ add_executable(
         8_thread_and_state
         8、线程和状态/main.cpp
         8、线程和状态/ThreadDemo.cpp
-#        8、线程和状态/lproc.cpp
+        8、线程和状态/lproc.cpp
         utils/lua_error.cpp
         utils/stack_dump.cpp
 )

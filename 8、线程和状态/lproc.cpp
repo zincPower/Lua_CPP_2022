@@ -19,7 +19,9 @@ typedef struct Proc {
 static Proc *waitsend = nullptr;
 static Proc *waitreceive = nullptr;
 
-pthread_mutex_t kernel_access;
+static pthread_mutex_t kernel_access = PTHREAD_MUTEX_INITIALIZER;
+
+static void *ll_thread(void *arg);
 
 static Proc *getself(lua_State *L) {
     Proc *p;
@@ -33,6 +35,7 @@ static void movevalues(lua_State *send, lua_State *rec) {
     int n = lua_gettop(send);
     int i;
     luaL_checkstack(rec, n, "too many results");
+    // 第一个参数是通道，所以就不移动
     for (i = 2; i <= n; i++) {
         lua_pushstring(rec, lua_tostring(send, i));
     }
@@ -42,9 +45,11 @@ static Proc *searchmatch(const char *channel, Proc **list) {
     Proc *node;
     for (node = *list; node != nullptr; node = node->next) {
         if (strcmp(channel, node->channel) == 0) {
+            // list 第一个节点，则需要更改 list
             if (*list == node) {
                 *list = (node->next == node) ? nullptr : node->next;
             }
+            // 从 list 移除
             node->previous->next = node->next;
             node->next->previous = node->previous;
             return node;
@@ -56,6 +61,7 @@ static Proc *searchmatch(const char *channel, Proc **list) {
 static void waitonlist(lua_State *L, const char *channel, Proc **list) {
     Proc *p = getself(L);
 
+    // 将其自身放在链表尾
     if (*list == nullptr) {
         *list = p;
         p->previous = p->next = p;
