@@ -13,44 +13,19 @@ include_directories(lua_lib/lua-5.4.4)
 # 这样就会把 lua_lib/CMakeLists.txt 加入到构建中
 add_subdirectory(lua_lib)
 
-#add_executable(
-#        Lua_CPP_2022
-#        lua_study_main.cpp
-#        2、application_extend/调用Lua函数/调用Lua函数.cpp
-#        2、application_extend/通用调用lua函数/call_va.cpp
-#        3、lua_call_c/lua_call_c.cpp
-#        3、lua_call_c/lua_call_c_main.cpp
-#        协程/CoroutineDemo.cpp
-#        5、编写C函数技巧/LuaArray.cpp
-#        5、编写C函数技巧/LuaString.cpp
-#        5、编写C函数技巧/注册表.cpp
-#        5、编写C函数技巧/上值/上值.cpp
-#        5、编写C函数技巧/tuple/tuplelib.cpp
-#        5、编写C函数技巧/共享上值/共享上值.cpp
-#        6、userdata/用户数据/newarray.cpp
-#        管理资源/file.cpp 管理资源/file.h
-#        #        管理资源/XmlParser.cpp
-#        #        管理资源/expat_lib.h
-#        #        8、线程和状态/ThreadDemo.cpp
-#        #        8、线程和状态/lproc.cpp
-#        5、编写C函数技巧/main.cpp)
-
-# 添加链接库
-#target_link_libraries(Lua_CPP_2022 LuaLib)
-
 # 1、 c api
 add_executable(
         1_C_API
-        1、C_API/c_api_main.cpp
+        1、C_API/main.cpp
         1、C_API/stack.cpp
         utils/stack_dump.cpp
-        6、userdata/main.cpp 8、线程和状态/main.cpp)
+)
 target_link_libraries(1_C_API LuaLib)
 
 # 2、 c 调用 lua 函数
 add_executable(
         2_application_extend
-        2、application_extend/application_extend_main.cpp
+        2、application_extend/main.cpp
         2、application_extend/config_parser.cpp
         2、application_extend/调用Lua函数/调用Lua函数.cpp
         2、application_extend/通用调用lua函数/call_va.cpp
@@ -62,7 +37,7 @@ target_link_libraries(2_application_extend LuaLib)
 # 3、 lua 调用 c 函数
 add_executable(
         3_lua_call_c
-        3、lua_call_c/lua_call_c_main.cpp
+        3、lua_call_c/main.cpp
         utils/lua_error.cpp
         utils/stack_dump.cpp
 )
@@ -71,7 +46,7 @@ target_link_libraries(3_lua_call_c LuaLib)
 # 4、 调用 lua_call_c_lib
 add_executable(
         4_lua_call_c_lib
-        4、lua_call_c_lib/c_lib_main.cpp
+        4、lua_call_c_lib/main.cpp
         utils/lua_error.cpp
         utils/stack_dump.cpp
 )
@@ -124,8 +99,8 @@ target_link_libraries(7_manage_resource PUBLIC ${EXPAT_LIBRARIES})
 add_executable(
         8_thread_and_state
         8、线程和状态/main.cpp
-        8、线程和状态/ThreadDemo.cpp
-        8、线程和状态/lproc.cpp
+        8、线程和状态/thread/ThreadDemo.cpp
+        8、线程和状态/lproc/lproc.cpp
         utils/lua_error.cpp
         utils/stack_dump.cpp
 )
