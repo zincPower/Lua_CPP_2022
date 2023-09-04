@@ -9,7 +9,7 @@
 
 关注 "江澎涌" 公众号，第一时间获取最新文章
 
-![](https://github.com/zincPower/Lua_CPP_2022/blob/master/imgs/公众号.png)
+![](https://github.com/zincPower/Lua_CPP_2022/blob/main/imgs/公众号.png)
 
 ## 一、项目介绍
 
@@ -56,11 +56,11 @@ csdn：https://blog.csdn.net/weixin_37625173
 
 公众号：微信搜索 "江澎涌" ，或扫描二维码
 
-![](https://github.com/zincPower/Lua_CPP_2022/blob/master/imgs/公众号.png)
+![](https://github.com/zincPower/Lua_CPP_2022/blob/main/imgs/公众号.png)
 
 ### 2、赞赏
 
 如果觉得所写文章和博客对您有所帮助，那请我喝杯水果茶吧
 
-![](https://github.com/zincPower/Lua_CPP_2022/blob/master/imgs/alipay.jpeg)
-![](https://github.com/zincPower/Lua_CPP_2022/blob/master/imgs/wxpay.png)
+![](https://github.com/zincPower/Lua_CPP_2022/blob/main/imgs/alipay.jpeg)
+![](https://github.com/zincPower/Lua_CPP_2022/blob/main/imgs/wxpay.png)
