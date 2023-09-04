@@ -73,6 +73,7 @@ static void waitonlist(lua_State *L, const char *channel, Proc **list) {
 
     p->channel = channel;
 
+    // 如果 p->channel != NULL 则表示尚未与进程 p 匹配的进程，需要继续等待
     do {
         pthread_cond_wait(&p->cond, &kernel_access);
     } while (p->channel);
@@ -86,11 +87,16 @@ static int ll_send(lua_State *L) {
 
     p = searchmatch(channel, &waitreceive);
 
+    // 是否找到匹配的接收线程
     if (p) {
+        // 将值传递给接收线程
         movevalues(L, p->L);
-        p->channel = NULL;
+        // 标记接收线程无需再等待
+        p->channel = nullptr;
+        // 唤醒接收线程
         pthread_cond_signal(&p->cond);
     } else {
+        // 没有找到匹配到的接收线程，就将当前线程（发送线程）加入到等待接收的队列中
         waitonlist(L, channel, &waitsend);
     }
 
@@ -107,16 +113,22 @@ static int ll_receive(lua_State *L) {
 
     p = searchmatch(channel, &waitsend);
 
+    // 是否找到匹配的发送线程
     if (p) {
+        // 从发送线程获取值
         movevalues(p->L, L);
+        // 标记发送线程无须在等待
         p->channel = nullptr;
+        // 唤醒发送线程
         pthread_cond_signal(&p->cond);
     } else {
+        // 如果没找到发送线程，就将当前线程（接收线程）放入到等待队列中
         waitonlist(L, channel, &waitreceive);
     }
 
     pthread_mutex_unlock(&kernel_access);
 
+    // 返回除通道外的栈中的值
     return lua_gettop(L) - 1;
 }
 
@@ -129,14 +141,17 @@ static int ll_start(lua_State *L) {
         luaL_error(L, "unable to create new state");
     }
 
+    // 加载编译代码
     if (luaL_loadstring(L1, chunk) != 0) {
         luaL_error(L, "error in thread body: %s", lua_tostring(L1, -1));
     }
 
+    // pthread_create 创建一个线程
     if (pthread_create(&thread, nullptr, ll_thread, L1) != 0) {
         luaL_error(L, "unable to create new thread");
     }
 
+    // 不需要该线程的结果
     pthread_detach(thread);
     return 0;
 }
@@ -144,11 +159,14 @@ static int ll_start(lua_State *L) {
 int luaopen_lproc(lua_State *L);
 
 static void *ll_thread(void *arg) {
-    lua_State *L = (lua_State *) arg;
+    auto *L = (lua_State *) arg;
+    // 进程自身的控制
     Proc *self;
 
+    // 打开标准库
     luaL_openlibs(L);
     luaL_requiref(L, "lproc", luaopen_lproc, 1);
+    // 移除之前调用结果
     lua_pop(L, 1);
     self = (Proc *) lua_newuserdata(L, sizeof(Proc));
     lua_setfield(L, LUA_REGISTRYINDEX, "_SELF");
@@ -157,6 +175,7 @@ static void *ll_thread(void *arg) {
     self->channel = nullptr;
     pthread_cond_init(&self->cond, nullptr);
 
+    // 调用主代码
     if (lua_pcall(L, 0, 0, 0) != 0) {
         fprintf(stderr, "thread error: %s", lua_tostring(L, -1));
     }
@@ -186,9 +205,12 @@ int luaopen_lproc(lua_State *L) {
 
 static void registerlib(lua_State *L, const char *name, lua_CFunction f) {
     lua_getglobal(L, "package");
+    // 获取 package.preload
     lua_getfield(L, -1, "preload");
     lua_pushcfunction(L, f);
+    // package.preload[name] = f
     lua_setfield(L, -2, name);
+    // 弹出 package 和 preload
     lua_pop(L, 2);
 }
 

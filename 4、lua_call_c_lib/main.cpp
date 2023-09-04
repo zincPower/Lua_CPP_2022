@@ -6,11 +6,6 @@
 #include "../utils/lua_error.h"
 
 int main() {
-
-#if defined(LUA_USE_MACOSX)
-    printf("LUA_USE_MACOSX");
-#endif
-
     lua_State *L = luaL_newstate();
     luaL_openlibs(L);
 
