@@ -20,14 +20,14 @@ add_executable(
 )
 target_link_libraries(1_CPP_integration_Lua LuaLib)
 
-# 1、 c api
+# 2、 C++ 与 Lua 数据交互载体——栈
 add_executable(
-        1_C_API
-        1、C_API/main.cpp
-        1、C_API/stack.cpp
+        2_CPP_Lua_communication_stack
+        2、C++与Lua数据交互载体——栈/main.cpp
+        2、C++与Lua数据交互载体——栈/stack.cpp
         utils/stack_dump.cpp
 )
-target_link_libraries(1_C_API LuaLib)
+target_link_libraries(2_CPP_Lua_communication_stack LuaLib)
 
 # 2、 c 调用 lua 函数
 add_executable(
