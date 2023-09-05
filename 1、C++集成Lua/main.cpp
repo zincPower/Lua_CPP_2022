@@ -3,7 +3,6 @@
 //
 
 #include "lua.hpp"
-#include "stack.h"
 
 /**
  * 验证 Lua 集成是否成功
@@ -13,7 +12,7 @@ void verification() {
     lua_State *L = luaL_newstate();
     luaL_openlibs(L);
 
-    error = luaL_loadstring(L, "print(\"jiang\")") || lua_pcall(L, 0, 0, 0);
+    error = luaL_loadstring(L, "print(\"C++ 集成 Lua 成功！！！\")") || lua_pcall(L, 0, 0, 0);
     if (error) {
         fprintf(stderr, "%s\n", lua_tostring(L, -1));
         lua_pop(L, 1);
@@ -26,10 +25,5 @@ int main() {
     printf("=============== 验证 Lua 集成 ===============\n");
     verification();
     printf("============================================\n");
-
-    printf("================= 栈 =================\n");
-    stackDemo();
-    printf("=============================================\n");
-
     return 0;
 }

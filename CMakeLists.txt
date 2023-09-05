@@ -13,6 +13,13 @@ include_directories(lua_lib/lua-5.4.4)
 # 这样就会把 lua_lib/CMakeLists.txt 加入到构建中
 add_subdirectory(lua_lib)
 
+# 1、 C++ 集成 Lua
+add_executable(
+        1_CPP_integration_Lua
+        1、C++集成Lua/main.cpp
+)
+target_link_libraries(1_CPP_integration_Lua LuaLib)
+
 # 1、 c api
 add_executable(
         1_C_API
