@@ -6,9 +6,53 @@
 #include "stack.h"
 #include "../utils/stack_dump.h"
 
+void showInfo(lua_State *L, ...) {
+    va_list args;
+    // 用于开启遍历可变参数，第二个参数是可变参数列表的前一参数
+    va_start(args, L);
+    // 在这里可以使用 va_list 对象 args
+    lua_pushvfstring(L, "lua_pushvfstring name: %s, age: %d", args);
+    va_end(args);
+}
+
 void stackDemo() {
     lua_State *L = luaL_newstate();
 
+    printf("===================== 压栈（ C++ 传递值给 Lua ） =====================\n");
+    lua_pushnil(L);
+    lua_pushnumber(L, 0.1);
+    lua_pushnumber(L, 0);
+    lua_pushinteger(L, 10);
+    lua_pushboolean(L, 1);
+    // lua_pushstring 会在 "\0" 终止
+    lua_pushstring(L, "lua_pushstring hello 江澎涌\0jiang peng yong");
+
+    // lua_pushlstring 同样会在 "\0" 终止，但会结合考虑长度参数
+    const char *sayHello = "lua_pushlstring hello jiang peng yong.\0 会被忽略的字符";
+    lua_pushlstring(L, sayHello, strlen(sayHello) - 6);
+
+    // lua_pushvfstring
+    const char *name = "jiang peng yong";
+    int age = 29;
+    showInfo(L, name, age);
+
+    lua_pushfstring(L, "lua_pushfstring name: %s, age: %d", name, age);
+
+    lua_pushthread(L);
+    // 验证 lua_pushthread 中的值，就是 lua_State
+    lua_State *threadState = lua_tothread(L, -1);
+    luaL_openlibs(threadState);
+    // 在线程状态对象上执行Lua代码
+    luaL_dostring(threadState, "print('Hello from the thread!')");
+    if (L == threadState) {
+        printf("L 和 threadState 相同\n");
+    }
+
+    printf("------ 栈中内容: ------\n");
+    stackDump(L);
+
+    printf("\n");
+    printf("===================== 栈空间检查 =====================\n");
     int checkSize = lua_checkstack(L, 100000000);
     printf("1,0000,0000 栈空间: %d\n", checkSize);
     checkSize = lua_checkstack(L, 10);
@@ -18,17 +62,8 @@ void stackDemo() {
 //    luaL_checkstack(L, 100000000, "Not enough space.");
     luaL_checkstack(L, 10, "Not enough space.");
 
-    // 将数值压入栈
-    lua_pushboolean(L, 1);
-    lua_pushinteger(L, 10);
-    lua_pushnumber(L, 0);
-    lua_pushnumber(L, 0.1);
-    lua_pushnil(L);
-    lua_pushstring(L, "hello");
-
-    printf("------ 栈中内容: ------\n");
-    printf("bottom >>>>>>>>>>>>>>>>>> top\n");
-    stackDump(L);
+    printf("\n");
+    printf("===================== 查询元素 =====================\n");
 
     printf("------ lua_tonumberx ------\n");
     int isNumber = false;
