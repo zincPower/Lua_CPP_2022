@@ -64,20 +64,51 @@ void stackDemo() {
 
     printf("\n");
     printf("===================== 查询元素 =====================\n");
+    printf("------ lua_toxxx 的错误表现 ------\n");
+    int isNum = false;
+    printf("lua_tonumberx(L, -1,&isNum) --> %f\n", lua_tonumberx(L, 1, &isNum));
+    printf("lua_tointegerx(L, -1,&isNum) --> %llu\n", lua_tointegerx(L, 1, &isNum));
+    printf("lua_toboolean(L, -1) --> %d\n", lua_toboolean(L, 1));
 
-    printf("------ lua_tonumberx ------\n");
+    size_t length = 0;
+    printf("lua_tolstring(L, -1, &length) == nullptr --> %d\n", lua_tolstring(L, 1, &length) == nullptr);
+    printf("lua_rawlen(L, -1) --> %llu\n", lua_rawlen(L, 1));
+
+    printf("lua_tocfunction(L, -1)) == nullptr --> %d\n", lua_tocfunction(L, 1) == nullptr);
+    printf("lua_touserdata(L, -1) == nullptr --> %d\n", lua_touserdata(L, 1) == nullptr);
+    printf("lua_tothread(L, -1) == nullptr --> %d\n", lua_tothread(L, 1) == nullptr);
+    printf("lua_topointer(L, -1) == nullptr --> %d\n", lua_topointer(L, 1) == nullptr);
+
+    printf("------ lua_len 的错误表现 ------\n");
+    // 如果获取错误会抛出异常，PANIC: unprotected error in call to Lua API (attempt to get length of a nil value)
+//    lua_len(L, 1);
+    // 会将 -2 的内容长度压入栈
+    lua_len(L, -2);
+    // 获取栈顶数据进行打印
+    printf("lua_len(L, -2) --> %lld\n", lua_tointeger(L, -1));
+    // 将长度弹出
+    lua_pop(L, 1);
+
+    printf("------ 数值转换 ------\n");
+    printf("lua_tonumber(L, -1) %f\n", lua_tonumber(L, -1));
+    printf("lua_tointeger(L, -1) %llu\n", lua_tointeger(L, -1));
+
     int isNumber = false;
-    lua_tointegerx(L, 2, &isNumber);
-    printf("integer isNumber: %s\n", (isNumber == 0 ? "false" : "true"));
-    lua_tonumberx(L, 1, &isNumber);
-    printf("boolean isNumber: %s\n", (isNumber == 0 ? "false" : "true"));
+    printf("lua_tointegerx(L, 2, &isNumber) %lld\n", lua_tointegerx(L, 2, &isNumber));
+    printf("%s 转 integer 是否成功 %s\n", lua_tostring(L, 2), (isNumber == 0 ? "false" : "true"));
 
-    printf("------ lua_tolstring ------\n");
-    printf("%s\n", lua_tolstring(L, -1, nullptr));
-    printf("%s\n", lua_tostring(L, -1));
+    printf("lua_tonumberx(L, 2, &isNumber) %f\n", lua_tonumberx(L, 2, &isNumber));
+    printf("%s 转 number 是否成功 %s\n", lua_tostring(L, 2), (isNumber == 0 ? "false" : "true"));
 
+    printf("------ lua_tolstring 和 lua_tostring ------\n");
+    printf("lua_tolstring(L, -2, nullptr) --> %s\n", lua_tolstring(L, -2, nullptr));
+    printf("lua_tostring(L, -2) --> %s\n", lua_tostring(L, -2));
+    printf("lua_tostring(L, -1) 获取非字符串内容 --> %s\n", lua_tostring(L, -1));
+
+    printf("\n");
+    printf("===================== 栈操作 =====================\n");
     printf("------ 栈中元素个数 ------\n");
-    printf("%d\n", lua_gettop(L));
+    printf("lua_gettop(L) %d\n", lua_gettop(L));
 
     printf("------ lua_pushvalue(-4): ------\n");
     // 将栈顶第四位数压进栈顶，不会变动原来的数

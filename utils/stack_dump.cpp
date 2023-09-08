@@ -27,9 +27,9 @@ void stackDump(lua_State *L) {
                 break;
             case LUA_TNUMBER:   // 数值类型
                 if (lua_isinteger(L, i)) {  // 是否整型
-                    printf("value: %lld", lua_tointeger(L, i));
+                    printf("value(integer): %lld", lua_tointeger(L, i));
                 } else {   // 浮点类型
-                    printf("value: %g", lua_tonumber(L, i));
+                    printf("value(number): %g", lua_tonumber(L, i));
                 }
                 break;
             default:     // 其他类型
