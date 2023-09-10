@@ -17,7 +17,7 @@ add_subdirectory(lua_lib)
 add_executable(
         1_CPP_integration_Lua
         1、C++集成Lua/main.cpp
-)
+        3、C++调用Lua的错误处理和内存分配/main.cpp)
 target_link_libraries(1_CPP_integration_Lua LuaLib)
 
 # 2、 C++ 与 Lua 数据交互载体——栈
@@ -28,6 +28,16 @@ add_executable(
         utils/stack_dump.cpp
 )
 target_link_libraries(2_CPP_Lua_communication_stack LuaLib)
+
+# 3、C++调用Lua的错误处理和内存分配
+add_executable(
+        3_CPP_Lua_error_alloc_memory
+        3、C++调用Lua的错误处理和内存分配/main.cpp
+        3、C++调用Lua的错误处理和内存分配/secure_fun.cpp
+        3、C++调用Lua的错误处理和内存分配/simple_parser.cpp
+        utils/stack_dump.cpp
+)
+target_link_libraries(3_CPP_Lua_error_alloc_memory LuaLib)
 
 # 2、 c 调用 lua 函数
 add_executable(

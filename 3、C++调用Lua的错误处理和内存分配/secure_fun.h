@@ -7,6 +7,6 @@
 
 #include "lua.hpp"
 
-extern int secureFoo(lua_State *L);
+extern void secureFoo();
 
 #endif //CPP2022_LUASECUREFUN_H
