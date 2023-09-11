@@ -11,8 +11,6 @@
 #include <cstring>
 #include "lua.hpp"
 
-static int l_sin(lua_State *L);
-
-static int l_dir(lua_State *L);
+int cppError(lua_State *L);
 
 #endif //LUA_CPP_2022_给LUA调用的C_函数_H

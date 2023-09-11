@@ -6,7 +6,9 @@
 #define CPP2022_LUASECUREFUN_H
 
 #include "lua.hpp"
+#include "../../utils/lua_ext.h"
+#include "../../config/env_config.h"
 
-extern void secureFoo();
+extern void cppHandleLuaError();
 
 #endif //CPP2022_LUASECUREFUN_H

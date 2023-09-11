@@ -6,8 +6,7 @@
 #include "Lua调用C++异常处理/Lua处理C++异常.h"
 
 int main() {
-    secureFoo();
-//    simpleParser();
+//    cppHandleLuaError();
     luaHandleCppError();
     return 0;
 }

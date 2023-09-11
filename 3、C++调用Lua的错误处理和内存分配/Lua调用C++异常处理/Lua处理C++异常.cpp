@@ -4,22 +4,18 @@
 
 #include "Lua处理C++异常.h"
 
-void luaHandleCppError(){
+
+void luaHandleCppError() {
     lua_State *L = luaL_newstate();
     luaL_openlibs(L);
 
-// 压入 l_sin 函数
-    lua_pushcfunction(L, l_sin);
-// 将压入的函数 l_sin 设置为 sin 变量
-    lua_setglobal(L, "sin");
+    // 压入 cppError 函数
+    lua_pushcfunction(L, cppError);
+    // 将压入的函数 cppError 设置为 cppError 变量
+    lua_setglobal(L, "cppError");
 
-// 压入 l_dir 函数
-//    lua_pushcfunction(L, l_dir);
-//// 将压入的函数 l_dir 设置为 dir 变量
-//    lua_setglobal(L, "dir");
-//
-//    std::string fname = "/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/3、lua_call_c/Lua处理C++异常.lua";
-//    if (luaL_loadfile(L, fname.c_str()) || lua_pcall(L, 0, 0, 0)) {
-//        error(L, "can't run config. file: %s", lua_tostring(L, -1));
-//    }
+    std::string fname = PROJECT_PATH + "/3、C++调用Lua的错误处理和内存分配/Lua调用C++异常处理/Lua处理C++异常.lua";
+    if (luaL_loadfile(L, fname.c_str()) || LuaExt::safeCallLua(L, 0, 0)) {
+        printf("can't run config. file: %s", lua_tostring(L, -1));
+    }
 }

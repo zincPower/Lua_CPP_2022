@@ -11,9 +11,9 @@ int main() {
     lua_State *L = luaL_newstate();
     luaL_openlibs(L);
 
-    // 压入 l_sin 函数
-    lua_pushcfunction(L, l_sin);
-    // 将压入的函数 l_sin 设置为 sin 变量
+    // 压入 cppError 函数
+    lua_pushcfunction(L, cppError);
+    // 将压入的函数 cppError 设置为 sin 变量
     lua_setglobal(L, "sin");
 
     // 压入 l_dir 函数

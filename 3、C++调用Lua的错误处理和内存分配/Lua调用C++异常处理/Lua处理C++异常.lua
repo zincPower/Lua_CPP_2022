@@ -4,22 +4,4 @@
 --- DateTime: 2022/5/1 17:19
 ---
 
-print("sin: ", sin, "\n");
-print("dir: ", dir, "\n");
-
-s = sin(10);
--- can't run config. file: ...ktop/code/Lua/Lua_CPP_2022/3、lua_call_c/Lua处理C++异常.lua:11: bad argument #1 to 'sin' (number expected, got string)
---s = sin('a');
-print("s: ", s, "\n");
-
-print("--------------- 存在目录 ---------------\n")
-t = dir('/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/3、lua_call_c')
-for key, value in pairs(t) do
-    io.write(key, value, "\n")
-end
-print("------------------------------\n")
-
-print("--------------- 不存在目录 ---------------\n")
-t1, t2 = dir('/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/3、lua调用c1')
-print(t1, t2, "\n")
-print("------------------------------\n")
+cppError()
