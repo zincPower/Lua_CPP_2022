@@ -17,7 +17,8 @@ add_subdirectory(lua_lib)
 add_executable(
         1_CPP_integration_Lua
         1、C++集成Lua/main.cpp
-        3、C++调用Lua的错误处理和内存分配/main.cpp)
+        3、C++调用Lua的错误处理和内存分配/main.cpp
+        utils/lua_ext.cpp 3、C++调用Lua的错误处理和内存分配/Lua调用C++异常处理/给Lua调用的C++函数.cpp)
 target_link_libraries(1_CPP_integration_Lua LuaLib)
 
 # 2、 C++ 与 Lua 数据交互载体——栈
@@ -25,18 +26,17 @@ add_executable(
         2_CPP_Lua_communication_stack
         2、C++与Lua数据交互载体——栈/main.cpp
         2、C++与Lua数据交互载体——栈/stack.cpp
-        utils/stack_dump.cpp
-)
+        utils/lua_ext.cpp)
 target_link_libraries(2_CPP_Lua_communication_stack LuaLib)
 
 # 3、C++调用Lua的错误处理和内存分配
 add_executable(
         3_CPP_Lua_error_alloc_memory
         3、C++调用Lua的错误处理和内存分配/main.cpp
-        3、C++调用Lua的错误处理和内存分配/secure_fun.cpp
-        3、C++调用Lua的错误处理和内存分配/simple_parser.cpp
-        utils/stack_dump.cpp
-)
+        3、C++调用Lua的错误处理和内存分配/C++调用Lua异常处理/C++处理Lua异常.cpp
+        3、C++调用Lua的错误处理和内存分配/Lua调用C++异常处理/Lua处理C++异常.cpp
+        3、C++调用Lua的错误处理和内存分配/Lua调用C++异常处理/给Lua调用的C++函数.cpp
+        utils/lua_ext.cpp )
 target_link_libraries(3_CPP_Lua_error_alloc_memory LuaLib)
 
 # 2、 c 调用 lua 函数
@@ -47,8 +47,7 @@ add_executable(
         2、application_extend/调用Lua函数/调用Lua函数.cpp
         2、application_extend/通用调用lua函数/call_va.cpp
         utils/lua_error.cpp
-        utils/stack_dump.cpp
-)
+        utils/lua_ext.cpp)
 target_link_libraries(2_application_extend LuaLib)
 
 # 3、 lua 调用 c 函数
@@ -56,8 +55,7 @@ add_executable(
         3_lua_call_c
         3、lua_call_c/main.cpp
         utils/lua_error.cpp
-        utils/stack_dump.cpp
-)
+        utils/lua_ext.cpp)
 target_link_libraries(3_lua_call_c LuaLib)
 
 # 4、 调用 lua_call_c_lib
@@ -65,8 +63,7 @@ add_executable(
         4_lua_call_c_lib
         4、lua_call_c_lib/main.cpp
         utils/lua_error.cpp
-        utils/stack_dump.cpp
-)
+        utils/lua_ext.cpp)
 target_link_libraries(4_lua_call_c_lib LuaLib)
 
 # 5、 编写 C 函数技巧
@@ -81,8 +78,7 @@ add_executable(
         5、编写C函数技巧/tuple/tuplelib.cpp
         5、编写C函数技巧/共享上值/共享上值.cpp
         utils/lua_error.cpp
-        utils/stack_dump.cpp
-)
+        utils/lua_ext.cpp)
 target_link_libraries(5_c_function_skill LuaLib)
 
 # 6、userdata
@@ -93,8 +89,7 @@ add_executable(
         6、userdata/用户数据_面向对象/newarray.cpp
         6、userdata/用户数据_数组访问/newarray.cpp
         utils/lua_error.cpp
-        utils/stack_dump.cpp
-)
+        utils/lua_ext.cpp)
 target_link_libraries(6_userdata LuaLib)
 
 # 7、管理资源
@@ -106,8 +101,7 @@ add_executable(
         7、管理资源/file/file.cpp
         7、管理资源/xml/xml_parser.cpp
         utils/lua_error.cpp
-        utils/stack_dump.cpp
-)
+        utils/lua_ext.cpp)
 target_link_libraries(7_manage_resource PUBLIC LuaLib EXPAT::EXPAT)
 target_include_directories(7_manage_resource PRIVATE ${EXPAT_INCLUDE_DIRS})
 target_link_libraries(7_manage_resource PUBLIC ${EXPAT_LIBRARIES})
@@ -119,6 +113,5 @@ add_executable(
         8、线程和状态/thread/ThreadDemo.cpp
         8、线程和状态/lproc/lproc.cpp
         utils/lua_error.cpp
-        utils/stack_dump.cpp
-)
+        utils/lua_ext.cpp)
 target_link_libraries(8_thread_and_state LuaLib)
