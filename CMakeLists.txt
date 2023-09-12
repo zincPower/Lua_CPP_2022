@@ -18,7 +18,8 @@ add_executable(
         1_CPP_integration_Lua
         1、C++集成Lua/main.cpp
         3、C++调用Lua的错误处理和内存分配/main.cpp
-        utils/lua_ext.cpp 3、C++调用Lua的错误处理和内存分配/Lua调用C++异常处理/给Lua调用的C++函数.cpp config/env_config.cpp config/env_config.h)
+        utils/lua_ext.cpp
+        config/env_config.cpp)
 target_link_libraries(1_CPP_integration_Lua LuaLib)
 
 # 2、 C++ 与 Lua 数据交互载体——栈
@@ -35,7 +36,6 @@ add_executable(
         3、C++调用Lua的错误处理和内存分配/main.cpp
         3、C++调用Lua的错误处理和内存分配/C++调用Lua异常处理/C++处理Lua异常.cpp
         3、C++调用Lua的错误处理和内存分配/Lua调用C++异常处理/Lua处理C++异常.cpp
-        3、C++调用Lua的错误处理和内存分配/Lua调用C++异常处理/给Lua调用的C++函数.cpp
         config/env_config.cpp
         utils/lua_ext.cpp )
 target_link_libraries(3_CPP_Lua_error_alloc_memory LuaLib)

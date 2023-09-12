@@ -6,7 +6,13 @@
 #include "Lua调用C++异常处理/Lua处理C++异常.h"
 
 int main() {
-//    cppHandleLuaError();
+    printf("============= C++ 处理 Lua 异常 =============\n");
+    // C++ 处理 Lua 异常
+    cppHandleLuaError();
+
+    printf("\n");
+    printf("============= Lua 处理 C++ 异常 =============\n");
+    // Lua 处理 C++ 异常
     luaHandleCppError();
     return 0;
 }

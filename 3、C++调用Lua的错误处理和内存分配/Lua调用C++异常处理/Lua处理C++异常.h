@@ -11,7 +11,8 @@
 #include "../../utils/lua_error.h"
 #include "../../utils/lua_ext.h"
 #include "../../config/env_config.h"
-#include "给Lua调用的C++函数.h"
+
+int cppError(lua_State *L);
 
 void luaHandleCppError();
 

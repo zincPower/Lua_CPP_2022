@@ -50,6 +50,7 @@ int errorTraceback(lua_State *L) {
 
     if (!msg && !lua_isnoneornil(L, -1)) {
         if (!luaL_callmeta(L, -1, "__tostring")) {
+            // 将一个字符串字面量（literal）作为常量压入 Lua 栈中
             lua_pushliteral(L, "(no error message)");
         }
     }

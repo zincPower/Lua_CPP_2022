@@ -15,10 +15,15 @@ void cppHandleLuaError() {
     // 加载函数库，否则加载的 Lua 无法使用内置库
     luaL_openlibs(L);
 
-    auto luaFilePath = PROJECT_PATH + "/3、C++调用Lua的错误处理和内存分配/C运行的Lua文件.lua";
+    auto luaFilePath = PROJECT_PATH + "/3、C++调用Lua的错误处理和内存分配/C++调用Lua异常处理/C运行的Lua文件.lua";
 
-    lua_pushinteger(L, 100);
-    luaL_loadfile(L, luaFilePath.c_str());
+//    lua_pushinteger(L, 100);
+    auto loadLuaResult = luaL_loadfile(L, luaFilePath.c_str());
+    if (loadLuaResult) {
+        printf("加载 Lua 文件失败. file: %s\n", lua_tostring(L, -1));
+        return;
+    }
+
     lua_pushstring(L, "jiang peng yong");
     lua_pushinteger(L, 29);
 
@@ -34,10 +39,10 @@ void cppHandleLuaError() {
 
     if (result == 0) {
         auto resultContent = lua_tostring(L, -1);
-        printf("lua result: 运行成功，结果：%s", resultContent);
+        printf("lua result: 运行成功，结果：%s\n", resultContent);
     } else {
         auto error = lua_tostring(L, -1);
-        printf("----- lua result: 运行失败，错误堆栈 -----\n%s", error);
+        printf("----- lua result: 运行失败，错误堆栈 -----\n%s\n", error);
     }
 
     lua_close(L);
