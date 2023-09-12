@@ -71,15 +71,15 @@ const char *getLuaErrorMsg(lua_State *L) {
 int errorTraceback(lua_State *L) {
     auto msg = getLuaErrorMsg(L);
 
-    printf("\n");
-    printf("-------- traceback 中的 stack 数据（未增加错误信息） --------\n");
-    stackDump(L);
+//    printf("\n");
+//    printf("-------- traceback 中的 stack 数据（未增加错误信息） --------\n");
+//    stackDump(L);
 
     // 获取函数调用堆栈信息的错误回溯信息
     luaL_traceback(L, L, msg, 1);
 
-    printf("-------- traceback 中的 stack 数据（增加错误信息） --------\n");
-    stackDump(L);
+//    printf("-------- traceback 中的 stack 数据（增加错误信息） --------\n");
+//    stackDump(L);
 
     return 1;
 }

@@ -11,7 +11,7 @@ local content = string.format("name: %s, age: %d", name, age)
 print("Lua 脚本中打印", content)
 
 -- 第一种异常：调用了 nil 的 name 属性
---local error = noneInitTable.name
+local error = noneInitTable.name
 
 -- 第二种异常：自己抛出 error 异常
 -- 抛出 table 类型异常

@@ -5,7 +5,12 @@
 #include "Lua处理C++异常.h"
 
 int cppError(lua_State *L) {
-    luaL_error(L, "C++ throw error.");
+    // 第一种方式，lua_error 会将栈顶的元素作为 Lua 的错误信息
+    lua_pushstring(L, "C++ throw error. 来自 lua_error");
+    lua_error(L);
+
+    // 第二种方式，luaL_error 会将字符串作为错误信息
+//    luaL_error(L, "C++ throw error. 来自 luaL_error");
     return 0;
 }
 
