@@ -43,23 +43,37 @@ void stackDump(lua_State *L) {
     printf("\n");
 }
 
-// 错误处理
-int errorTraceback(lua_State *L) {
-    // 获取错误信息
+const char *getLuaErrorMsg(lua_State *L) {
+    // 获取字符串和数值错误信息
     const char *msg = lua_tostring(L, -1);
+    if (msg) return msg;
 
-    if (!msg && !lua_isnoneornil(L, -1)) {
-        if (!luaL_callmeta(L, -1, "__tostring")) {
-            // 将一个字符串字面量（literal）作为常量压入 Lua 栈中
-            lua_pushliteral(L, "(no error message)");
+    // 获取 table 的 __tostring 错误信息
+    if (luaL_callmeta(L, -1, "__tostring")) {
+        msg = lua_tostring(L, -1);
+        if (msg) return msg;
+    }
+
+    // 获取布尔值的错误信息
+    if (lua_isboolean(L, -1)) {
+        if (lua_toboolean(L, -1)) {
+            return "true";
+        } else {
+            return "false";
         }
     }
+
+    // nil、函数、table 没有 __tostring 元方法则会返回这个错误信息
+    return "no error message";
+}
+
+// 错误处理
+int errorTraceback(lua_State *L) {
+    auto msg = getLuaErrorMsg(L);
 
     printf("\n");
     printf("-------- traceback 中的 stack 数据（未增加错误信息） --------\n");
     stackDump(L);
-
-    msg = lua_tostring(L, -1);
 
     // 获取函数调用堆栈信息的错误回溯信息
     luaL_traceback(L, L, msg, 1);

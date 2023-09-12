@@ -17,13 +17,16 @@ void cppHandleLuaError() {
 
     auto luaFilePath = PROJECT_PATH + "/3、C++调用Lua的错误处理和内存分配/C++调用Lua异常处理/C运行的Lua文件.lua";
 
+    // 开启这段代码可以验证错误处理函数的栈是新的
 //    lua_pushinteger(L, 100);
+    // 加载 Lua 脚本
     auto loadLuaResult = luaL_loadfile(L, luaFilePath.c_str());
     if (loadLuaResult) {
         printf("加载 Lua 文件失败. file: %s\n", lua_tostring(L, -1));
         return;
     }
 
+    // 压入参数，传递给 Lua 脚本
     lua_pushstring(L, "jiang peng yong");
     lua_pushinteger(L, 29);
 

@@ -10,14 +10,28 @@ local name, age = ...
 local content = string.format("name: %s, age: %d", name, age)
 print("Lua 脚本中打印", content)
 
-local error = noneInitTable.name
+-- 第一种异常：调用了 nil 的 name 属性
+--local error = noneInitTable.name
 
-local errorTable = {}
-setmetatable(errorTable, {
-    __tostring = function(table)
-        return "Error table..."
-    end
-})
-error(errorTable)
+-- 第二种异常：自己抛出 error 异常
+-- 抛出 table 类型异常
+--local errorTable = {}
+--setmetatable(errorTable, {
+--    __tostring = function(table)
+--        return "Error table..."
+--    end
+--})
+--error(errorTable)
+-- 抛出 nil 类型异常
+--error(nil)
+-- 抛出 数值 类型异常
+--error(10)
+-- 抛出 布尔 类型异常
+--error(true)
+-- 抛出 函数 类型异常
+--local testFunction = function()
+--    return "error function"
+--end
+--error(testFunction)
 
 return content
