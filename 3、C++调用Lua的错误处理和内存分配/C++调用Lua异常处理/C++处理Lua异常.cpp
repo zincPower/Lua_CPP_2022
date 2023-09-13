@@ -6,6 +6,13 @@
 
 using namespace LuaExt;
 
+int my_panic(lua_State* L) {
+    const char* error = lua_tostring(L, -1);
+    printf("Lua panic: %s\n", error);
+    // 可以进行其他自定义操作，如记录日志、释放资源等
+    return 0;
+}
+
 /**
  * C++ 运行 Lua ，错误处理，提供一个保护区
  */
@@ -18,13 +25,15 @@ void cppHandleLuaError() {
     auto luaFilePath = PROJECT_PATH + "/3、C++调用Lua的错误处理和内存分配/C++调用Lua异常处理/C运行的Lua文件.lua";
 
     // 开启这段代码可以验证错误处理函数的栈是新的
-//    lua_pushinteger(L, 100);
+    lua_pushinteger(L, 100);
     // 加载 Lua 脚本
     auto loadLuaResult = luaL_loadfile(L, luaFilePath.c_str());
     if (loadLuaResult) {
         printf("加载 Lua 文件失败. file: %s\n", lua_tostring(L, -1));
         return;
     }
+
+    lua_atpanic(L, my_panic);
 
     // 压入参数，传递给 Lua 脚本
     lua_pushstring(L, "jiang peng yong");
@@ -34,19 +43,19 @@ void cppHandleLuaError() {
     stackDump(L);
 
     printf("-------- lua_pcall 调用 --------\n");
-    auto result = safeCallLua(L, 2, 1);
+    lua_call(L, 2, 1);
 
     printf("\n");
     printf("-------- 运行完 Lua 的栈 --------\n");
     stackDump(L);
 
-    if (result == 0) {
-        auto resultContent = lua_tostring(L, -1);
-        printf("lua result: 运行成功，结果：%s\n", resultContent);
-    } else {
-        auto error = lua_tostring(L, -1);
-        printf("----- lua result: 运行失败，错误堆栈 -----\n%s\n", error);
-    }
+//    if (result == 0) {
+//        auto resultContent = lua_tostring(L, -1);
+//        printf("lua result: 运行成功，结果：%s\n", resultContent);
+//    } else {
+//        auto error = lua_tostring(L, -1);
+//        printf("----- lua result: 运行失败，错误堆栈 -----\n%s\n", error);
+//    }
 
     lua_close(L);
 }
