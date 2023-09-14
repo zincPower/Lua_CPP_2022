@@ -8,16 +8,16 @@
 #include "内存分配/自定义内存分配器.h"
 
 int main() {
-//    printf("============= C++ 处理 Lua 异常 =============\n");
-//    cppHandleLuaError();
-//
-//    printf("\n");
-//    printf("============= Lua 处理 C++ 异常 =============\n");
-//    luaHandleCppError();
+    printf("============= C++ 处理 Lua 异常 =============\n");
+    cppHandleLuaError();
 
-//    printf("\n");
-//    printf("============= Lua 内存分配 =============\n");
-//    allocationFunction();
+    printf("\n");
+    printf("============= Lua 处理 C++ 异常 =============\n");
+    luaHandleCppError();
+
+    printf("\n");
+    printf("============= Lua 内存分配 =============\n");
+    allocationFunction();
 
     printf("\n");
     printf("============= Lua 紧急函数 =============\n");
