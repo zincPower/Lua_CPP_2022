@@ -17,7 +17,7 @@ add_subdirectory(lua_lib)
 add_executable(
         1_CPP_integration_Lua
         1、C++集成Lua/main.cpp
-        3、C++调用Lua的错误处理和内存分配/main.cpp
+        1、C++集成Lua/simple_parser.cpp
         utils/lua_ext.cpp
         config/env_config.cpp
 )
@@ -39,6 +39,7 @@ add_executable(
         3、C++调用Lua的错误处理和内存分配/C++调用Lua异常处理/C++处理Lua异常.cpp
         3、C++调用Lua的错误处理和内存分配/Lua调用C++异常处理/Lua处理C++异常.cpp
         3、C++调用Lua的错误处理和内存分配/紧急函数/紧急函数.cpp
+        3、C++调用Lua的错误处理和内存分配/内存分配/自定义内存分配器.cpp
         config/env_config.cpp
         utils/lua_ext.cpp
 )
