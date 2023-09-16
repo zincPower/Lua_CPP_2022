@@ -32,18 +32,27 @@ add_executable(
 )
 target_link_libraries(2_CPP_Lua_communication_stack LuaLib)
 
-# 3、C++调用Lua的错误处理和内存分配
+# 3、C++与Lua交互错误处理
 add_executable(
-        3_CPP_Lua_error_alloc_memory
-        3、C++调用Lua的错误处理和内存分配/main.cpp
-        3、C++调用Lua的错误处理和内存分配/C++调用Lua异常处理/C++处理Lua异常.cpp
-        3、C++调用Lua的错误处理和内存分配/Lua调用C++异常处理/Lua处理C++异常.cpp
-        3、C++调用Lua的错误处理和内存分配/紧急函数/紧急函数.cpp
-        3、C++调用Lua的错误处理和内存分配/内存分配/自定义内存分配器.cpp
+        3_CPP_Lua_handle_error
+        3、C++与Lua交互错误处理/main.cpp
+        3、C++与Lua交互错误处理/C++调用Lua异常处理/C++处理Lua异常.cpp
+        3、C++与Lua交互错误处理/Lua调用C++异常处理/Lua处理C++异常.cpp
+        3、C++与Lua交互错误处理/紧急函数/紧急函数.cpp
         config/env_config.cpp
         utils/lua_ext.cpp
 )
-target_link_libraries(3_CPP_Lua_error_alloc_memory LuaLib)
+target_link_libraries(3_CPP_Lua_handle_error LuaLib)
+
+# 4、C++与Lua交互内存管理
+add_executable(
+        4_CPP_Lua_alloc_memory
+        4、C++与Lua交互内存管理/main.cpp
+        4、C++与Lua交互内存管理/自定义内存分配器.cpp
+        config/env_config.cpp
+        utils/lua_ext.cpp
+)
+target_link_libraries(4_CPP_Lua_alloc_memory LuaLib)
 
 # 2、 c 调用 lua 函数
 add_executable(

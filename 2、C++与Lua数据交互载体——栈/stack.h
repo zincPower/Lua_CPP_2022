@@ -6,6 +6,10 @@
 #define CPP2022_LUASTACK_H
 
 #include <cstring>
+#include "lua.hpp"
+#include "../utils/lua_ext.h"
+
+using namespace LuaExt;
 
 extern void stackDemo();
 

@@ -17,7 +17,7 @@ int panicHandle(lua_State *L) {
 void panicMain() {
     lua_State *L = luaL_newstate();
 
-    auto luaFilePath = PROJECT_PATH + "/3、C++调用Lua的错误处理和内存分配/紧急函数/Lua异常.lua";
+    auto luaFilePath = PROJECT_PATH + "/3、C++与Lua交互错误处理/紧急函数/Lua异常.lua";
 
     // 加载 Lua 脚本
     auto loadLuaResult = luaL_loadfile(L, luaFilePath.c_str());

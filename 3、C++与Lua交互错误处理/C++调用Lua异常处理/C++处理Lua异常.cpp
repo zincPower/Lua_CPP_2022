@@ -15,7 +15,7 @@ void cppHandleLuaError() {
     // 加载函数库，否则加载的 Lua 无法使用内置库
     luaL_openlibs(L);
 
-    auto luaFilePath = PROJECT_PATH + "/3、C++调用Lua的错误处理和内存分配/C++调用Lua异常处理/C运行的Lua文件.lua";
+    auto luaFilePath = PROJECT_PATH + "/3、C++与Lua交互错误处理/C++调用Lua异常处理/C运行的Lua文件.lua";
 
     // 开启这段代码可以验证错误处理函数的栈是新的
     lua_pushinteger(L, 100);

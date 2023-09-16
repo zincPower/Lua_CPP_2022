@@ -98,7 +98,7 @@ int safeCallLua(lua_State *L, int narg, int nres) {
     int base = lua_gettop(L) - narg;
     // 压入异常处理函数
     lua_pushcfunction(L, errorTraceback);
-    // 将异常处理函数压入到 base 下标的位置
+    // 将异常处理函数插入到 base 下标的位置
     lua_insert(L, base);
     // 调用 Lua 函数
     int status = lua_pcall(L, narg, nres, base);

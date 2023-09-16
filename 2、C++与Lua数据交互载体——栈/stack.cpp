@@ -2,9 +2,7 @@
 // Created by 江澎涌 on 2022/4/28.
 //
 
-#include "lua.hpp"
 #include "stack.h"
-#include "../utils/stack_dump.h"
 
 void showInfo(lua_State *L, ...) {
     va_list args;
@@ -50,7 +48,7 @@ void stackDemo() {
 
     printf("\n");
     printf("------ 栈中内容: ------\n");
-    stackDump(L);
+    LuaExt::stackDump(L);
 
     printf("\n");
     printf("===================== 栈空间检查 =====================\n");
