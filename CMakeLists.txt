@@ -54,16 +54,18 @@ add_executable(
 )
 target_link_libraries(4_CPP_Lua_alloc_memory LuaLib)
 
-# 2、 c 调用 lua 函数
+# 5、 C++ 调用 Lua 函数
 add_executable(
-        2_application_extend
-        2、application_extend/main.cpp
-        2、application_extend/config_parser.cpp
-        2、application_extend/调用Lua函数/调用Lua函数.cpp
-        2、application_extend/通用调用lua函数/call_va.cpp
+        5_CPP_Call_Lua
+        5、C++调用Lua代码/main.cpp
+        5、C++调用Lua代码/Lua作为配置文件/config_parser.cpp
+        5、C++调用Lua代码/调用Lua函数/调用Lua函数.cpp
+        5、C++调用Lua代码/通用调用lua函数/call_va.cpp
+        config/env_config.cpp
         utils/lua_error.cpp
-        utils/lua_ext.cpp)
-target_link_libraries(2_application_extend LuaLib)
+        utils/lua_ext.cpp
+)
+target_link_libraries(5_CPP_Call_Lua LuaLib)
 
 # 3、 lua 调用 c 函数
 add_executable(

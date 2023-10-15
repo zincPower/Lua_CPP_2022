@@ -2,10 +2,7 @@
 // Created by 江澎涌 on 2022/4/29.
 //
 
-#include <cstring>
-#include "lua.hpp"
-#include "../utils/lua_error.h"
-#include "../utils/stack_dump.h"
+#include "config_parser.h"
 
 #define MAX_COLOR 255
 
@@ -158,5 +155,13 @@ void load(lua_State *L, const char *fname) {
     } else {
         error(L, "'background' is not a table.");
     }
+}
 
+void loadConfig(){
+    std::string filename = PROJECT_PATH + "/5、C++调用Lua代码/Lua作为配置文件/config.lua";
+    lua_State *L = luaL_newstate();
+    // 需要使用 lua_openlibs 进行开启库，否则 lua 中无法使用
+    luaL_openlibs(L);
+    load(L, filename.c_str());
+    lua_close(L);
 }
