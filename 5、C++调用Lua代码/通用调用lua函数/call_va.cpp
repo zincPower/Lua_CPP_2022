@@ -2,9 +2,7 @@
 // Created by 江澎涌 on 2022/5/1.
 //
 
-#include <cstring>
-#include "lua.hpp"
-#include "../../utils/lua_error.h"
+#include "call_va.h"
 
 void call_va(lua_State *L, const char *func, const char *sig, ...) {
     va_list vl;
@@ -80,4 +78,19 @@ void call_va(lua_State *L, const char *func, const char *sig, ...) {
     }
 
     va_end(vl);
+}
+
+void commonCallLuaDemo(){
+    std::string fname = PROJECT_PATH + "/5、C++调用Lua代码/调用Lua函数/调用Lua函数.lua";
+    lua_State *L = luaL_newstate();
+    // 需要使用 lua_openlibs 进行开启库，否则 lua 中无法使用
+    luaL_openlibs(L);
+    if (luaL_loadfile(L, fname.c_str()) || lua_pcall(L, 0, 0, 0)) {
+        printf("can't run config. file: %s", lua_tostring(L, -1));
+        return;
+    }
+    double z;
+    call_va(L, "luaFunction", "dd>d", 2.0, 34.0, &z);
+    printf("f: %f\n", z);
+    lua_close(L);
 }

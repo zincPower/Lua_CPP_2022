@@ -4,8 +4,6 @@
 
 #include "lua.hpp"
 #include <cstring>
-#include "lua.hpp"
 #include "../../config/env_config.h"
-#include "../../utils/lua_error.h"
 
-extern void loadConfig();
+extern void loadConfigUseEnv();

@@ -2,9 +2,10 @@
 // Created by 江澎涌 on 2022/4/29.
 //
 
-#include "config_parser.h"
+#include "config_use_table.h"
 
 #define MAX_COLOR 255
+using namespace LuaExt;
 
 struct ColorTable {
     char *name;
@@ -19,26 +20,6 @@ struct ColorTable {
 };
 
 /**
- * 获取全局 int
- * @param L lua state
- * @param var 字段名
- * @return lua 中字段名对应的值
- * lua_getglobal 将会从 lua 中读取全局变量，将值压入栈中
- */
-int getGlobInt(lua_State *L, const char *var) {
-    int isNum, result;
-    // 将 var 对应的值压入栈中
-    lua_getglobal(L, var);
-    result = (int) lua_tointegerx(L, -1, &isNum);
-    if (!isNum) {
-        error(L, "'%s' should be a number\n", var);
-    }
-    // 将 var 对应值压入栈中的值弹出
-    lua_pop(L, 1);
-    return result;
-}
-
-/**
  * 获取 lua 中 table 颜色值
  * @param L lua state
  * @param key 字段名
@@ -48,27 +29,36 @@ int getGlobInt(lua_State *L, const char *var) {
  * 1、将 key 压入栈中
  * 2、lua_table 将栈顶 key 弹出，从 table 中读取后压入栈
  */
-int getColorField(lua_State *L, const char *key) {
-    int result, isNum;
+bool getColorField(lua_State *L, const char *key, int *result) {
+    int isNum;
 
     // 第一种做法
     // 将 key 压入栈
     lua_pushstring(L, key);
     // 将栈顶（key）弹出，然后将读取的值压入
-    lua_gettable(L, -2);
+    int type = lua_gettable(L, -2);
+    printf("lua_gettable(L, -2) %d\n", type);
+    if (type != LUA_TNUMBER) {
+        printf("invalid component in background color");
+        return false;
+    }
 
     // 第二种做法（lua_getfield 和 lua_gettable 都会返回类型）
-//    if (lua_getfield(L, -1, key) == LUA_TNUMBER) {
-//        error(L, "invalid component in background color");
+    if (lua_getfield(L, -1, key) == LUA_TNUMBER) {
+//        printf("invalid component in background color");
+//        return false;
 //    }
 
-    result = (int) (lua_tonumberx(L, -1, &isNum) * MAX_COLOR);
+//    stackDump(L);
+
+    *result = (int) (lua_tonumberx(L, -1, &isNum) * MAX_COLOR);
     if (!isNum) {
-        error(L, "invalid component '%s' in color", key);
+        printf("invalid component '%s' in color", key);
+        return false;
     }
 
     lua_pop(L, 1);
-    return result;
+    return true;
 }
 
 /**
@@ -87,7 +77,7 @@ void setColorField(lua_State *L, const char *index, int value) {
     lua_pushstring(L, index);
     // 值
     lua_pushnumber(L, (double) value / MAX_COLOR);
-    // 将键和值弹出，然后设置到 table 中，table[stack[-2]] = stack[-1]
+    // 将键和值弹出，然后设置到 table （索引为 -3） 中，table[stack[-2]] = stack[-1]
     lua_settable(L, -3);
 
     // 第二种
@@ -118,24 +108,34 @@ void setColor(lua_State *L, struct ColorTable *ct) {
 
 void load(lua_State *L, const char *fname) {
     int i = 0;
+    // 设置颜色值
     while (colorTable[i].name != nullptr) {
         setColor(L, &colorTable[i++]);
     }
 
     if (luaL_loadfile(L, fname) || lua_pcall(L, 0, 0, 0)) {
-        error(L, "can't run config. file: %s", lua_tostring(L, -1));
+        printf("can't run config. file: %s\n", lua_tostring(L, -1));
+        return;
     }
-
-    int w = getGlobInt(L, "width");
-    int h = getGlobInt(L, "height");
-    printf("size: %d x %d\n", w, h);
 
     // 将 background 压入栈
     lua_getglobal(L, "background");
     if (lua_istable(L, -1)) {
-        int red = getColorField(L, "red");
-        int green = getColorField(L, "green");
-        int blue = getColorField(L, "blue");
+        int red;
+        if (!getColorField(L, "red", &red)) {
+            printf("Get red failure.\n");
+            return;
+        }
+        int green;
+        if (!getColorField(L, "green", &green)) {
+            printf("Get green failure.\n");
+            return;
+        }
+        int blue;
+        if (!getColorField(L, "blue", &blue)) {
+            printf("Get blue failure.\n");
+            return;
+        }
         printf("table color: (%d, %d, %d)\n", red, green, blue);
     } else if (lua_isstring(L, -1)) {
         const char *name = lua_tostring(L, -1);
@@ -146,21 +146,21 @@ void load(lua_State *L, const char *fname) {
             }
         }
         if (colorTable[i].name == nullptr) {
-            error(L, "invalid color name (%s)", name);
+            printf("invalid color name (%s)", name);
+            return;
         }
         int red = colorTable[i].red;
         int green = colorTable[i].green;
         int blue = colorTable[i].blue;
         printf("string color: (%d, %d, %d)\n", red, green, blue);
     } else {
-        error(L, "'background' is not a table.");
+        printf("'background' is not a table.");
     }
 }
 
-void loadConfig(){
-    std::string filename = PROJECT_PATH + "/5、C++调用Lua代码/Lua作为配置文件/config.lua";
+void loadConfigUseTable() {
+    std::string filename = PROJECT_PATH + "/5、C++调用Lua代码/Lua作为配置文件/配置中使用表/config.lua";
     lua_State *L = luaL_newstate();
-    // 需要使用 lua_openlibs 进行开启库，否则 lua 中无法使用
     luaL_openlibs(L);
     load(L, filename.c_str());
     lua_close(L);

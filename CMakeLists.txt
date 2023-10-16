@@ -58,7 +58,8 @@ target_link_libraries(4_CPP_Lua_alloc_memory LuaLib)
 add_executable(
         5_CPP_Call_Lua
         5、C++调用Lua代码/main.cpp
-        5、C++调用Lua代码/Lua作为配置文件/config_parser.cpp
+        5、C++调用Lua代码/Lua作为配置文件/根据环境变量获取值/config_use_env.cpp
+        5、C++调用Lua代码/Lua作为配置文件/配置中使用表/config_use_table.cpp
         5、C++调用Lua代码/调用Lua函数/调用Lua函数.cpp
         5、C++调用Lua代码/通用调用lua函数/call_va.cpp
         config/env_config.cpp
