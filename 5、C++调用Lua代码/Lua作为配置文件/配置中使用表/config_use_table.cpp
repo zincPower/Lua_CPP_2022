@@ -43,8 +43,8 @@ bool getColorField(lua_State *L, const char *key, int *result) {
         return false;
     }
 
-    // 第二种做法（lua_getfield 和 lua_gettable 都会返回类型）
-    if (lua_getfield(L, -1, key) == LUA_TNUMBER) {
+//    // 第二种做法（lua_getfield 和 lua_gettable 都会返回类型）
+//    if (lua_getfield(L, -1, key) != LUA_TNUMBER) {
 //        printf("invalid component in background color");
 //        return false;
 //    }
@@ -72,6 +72,8 @@ bool getColorField(lua_State *L, const char *key, int *result) {
  * 3、设置进 table ，弹出 value 、 key ，设置 table[stack[-2]] = stack[-1]
  */
 void setColorField(lua_State *L, const char *index, int value) {
+//    stackDump(L);
+
     // 第一种
     // 键
     lua_pushstring(L, index);
@@ -81,8 +83,11 @@ void setColorField(lua_State *L, const char *index, int value) {
     lua_settable(L, -3);
 
     // 第二种
-//    lua_pushnumber(L, (double) value / MAX_COLOR);
-//    lua_setfield(L, -2, index);
+    lua_pushnumber(L, (double) value / MAX_COLOR);
+    // 将键和值弹出，然后设置到 table （索引为 -2） 中，table[index] = stack[-1]
+    lua_setfield(L, -2, index);
+
+//    stackDump(L);
 }
 
 /**
