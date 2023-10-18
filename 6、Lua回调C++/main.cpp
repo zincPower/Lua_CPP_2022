@@ -5,7 +5,7 @@
 #include <string>
 #include "lua.hpp"
 #include "lua_call_c.cpp"
-#include "../utils/lua_error.h"
+#include "../config/env_config.h"
 
 int main() {
     lua_State *L = luaL_newstate();
@@ -21,8 +21,8 @@ int main() {
     // 将压入的函数 l_dir 设置为 dir 变量
     lua_setglobal(L, "dir");
 
-    std::string fname = "/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/6、Lua回调C++/lua_call_c.lua";
+    std::string fname = PROJECT_PATH + "/6、Lua回调C++/lua_call_c.lua";
     if (luaL_loadfile(L, fname.c_str()) || lua_pcall(L, 0, 0, 0)) {
-        error(L, "can't run config. file: %s", lua_tostring(L, -1));
+        printf("can't run config. file: %s", lua_tostring(L, -1));
     }
 }

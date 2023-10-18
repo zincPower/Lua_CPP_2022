@@ -2,8 +2,6 @@
 // Created by 江澎涌 on 2023/1/24.
 //
 
-#include <string>
-
 #include "lua.hpp"
 #include "调用Lua函数/调用Lua函数.h"
 #include "通用调用lua函数/call_va.h"
