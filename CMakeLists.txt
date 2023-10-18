@@ -68,13 +68,14 @@ add_executable(
 )
 target_link_libraries(5_CPP_Call_Lua LuaLib)
 
-# 3、 lua 调用 c 函数
+# 6、 Lua 回调 C++
 add_executable(
-        3_lua_call_c
-        3、lua_call_c/main.cpp
+        6_Lua_Call_CPP
+        6、Lua回调C++/main.cpp
         utils/lua_error.cpp
-        utils/lua_ext.cpp)
-target_link_libraries(3_lua_call_c LuaLib)
+        utils/lua_ext.cpp
+)
+target_link_libraries(6_Lua_Call_CPP LuaLib)
 
 # 4、 调用 lua_call_c_lib
 add_executable(
