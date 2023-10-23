@@ -72,8 +72,11 @@ target_link_libraries(5_CPP_Call_Lua LuaLib)
 add_executable(
         6_Lua_Call_CPP
         6、Lua回调C++/main.cpp
-        utils/lua_ext.cpp
+        6、Lua回调C++/调用C++函数/简易的sin函数.cpp
+        6、Lua回调C++/调用C++函数/读取目录函数.cpp
+        6、Lua回调C++/协程/CoroutineDemo.cpp
         config/env_config.cpp
+        utils/lua_ext.cpp
 )
 target_link_libraries(6_Lua_Call_CPP LuaLib)
 
