@@ -4,20 +4,24 @@
 --- DateTime: 2022/5/1 21:40
 ---
 
+local currentPath = debug.getinfo(1, "S").source:sub(2):match("(.*/)")
+print("source:", currentPath)
+
 -- 添加一个 cpath 搜索动态库
-package.cpath = package.cpath..";/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/4、lua_call_c_lib/lib/mylib"
+package.cpath = package.cpath .. ";" .. currentPath .. "lib/mylib"
 
 local mylib = require "mylib"
 
 print("------------------ mylib ------------------")
 print("mylib", mylib)
+
 print("------------------ mylib 的所有函数 ------------------")
 for i, v in pairs(mylib) do
     print(i, v)
 end
 
 print("------------------ 目录 ------------------")
-t = mylib.dir('/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/4、lua_call_c_lib');
+t = mylib.dir(currentPath);
 for key, value in pairs(t) do
     io.write(key, value, "\n")
 end

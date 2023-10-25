@@ -75,18 +75,19 @@ add_executable(
         6、Lua回调C++/调用C++函数/简易的sin函数.cpp
         6、Lua回调C++/调用C++函数/读取目录函数.cpp
         6、Lua回调C++/协程/CoroutineDemo.cpp
+        6、Lua回调C++/Lua调用C++的lib/
         config/env_config.cpp
         utils/lua_ext.cpp
 )
 target_link_libraries(6_Lua_Call_CPP LuaLib)
 
-# 4、 调用 lua_call_c_lib
-add_executable(
-        4_lua_call_c_lib
-        4、lua_call_c_lib/main.cpp
-        utils/lua_error.cpp
-        utils/lua_ext.cpp)
-target_link_libraries(4_lua_call_c_lib LuaLib)
+## 4、 调用 lua_call_c_lib
+#add_executable(
+#        4_lua_call_c_lib
+#        4、lua_call_c_lib/main.cpp
+#        utils/lua_error.cpp
+#        utils/lua_ext.cpp)
+#target_link_libraries(4_lua_call_c_lib LuaLib)
 
 # 5、 编写 C 函数技巧
 add_executable(

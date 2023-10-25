@@ -4,16 +4,18 @@
 --- DateTime: 2023/10/23 08:37
 ---
 
-print("dir: ", dir, "\n");
+print("dir: ", dir);
 
-print("--------------- 存在目录 ---------------\n")
-t = dir('/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/6、Lua回调C++')
+local currentPath = debug.getinfo(1, "S").source:sub(2):match("(.*/)")
+
+print("--------------- 存在目录 ---------------")
+t = dir(currentPath)
 for key, value in pairs(t) do
     io.write(key, value, "\n")
 end
-print("------------------------------\n")
+print("------------------------------")
 
-print("--------------- 不存在目录 ---------------\n")
-t1, t2 = dir('/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/3、lua调用c1')
-print(t1, t2, "\n")
-print("------------------------------\n")
+print("--------------- 不存在目录 ---------------")
+t1, t2 = dir(currentPath .. '不存在的目录')
+print(t1, t2)
+print("------------------------------")

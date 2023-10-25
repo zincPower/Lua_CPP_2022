@@ -35,6 +35,18 @@ int main() {
         printf("can't run config. file: %s", lua_tostring(L, -1));
     }
 
+    printf("\n");
     printf("=============== 协程 ===============\n");
     coroutineDemo();
+
+    printf("\n");
+    printf("=============== Lua调用 ===============\n");
+    std::string fname = PROJECT_PATH +"/6、Lua回调C++/Lua调用C++的lib/lua加载c库.lua";
+    if (luaL_loadfile(L, fname.c_str()) || lua_pcall(L, 0, 0, 0)) {
+        printf("can't run config. file: %s", lua_tostring(L, -1));
+    }
+
+    lua_close(L);
+
+    return 1;
 }
