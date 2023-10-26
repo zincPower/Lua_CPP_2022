@@ -59,7 +59,7 @@ void tupleDemo() {
     luaL_openlibs(L);
     luaopen_tuple(L);
 
-    std::string filename = "/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/5、编写C函数技巧/tuple/tuple.lua";
+    std::string filename = "/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/8、编写C函数技巧/tuple/tuple.lua";
     if (luaL_loadfile(L, filename.c_str()) || lua_pcall(L, 0, 0, 0)) {
         error(L, "can't run config. file: %s", lua_tostring(L, -1));
     }

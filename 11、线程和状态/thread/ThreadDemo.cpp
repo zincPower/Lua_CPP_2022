@@ -26,7 +26,7 @@ void threadDemo() {
     printf("L1 栈内容长度：%d\n", lua_gettop(L1));
     printf("L 栈内容长度：%d - %s\n", lua_gettop(L), luaL_typename(L, -1));
 
-    std::string fname = "/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/8、线程和状态/thread/thread.lua";
+    std::string fname = "/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/11、线程和状态/thread/thread.lua";
     if (luaL_loadfile(L1, fname.c_str()) || lua_pcall(L1, 0, 0, 0)) {
         error(L, "can't run config. file: %s", lua_tostring(L1, -1));
     }

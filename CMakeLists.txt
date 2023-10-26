@@ -81,60 +81,61 @@ add_executable(
 )
 target_link_libraries(6_Lua_Call_CPP LuaLib)
 
-## 4、 调用 lua_call_c_lib
-#add_executable(
-#        4_lua_call_c_lib
-#        4、lua_call_c_lib/main.cpp
-#        utils/lua_error.cpp
-#        utils/lua_ext.cpp)
-#target_link_libraries(4_lua_call_c_lib LuaLib)
-
-# 5、 编写 C 函数技巧
+# 7、Lua调用C++的lib
 add_executable(
-        5_c_function_skill
-        5、编写C函数技巧/main.cpp
-        5、编写C函数技巧/LuaArray.cpp
-        5、编写C函数技巧/LuaString.cpp
-        5、编写C函数技巧/注册表.cpp
-        5、编写C函数技巧/共享上值/共享上值.cpp
-        5、编写C函数技巧/上值/上值.cpp
-        5、编写C函数技巧/tuple/tuplelib.cpp
-        5、编写C函数技巧/共享上值/共享上值.cpp
+        7_Lua_Call_CPP_Lib
+        7、Lua调用C++的lib/main.cpp
+        config/env_config.cpp
+        utils/lua_ext.cpp
+)
+target_link_libraries(7_Lua_Call_CPP_Lib LuaLib)
+
+# 8、 编写 C 函数技巧
+add_executable(
+        8_C_Function_Skill
+        8、编写C函数技巧/main.cpp
+        8、编写C函数技巧/LuaArray.cpp
+        8、编写C函数技巧/LuaString.cpp
+        8、编写C函数技巧/注册表.cpp
+        8、编写C函数技巧/共享上值/共享上值.cpp
+        8、编写C函数技巧/上值/上值.cpp
+        8、编写C函数技巧/tuple/tuplelib.cpp
+        8、编写C函数技巧/共享上值/共享上值.cpp
         utils/lua_error.cpp
         utils/lua_ext.cpp)
-target_link_libraries(5_c_function_skill LuaLib)
+target_link_libraries(8_C_Function_Skill LuaLib)
 
-# 6、userdata
+# 9、userdata
 add_executable(
-        6_userdata
-        6、userdata/main.cpp
-        6、userdata/用户数据/newarray.cpp
-        6、userdata/用户数据_面向对象/newarray.cpp
-        6、userdata/用户数据_数组访问/newarray.cpp
+        9_Userdata
+        9、userdata/main.cpp
+        9、userdata/用户数据/newarray.cpp
+        9、userdata/用户数据_面向对象/newarray.cpp
+        9、userdata/用户数据_数组访问/newarray.cpp
         utils/lua_error.cpp
         utils/lua_ext.cpp)
-target_link_libraries(6_userdata LuaLib)
+target_link_libraries(9_Userdata LuaLib)
 
-# 7、管理资源
+# 10、管理资源
 # https://github.com/libexpat/libexpat/tree/R_2_5_0
 find_package(EXPAT 2.4.8 MODULE REQUIRED)
 add_executable(
-        7_manage_resource
-        7、管理资源/main.cpp
-        7、管理资源/file/file.cpp
-        7、管理资源/xml/xml_parser.cpp
+        10_Manage_Resource
+        10、管理资源/main.cpp
+        10、管理资源/file/file.cpp
+        10、管理资源/xml/xml_parser.cpp
         utils/lua_error.cpp
         utils/lua_ext.cpp)
-target_link_libraries(7_manage_resource PUBLIC LuaLib EXPAT::EXPAT)
-target_include_directories(7_manage_resource PRIVATE ${EXPAT_INCLUDE_DIRS})
-target_link_libraries(7_manage_resource PUBLIC ${EXPAT_LIBRARIES})
+target_link_libraries(10_Manage_Resource PUBLIC LuaLib EXPAT::EXPAT)
+target_include_directories(10_Manage_Resource PRIVATE ${EXPAT_INCLUDE_DIRS})
+target_link_libraries(10_Manage_Resource PUBLIC ${EXPAT_LIBRARIES})
 
-# 8、线程和状态
+# 11、线程和状态
 add_executable(
-        8_thread_and_state
-        8、线程和状态/main.cpp
-        8、线程和状态/thread/ThreadDemo.cpp
-        8、线程和状态/lproc/lproc.cpp
+        11_Thread_And_State
+        11、线程和状态/main.cpp
+        11、线程和状态/thread/ThreadDemo.cpp
+        11、线程和状态/lproc/lproc.cpp
         utils/lua_error.cpp
         utils/lua_ext.cpp)
-target_link_libraries(8_thread_and_state LuaLib)
+target_link_libraries(11_Thread_And_State LuaLib)
