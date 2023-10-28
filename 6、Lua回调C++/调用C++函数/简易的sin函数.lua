@@ -4,9 +4,10 @@
 --- DateTime: 2023/10/23 08:37
 ---
 
-print("sin: ", sin, "\n");
+print("sin: ", sin);
 
 s = sin(10);
--- can't run config. file: ...ktop/code/Lua/Lua_CPP_2022/6、Lua回调C++/lua_call_c.lua:11: bad argument #1 to 'sin' (number expected, got string)
+print("s: ", s);
+
+-- can't run config. file: ...ktop/code/Lua/Lua_CPP_2022/6、Lua回调C++/调用C++函数/lua_call_c.lua:11: bad argument #1 to 'sin' (number expected, got string)
 --s = sin('a');
-print("s: ", s, "\n");

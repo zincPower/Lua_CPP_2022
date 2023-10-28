@@ -8,14 +8,35 @@ print("dir: ", dir);
 
 local currentPath = debug.getinfo(1, "S").source:sub(2):match("(.*/)")
 
+print("--------------- 传递错误参数 ---------------")
+print(pcall(function()
+    dir({ "传递错误参数" })
+end))
+
 print("--------------- 存在目录 ---------------")
-t = dir(currentPath)
-for key, value in pairs(t) do
-    io.write(key, value, "\n")
+local dirTable
+local isSuccess, msg = pcall(function()
+    dirTable = dir(currentPath)
+end)
+if isSuccess then
+    for key, value in pairs(dirTable) do
+        io.write(key, value, "\n")
+    end
+else
+    print("打开目录失败", currentPath, msg)
 end
+
 print("------------------------------")
 
 print("--------------- 不存在目录 ---------------")
-t1, t2 = dir(currentPath .. '不存在的目录')
-print(t1, t2)
+isSuccess, msg = pcall(function()
+    dirTable = dir("不存在目录")
+end)
+if isSuccess then
+    for key, value in pairs(dirTable) do
+        io.write(key, value, "\n")
+    end
+else
+    print("打开目录失败", currentPath, msg)
+end
 print("------------------------------")

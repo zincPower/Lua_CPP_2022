@@ -5,26 +5,32 @@
 #include "读取目录函数.h"
 
 int l_dir(lua_State *L) {
-    DIR *dir;
-    struct dirent *entry;
-    int i;
+    // 检测入参是否为字符串
+    // 如果不是，则会抛出异常到 Lua 中，can't run config. file: .../6、Lua回调C++/调用C++函数/读取目录函数.lua:11: bad argument #1 to 'dir' (string expected, got table)
     const char *path = luaL_checkstring(L, 1);
 
-    dir = opendir(path);
+    // 打开相应目录
+    DIR *dir = opendir(path);
     if (dir == nullptr) {
-        lua_pushnil(L);
-        lua_pushstring(L, strerror(errno));
-        return 2;
+        // 抛异常至 Lua
+        luaL_error(L, strerror(errno));
     }
 
+    // 创建表，用于装载目录下 "索引" 和 "文件名"
+    // 格式为 table[index] = "文件名"
     lua_newtable(L);
-    i = 1;
+    int i = 1;
+    struct dirent *entry;
     while ((entry = readdir(dir)) != nullptr) {
-        lua_pushinteger(L, ++i);
+        // 压入 key ，即索引
+        lua_pushinteger(L, i++);
+        // 压入 value ，即文件名
         lua_pushstring(L, entry->d_name);
+        // 将 key 和 value 插入 table
         lua_settable(L, -3);
     }
 
     closedir(dir);
+    // 只有一个返回值，即 table
     return 1;
 }
