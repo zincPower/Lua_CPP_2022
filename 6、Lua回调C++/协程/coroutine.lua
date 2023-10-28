@@ -5,15 +5,17 @@
 ---
 
 co = coroutine.wrap(function()
-    print("江澎涌5")
-    print(pcall(coroutine.yield))
-    print("江澎涌3")
+    print("Lua 江澎涌3")
+    print("pcall ",pcall(coroutine.yield))
+    print("Lua 江澎涌5")
 end)
 
-print("江澎涌1")
+print("Lua 江澎涌1")
 
 co()
 
-print("江澎涌2")
+print("Lua 江澎涌2")
 
 co()
+
+print("Lua 江澎涌6")

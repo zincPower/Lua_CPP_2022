@@ -8,9 +8,12 @@ void coroutineDemo() {
     std::string fileName = PROJECT_PATH + "/6、Lua回调C++/协程/coroutine.lua";
     lua_State *L = luaL_newstate();
     luaL_openlibs(L);
+
+    printf("C++ 江澎涌0\n");
     if (luaL_loadfile(L, fileName.c_str()) || lua_pcall(L, 0, 0, 0)) {
         printf("can't run file. file: %s", lua_tostring(L, -1));
     }
+    printf("C++ 江澎涌7\n");
 }
 
 //int luaB_pcall(lua_State *L) {
