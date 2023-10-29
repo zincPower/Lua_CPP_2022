@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 include_directories(lua_lib/lua-5.4.4)
 add_subdirectory(lua_lib)
 
-add_executable(mylib mylib.cpp)
+add_executable(mylib src/mylib.cpp)
 target_link_libraries(mylib LuaLibForLib)
 
 # 在 lib 目录下，运行

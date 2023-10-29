@@ -21,7 +21,14 @@ for i, v in pairs(mylib) do
 end
 
 print("------------------ 目录 ------------------")
-t = mylib.dir(currentPath);
-for key, value in pairs(t) do
-    io.write(key, value, "\n")
+local dirTable
+local isSuccess, msg = pcall(function()
+    dirTable = mylib.dir(currentPath);
+end)
+if isSuccess then
+    for key, value in pairs(dirTable) do
+        print(key, value)
+    end
+else
+    print("打开目录失败", currentPath, msg)
 end

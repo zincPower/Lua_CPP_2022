@@ -12,7 +12,7 @@ int main(){
 
     printf("\n");
     printf("=============== Lua调用 ===============\n");
-    std::string fname = PROJECT_PATH +"/7、Lua调用C++的lib/lua加载c库.lua";
+    std::string fname = PROJECT_PATH +"/7、Lua调用C++的lib/Lua加载C模块.lua";
     if (luaL_loadfile(L, fname.c_str()) || lua_pcall(L, 0, 0, 0)) {
         printf("can't run config. file: %s", lua_tostring(L, -1));
     }
