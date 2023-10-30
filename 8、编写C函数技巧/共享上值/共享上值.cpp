@@ -2,10 +2,7 @@
 // Created by 江澎涌 on 2022/5/8.
 //
 
-#include <string>
 #include "共享上值.h"
-#include "lua.hpp"
-#include "../../utils/lua_error.h"
 
 int showInfo(lua_State *L) {
     long long age = lua_tointeger(L, lua_upvalueindex(1));

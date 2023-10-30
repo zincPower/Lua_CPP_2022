@@ -5,6 +5,11 @@
 #ifndef CPP2022_LUASTRING_H
 #define CPP2022_LUASTRING_H
 
+#include <cstring>
+#include <cctype>
+#include "LuaString.h"
+#include "lua.hpp"
+
 void luaStringDemo();
 
 void luaConcatDemo();

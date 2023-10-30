@@ -4,7 +4,6 @@
 
 #include "注册表.h"
 #include "lua.hpp"
-#include "../utils/stack_dump.h"
 
 // 用静态属性 Key 地址作为键
 void registerTable(lua_State *L) {

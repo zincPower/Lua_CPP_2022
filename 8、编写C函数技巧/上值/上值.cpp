@@ -2,10 +2,7 @@
 // Created by 江澎涌 on 2022/5/8.
 //
 
-#include <string>
 #include "上值.h"
-#include "lua.hpp"
-#include "../../utils/lua_error.h"
 
 static int counter(lua_State *L) {
     int value = lua_tointeger(L, lua_upvalueindex(1));

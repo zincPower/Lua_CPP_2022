@@ -5,6 +5,8 @@
 #ifndef CPP2022_TUPLELIB_H
 #define CPP2022_TUPLELIB_H
 
+#include <iostream>
+#include "../../utils/lua_error.h"
 #include "lua.hpp"
 
 int luaopen_tuple(lua_State *L);

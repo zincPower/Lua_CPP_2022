@@ -2,10 +2,7 @@
 // Created by 江澎涌 on 2022/5/6.
 //
 
-#include <cstring>
-#include <cctype>
 #include "LuaString.h"
-#include "lua.hpp"
 
 void l_split(lua_State *L) {
     const char *s = luaL_checkstring(L, 1);

@@ -94,7 +94,7 @@ target_link_libraries(7_Lua_Call_CPP_Lib LuaLib)
 add_executable(
         8_C_Function_Skill
         8、编写C函数技巧/main.cpp
-        8、编写C函数技巧/LuaArray.cpp
+        8、编写C函数技巧/数组便捷存取/LuaArray.cpp
         8、编写C函数技巧/LuaString.cpp
         8、编写C函数技巧/注册表.cpp
         8、编写C函数技巧/共享上值/共享上值.cpp

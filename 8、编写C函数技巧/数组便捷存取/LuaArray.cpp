@@ -3,13 +3,11 @@
 //
 
 #include "LuaArray.h"
-#include "lua.hpp"
-#include "../utils/stack_dump.h"
 
 void luaArrayDemo() {
     lua_State *L = luaL_newstate();
 
-    // 创建并押入一个新表
+    // 创建并压入一个新表
     lua_newtable(L);
     // 添加至数组的操作方式
     // 第一种：
@@ -74,7 +72,6 @@ int l_map(lua_State *L) {
 }
 
 void luaMapFunctionDemo() {
-
     lua_State *L = luaL_newstate();
 
     lua_newtable(L);

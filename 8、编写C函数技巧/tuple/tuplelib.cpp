@@ -3,9 +3,6 @@
 //
 
 #include "tuplelib.h"
-#include <iostream>
-#include "../../utils/lua_error.h"
-#include "../../utils/stack_dump.h"
 
 int t_tuple(lua_State *L) {
     // 获取第一个值，是否为整型，不是的话就返回 0

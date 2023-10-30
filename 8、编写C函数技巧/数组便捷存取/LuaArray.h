@@ -5,6 +5,9 @@
 #ifndef CPP2022_LUAARRAY_H
 #define CPP2022_LUAARRAY_H
 
+#include "LuaArray.h"
+#include "lua.hpp"
+
 void luaArrayDemo();
 
 void luaMapFunctionDemo();
