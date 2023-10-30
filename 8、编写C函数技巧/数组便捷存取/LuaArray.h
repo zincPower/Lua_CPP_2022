@@ -7,6 +7,11 @@
 
 #include "LuaArray.h"
 #include "lua.hpp"
+#include "../../utils/lua_ext.h"
+#include "../../config/env_config.h"
+#include <string>
+
+using namespace LuaExt;
 
 void luaArrayDemo();
 

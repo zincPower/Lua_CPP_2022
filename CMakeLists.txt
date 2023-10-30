@@ -101,8 +101,10 @@ add_executable(
         8、编写C函数技巧/上值/上值.cpp
         8、编写C函数技巧/tuple/tuplelib.cpp
         8、编写C函数技巧/共享上值/共享上值.cpp
+        config/env_config.cpp
         utils/lua_error.cpp
-        utils/lua_ext.cpp)
+        utils/lua_ext.cpp
+)
 target_link_libraries(8_C_Function_Skill LuaLib)
 
 # 9、userdata

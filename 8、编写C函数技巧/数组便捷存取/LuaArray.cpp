@@ -73,31 +73,41 @@ int l_map(lua_State *L) {
 
 void luaMapFunctionDemo() {
     lua_State *L = luaL_newstate();
+    luaL_openlibs(L);
 
-    lua_newtable(L);
-    lua_pushcfunction(L, showName);
+//    // 压入表
+//    lua_newtable(L);
+//    // 压入一个 C 函数，showName 用于显示参数值
+//    lua_pushcfunction(L, showName);
+//    // 添加元素 t[1] = 你好，江澎涌!
+//    lua_pushnumber(L, 1);
+//    lua_pushstring(L, "你好，江澎涌!");
+//    lua_settable(L, 1);
+//
+//    // 添加元素 t[2] = "小朋友"
+//    // lua_seti 的第二个参数 idx 指定的是 table 在栈中的索引
+//    // n 指定的是 value 在 table 中所在的索引
+//    lua_pushstring(L, "小朋友");
+//    lua_seti(L, 1, 2);
+//
+//    // 添加元素 t[3] = "zinc power"
+//    // lua_rawseti 的第二个参数 idx 指定的是 table 在栈中的索引
+//    // n 指定的是 value 在 table 中所在的索引
+//    lua_pushstring(L, "zinc power");
+//    lua_rawseti(L, 1, 3);
+//
+//    l_map(L);
+//
+//    long long n = luaL_len(L, 1);
+//    printf("lua table length: %lld\n", n);
 
-    // 添加元素 t[1] = 江澎涌！!!!!ha
-    lua_pushnumber(L, 1);
-    lua_pushstring(L, "江澎涌!!!!!ha");
-    lua_settable(L, 1);
+    lua_pushcfunction(L, l_map);
+    lua_setglobal(L, "map");
 
-    // 添加元素 t[2] = "小朋友"
-    // lua_seti 的第二个参数 idx 指定的是 table 在栈中的索引
-    // n 指定的是 value 在 table 中所在的索引
-    lua_pushstring(L, "小朋友");
-    lua_seti(L, 1, 2);
-
-    // 添加元素 t[3] = "zinc power"
-    // lua_rawseti 的第二个参数 idx 指定的是 table 在栈中的索引
-    // n 指定的是 value 在 table 中所在的索引
-    lua_pushstring(L, "zinc power");
-    lua_rawseti(L, 1, 3);
-
-    l_map(L);
-
-    long long n = luaL_len(L, 1);
-    printf("lua table length: %lld\n", n);
+    std::string fname = PROJECT_PATH +"/8、编写C函数技巧/数组便捷存取/Array便捷存取.lua";
+    if (luaL_loadfile(L, fname.c_str()) || lua_pcall(L, 0, 0, 0)) {
+        printf("can't run config. file: %s\n", lua_tostring(L, -1));
+    }
 
     lua_close(L);
 }
