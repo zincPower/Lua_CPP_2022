@@ -12,7 +12,7 @@ local change = function(key)
 end
 
 print(pcall(function()
-    map(info, {})
+    map(info, change)
 end))
 
 for i, v in pairs(info) do
