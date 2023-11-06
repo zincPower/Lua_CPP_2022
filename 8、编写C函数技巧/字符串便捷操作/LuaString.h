@@ -9,6 +9,7 @@
 #include <cctype>
 #include "LuaString.h"
 #include "lua.hpp"
+#include "../../config/env_config.h"
 
 void luaStringDemo();
 
