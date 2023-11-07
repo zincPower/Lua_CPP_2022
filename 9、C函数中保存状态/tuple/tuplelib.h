@@ -8,6 +8,7 @@
 #include <iostream>
 #include "../../utils/lua_error.h"
 #include "lua.hpp"
+#include "../../config/env_config.h"
 
 int luaopen_tuple(lua_State *L);
 

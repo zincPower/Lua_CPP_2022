@@ -52,7 +52,7 @@ void shareUpValueDemo() {
     luaL_setfuncs(L, user, 3);
     lua_setglobal(L, "User");
 
-    std::string fileName = "/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/8、编写C函数技巧/共享上值/共享上值.lua";
+    std::string fileName = PROJECT_PATH + "/9、C函数中保存状态/共享上值/共享上值.lua";
     if (luaL_loadfile(L, fileName.c_str()) || lua_pcall(L, 0, 0, 0)) {
         error(L, "can't run config. file: %s", lua_tostring(L, -1));
     }

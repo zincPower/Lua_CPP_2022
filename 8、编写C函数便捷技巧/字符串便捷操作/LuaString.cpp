@@ -39,7 +39,7 @@ void luaStringDemo() {
     lua_pushcfunction(L, lua_split);
     lua_setglobal(L, "split");
 
-    std::string fname = PROJECT_PATH + "/8、编写C函数技巧/字符串便捷操作/字符串截取.lua";
+    std::string fname = PROJECT_PATH + "/8、编写C函数便捷技巧/字符串便捷操作/字符串截取.lua";
     if (luaL_loadfile(L, fname.c_str()) || lua_pcall(L, 0, 0, 0)) {
         printf("can't run config. file: %s\n", lua_tostring(L, -1));
     }
@@ -127,7 +127,7 @@ void bufferConcatDemo() {
     lua_pushcfunction(L, bufferConcat);
     lua_setglobal(L, "concat");
 
-    std::string fname = PROJECT_PATH + "/8、编写C函数技巧/字符串便捷操作/字符串连接（缓冲区）.lua";
+    std::string fname = PROJECT_PATH + "/8、编写C函数便捷技巧/字符串便捷操作/字符串连接（缓冲区）.lua";
     if (luaL_loadfile(L, fname.c_str()) || lua_pcall(L, 0, 0, 0)) {
         printf("can't run config. file: %s\n", lua_tostring(L, -1));
     }

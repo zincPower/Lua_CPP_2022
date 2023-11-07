@@ -90,22 +90,37 @@ add_executable(
 )
 target_link_libraries(7_Lua_Call_CPP_Lib LuaLib)
 
-# 8、 编写 C 函数技巧
+# 8、编写 C 函数技巧
 add_executable(
         8_C_Function_Skill
-        8、编写C函数技巧/main.cpp
-        8、编写C函数技巧/数组便捷存取/LuaArray.cpp
-        8、编写C函数技巧/字符串便捷操作/LuaString.cpp
-        8、编写C函数技巧/注册表/注册表.cpp
-        8、编写C函数技巧/共享上值/共享上值.cpp
-        8、编写C函数技巧/上值/上值.cpp
-        8、编写C函数技巧/tuple/tuplelib.cpp
-        8、编写C函数技巧/共享上值/共享上值.cpp
+        8、编写C函数便捷技巧/main.cpp
+        8、编写C函数便捷技巧/数组便捷存取/LuaArray.cpp
+        8、编写C函数便捷技巧/字符串便捷操作/LuaString.cpp
+        9、C函数中保存状态/注册表/注册表.cpp
+        9、C函数中保存状态/共享上值/共享上值.cpp
+        9、C函数中保存状态/上值/上值.cpp
+        9、C函数中保存状态/tuple/tuplelib.cpp
+        9、C函数中保存状态/共享上值/共享上值.cpp
         config/env_config.cpp
         utils/lua_error.cpp
         utils/lua_ext.cpp
 )
 target_link_libraries(8_C_Function_Skill LuaLib)
+
+# 9、C函数中保存状态
+add_executable(
+        9_C_Save_State
+        9、C函数中保存状态/main.cpp
+        9、C函数中保存状态/注册表/注册表.cpp
+        9、C函数中保存状态/共享上值/共享上值.cpp
+        9、C函数中保存状态/上值/上值.cpp
+        9、C函数中保存状态/tuple/tuplelib.cpp
+        9、C函数中保存状态/共享上值/共享上值.cpp
+        config/env_config.cpp
+        utils/lua_error.cpp
+        utils/lua_ext.cpp
+)
+target_link_libraries(9_C_Save_State LuaLib)
 
 # 9、userdata
 add_executable(

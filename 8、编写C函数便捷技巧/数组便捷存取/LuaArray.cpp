@@ -84,7 +84,7 @@ void luaMapFunctionDemo() {
     lua_pushcfunction(L, l_map);
     lua_setglobal(L, "map");
 
-    std::string fname = PROJECT_PATH + "/8、编写C函数技巧/数组便捷存取/Array便捷存取.lua";
+    std::string fname = PROJECT_PATH + "/8、编写C函数便捷技巧/数组便捷存取/Array便捷存取.lua";
     if (luaL_loadfile(L, fname.c_str()) || lua_pcall(L, 0, 0, 0)) {
         printf("can't run config. file: %s\n", lua_tostring(L, -1));
     }
