@@ -5,8 +5,15 @@
 #ifndef CPP2022_注册表_H
 #define CPP2022_注册表_H
 
-void registerTableDemo();
+#include "lua.hpp"
+#include "../../utils/lua_ext.h"
 
-void refDemo();
+using namespace LuaExt;
+
+void customKeyRegistryDemo();
+
+void refRegistryDemo();
+
+void cStaticValueRegistryDemo();
 
 #endif //CPP2022_注册表_H

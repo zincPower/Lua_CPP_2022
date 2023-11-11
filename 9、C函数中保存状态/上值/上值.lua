@@ -4,8 +4,8 @@
 --- DateTime: 2022/5/8 16:16
 ---
 
-a = Counter.newCounter()
-b = Counter.newCounter()
+local a = Counter.newCounter()
+local b = Counter.newCounter()
 
 print("a", a(), a(), a())
 print("b", b())

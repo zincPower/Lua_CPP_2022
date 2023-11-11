@@ -7,7 +7,7 @@
 int t_tuple(lua_State *L) {
     // 获取第一个值，是否为整型，不是的话就返回 0
     lua_Integer op = luaL_optinteger(L, 1, 0);
-    printf("t_tuple: %lld\n", op);
+//    printf("t_tuple: %lld\n", op);
     if (op == 0) { // 没有参数
         int i;
         // 将每一个有效的上值压栈
@@ -17,7 +17,7 @@ int t_tuple(lua_State *L) {
         // 值的个数
         return i - 1;
     } else {
-        luaL_argcheck(L, 0 < op && op <= 256, 1, "index out of range");
+        luaL_argcheck(L, 0 < op && op < 256, 1, "index out of range");
         if (lua_isnone(L, lua_upvalueindex(op))) {
             return 0;
         }
@@ -29,12 +29,12 @@ int t_tuple(lua_State *L) {
 int t_new(lua_State *L) {
     // 是 lua 中携带过来的函数
     int top = lua_gettop(L);
-    printf("new top: %d\n", top);
+//    printf("new top: %d\n", top);
     luaL_argcheck(L, top < 256, top, "too many fields");
+    // 将 lua 传递过来的值都作为 闭包 t_tuple 函数的 上值
     lua_pushcclosure(L, t_tuple, top);
-    lua_pushstring(L, "jiang pengyong");
     // 返回值代表着返回值的数量
-    return 2;
+    return 1;
 }
 
 static const struct luaL_Reg tuplelib[] = {

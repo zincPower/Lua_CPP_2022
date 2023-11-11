@@ -10,17 +10,22 @@
 
 int main(){
     printf("======================== 注册表 ========================\n");
-    printf("------------------------ 引用 ------------------------\n");
-    refDemo();
-    printf("------------------------ register table ------------------------\n");
-    registerTableDemo();
+    printf("------------------------ 模块自定义 key 值 ------------------------\n");
+    customKeyRegistryDemo();
+    printf("------------------------ 引用系统生成 key 值 ------------------------\n");
+    refRegistryDemo();
+    printf("------------------------ 静态变量作为 key 值 ------------------------\n");
+    cStaticValueRegistryDemo();
 
+    printf("\n");
     printf("======================== up value ========================\n");
     upValueDemo();
 
+    printf("\n");
     printf("======================== tuple ========================\n");
     tupleDemo();
 
+    printf("\n");
     printf("======================== share up value ========================\n");
     shareUpValueDemo();
 

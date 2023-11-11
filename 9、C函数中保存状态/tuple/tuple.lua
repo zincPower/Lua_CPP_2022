@@ -4,11 +4,12 @@
 --- DateTime: 2022/5/8 12:05
 ---
 
-x, name = tuple.new(10, "hi", {}, 3)
-print(x, name)
-print(x(1))
-print(x(2))
-print(x())
+x = tuple.new(10, "hi", {}, 3)
+print("x --> ", x)
+print("x(1) --> ", x(1))
+print("x(2) --> ", x(2))
+print("x() --> ", x())
 
 x1 = tuple.new("jiang", {})
-print(x1())
+print("x1 --> ", x1)
+print("x1() --> ", x1())
