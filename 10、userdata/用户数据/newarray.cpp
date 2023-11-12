@@ -7,7 +7,6 @@
 #include "lua.hpp"
 #include "newarray.h"
 #include "../../utils/lua_error.h"
-#include "../../utils/stack_dump.h"
 
 // CHAR_BIT 用于表示一个 char 占用的位数，现在的架构基本上都是 8 位，以前旧设备有些是 7 位
 // https://stackoverflow.com/questions/3200954/what-is-char-bit
@@ -21,7 +20,7 @@
 
 // 检查第一个参数是否是一个有效的数组
 // 如果元表类型不对，则会抛出
-// .../Lua/Lua_CPP_2022/9、userdata/用户数据/newarray_数组访问.lua:15: bad argument #1 to 'get' (df expected, got Jiang.array)
+// .../Lua/Lua_CPP_2022/10、userdata/用户数据/newarray_数组访问.lua:15: bad argument #1 to 'get' (df expected, got Jiang.array)
 #define checkarray(L) (BitArray *)luaL_checkudata(L, 1, METE.c_str())
 
 static const std::string METE = "Jiang.array";
@@ -38,20 +37,16 @@ typedef struct BitArray {
  * @return
  */
 static int newarray(lua_State *L) {
-    int i;
-    size_t nbytes;
-    BitArray *a;
-
-    // lua 传递过来的参数，
+    // Lua 传递过来的参数
     int n = (int) luaL_checkinteger(L, 1);
     luaL_argcheck(L, n >= 1, 1, "invalid size");
 
     // 计算所需要的存储长度
-    nbytes = sizeof(BitArray) + I_WORD(n - 1) * sizeof(unsigned int);
-    // 生成一个 user data 并压入栈中
-    a = (BitArray *) lua_newuserdata(L, nbytes);
+    size_t nbytes = sizeof(BitArray) + I_WORD(n - 1) * sizeof(unsigned int);
+    // 生成一个 User Data 并压入栈中
+    auto *a = (BitArray *) lua_newuserdata(L, nbytes);
     a->size = n;
-    for (i = 0; i < I_WORD(n - 1); ++i) {
+    for (int i = 0; i < I_WORD(n - 1); ++i) {
         a->values[i] = 0;
     }
 
@@ -156,12 +151,11 @@ void arrayDemo() {
     printf("I_BIT(41): %d\n", I_BIT(41));
 
     lua_State *L = luaL_newstate();
-
     luaL_openlibs(L);
     luaopen_array(L);
     lua_setglobal(L, "array");
 
-    std::string fileName = "/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/9、userdata/用户数据/newarray.lua";
+    std::string fileName = "/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/10、userdata/用户数据/newarray.lua";
     if (luaL_loadfile(L, fileName.c_str()) || lua_pcall(L, 0, 0, 0)) {
         error(L, "can't run config. file: %s", lua_tostring(L, -1));
     }

@@ -4,7 +4,6 @@
 --- DateTime: 2022/5/8 18:29
 ---
 
-print("================ 面向对象使用 userdata ================")
 a = array.new(5)
 
 a:set(1, false)

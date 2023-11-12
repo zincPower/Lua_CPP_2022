@@ -4,8 +4,8 @@
 --- DateTime: 2022/5/8 18:29
 ---
 
-print("================ 使用 userdata ================")
 a = array.new(1000)
+print("type(a) =>>", type(a))
 --for i = 1, 1000 do
 --    array.set(a, i, i % 2 == 0)
 --end

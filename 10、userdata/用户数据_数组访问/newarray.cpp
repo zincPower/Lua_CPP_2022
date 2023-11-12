@@ -7,7 +7,6 @@
 #include "lua.hpp"
 #include "newarray.h"
 #include "../../utils/lua_error.h"
-#include "../../utils/stack_dump.h"
 
 // CHAR_BIT 用于表示一个 char 占用的位数，现在的架构基本上都是 8 位，以前旧设备有些是 7 位
 // https://stackoverflow.com/questions/3200954/what-is-char-bit
@@ -21,7 +20,7 @@
 
 // 检查第一个参数是否是一个有效的数组
 // 如果元表类型不对，则会抛出
-// .../Lua/Lua_CPP_2022/9、userdata/用户数据/newarray_数组访问.lua:15: bad argument #1 to 'get' (df expected, got Jiang.array)
+// .../Lua/Lua_CPP_2022/10、userdata/用户数据/newarray_数组访问.lua:15: bad argument #1 to 'get' (df expected, got Jiang.array)
 #define checkarray(L) (BitArray *)luaL_checkudata(L, 1, METE.c_str())
 
 static const std::string METE = "Jiang.array_array";
@@ -139,7 +138,7 @@ void arrayArrayDemo() {
     luaopen_array_for_array(L);
     lua_setglobal(L, "array");
 
-    std::string fileName = "/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/9、userdata/用户数据_数组访问/newarray_数组访问.lua";
+    std::string fileName = "/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/10、userdata/用户数据_数组访问/newarray_数组访问.lua";
     if (luaL_loadfile(L, fileName.c_str()) || lua_pcall(L, 0, 0, 0)) {
         error(L, "can't run config. file: %s", lua_tostring(L, -1));
     }
