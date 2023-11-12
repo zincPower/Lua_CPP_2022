@@ -2,11 +2,7 @@
 // Created by 江澎涌 on 2022/5/8.
 //
 
-#include <limits>
-#include <string>
-#include "lua.hpp"
-#include "newarray.h"
-#include "../../utils/lua_error.h"
+#include "array.h"
 
 // CHAR_BIT 用于表示一个 char 占用的位数，现在的架构基本上都是 8 位，以前旧设备有些是 7 位
 // https://stackoverflow.com/questions/3200954/what-is-char-bit
@@ -50,75 +46,46 @@ static int newarray(lua_State *L) {
         a->values[i] = 0;
     }
 
-    // 将 METE.c_str() 的对应表入栈，然后关联到 -2 的表做元表
+    // 将 META.c_str() 的对应表入栈，然后关联到 -2 的表做元表
     luaL_getmetatable(L, METE.c_str());
     lua_setmetatable(L, -2);
 
     return 1;
 }
 
-static unsigned int *getparams(lua_State *L, unsigned int *mask) {
-    auto *a = checkarray(L);
-    int index = (int) luaL_checkinteger(L, 2) - 1;
-
-    luaL_argcheck(L, 0 <= index && index < a->size, 2, "index out of range");
-    *mask = I_BIT(index);
-    return &a->values[I_WORD(index)];
-}
-
-//static int setarray(lua_State *L) {
-//    auto *a = (BitArray *) lua_touserdata(L, 1);
-//    int index = (int) luaL_checkinteger(L, 2) - 1;
-//    luaL_argcheck(L, a != nullptr, 1, "'array' expected");
-//    luaL_argcheck(L, 0 <= index && index < a->size, 2, "index out of range");
-//
-//    luaL_checkany(L, 3);
-//
-//    if (lua_toboolean(L, 3)) {
-//        // 置位
-//        a->values[I_WORD(index)] |= I_BIT(index);
-//    } else {
-//        // 复位
-//        a->values[I_WORD(index)] &= ~I_BIT(index);
-//    }
-//
-//    return 0;
-//}
 static int setarray(lua_State *L) {
-    unsigned int mask;
-    unsigned int *entry = getparams(L, &mask);
+    auto *a = (BitArray *) lua_touserdata(L, 1);
+    int index = (int) luaL_checkinteger(L, 2) - 1;
+    luaL_argcheck(L, a != nullptr, 1, "'array' expected");
+    luaL_argcheck(L, 0 <= index && index < a->size, 2, "index out of range");
+
     luaL_checkany(L, 3);
+
     if (lua_toboolean(L, 3)) {
         // 置位
-        *entry |= mask;
+        a->values[I_WORD(index)] |= I_BIT(index);
     } else {
         // 复位
-        *entry &= ~mask;
+        a->values[I_WORD(index)] &= ~I_BIT(index);
     }
+
     return 0;
 }
 
-//static int getarray(lua_State *L) {
-//    auto *a = (BitArray *) lua_touserdata(L, 1);
-//    int index = (int) luaL_checkinteger(L, 2) - 1;
-//
-//    luaL_argcheck(L, a != nullptr, 1, "'array' expected");
-//    luaL_argcheck(L, 0 <= index && index < a->size, 2, "index out of range");
-//
-//    lua_pushboolean(L, a->values[I_WORD(index)] & I_BIT(index));
-//    return 1;
-//}
 static int getarray(lua_State *L) {
-    unsigned int mask;
-    unsigned int *entry = getparams(L, &mask);
-    lua_pushboolean(L, *entry & mask);
+    auto *a = (BitArray *) lua_touserdata(L, 1);
+    int index = (int) luaL_checkinteger(L, 2) - 1;
+
+    luaL_argcheck(L, a != nullptr, 1, "'array' expected");
+    luaL_argcheck(L, 0 <= index && index < a->size, 2, "index out of range");
+
+    lua_pushboolean(L, a->values[I_WORD(index)] & I_BIT(index));
     return 1;
 }
 
 static int getsize(lua_State *L) {
-//    auto *a = (BitArray *) lua_touserdata(L, 1);
-//    luaL_argcheck(L, a != nullptr, 1, "'array' expected");
-    auto *a = checkarray(L);
+    auto *a = (BitArray *) lua_touserdata(L, 1);
+    luaL_argcheck(L, a != nullptr, 1, "'array' expected");
     lua_pushinteger(L, a->size);
     return 1;
 }
@@ -137,7 +104,7 @@ int luaopen_array(lua_State *L) {
     return 1;
 }
 
-void arrayDemo() {
+void arraySimpleDemo() {
     printf("BITS_PER_WORD: %lu\n", BITS_PER_WORD);
     printf("CHAR_BIT: %d\n", CHAR_BIT);
     printf("sizeof(unsigned int): %lu\n", sizeof(unsigned int));
@@ -155,9 +122,9 @@ void arrayDemo() {
     luaopen_array(L);
     lua_setglobal(L, "array");
 
-    std::string fileName = "/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/10、userdata/用户数据/newarray.lua";
+    std::string fileName = PROJECT_PATH + "/10、userdata/array/1普通版本/array.lua";
     if (luaL_loadfile(L, fileName.c_str()) || lua_pcall(L, 0, 0, 0)) {
-        error(L, "can't run config. file: %s", lua_tostring(L, -1));
+        printf( "can't run config. file: %s\n", lua_tostring(L, -1));
     }
 
     lua_close(L);

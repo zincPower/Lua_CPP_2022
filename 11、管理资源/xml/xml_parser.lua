@@ -28,7 +28,7 @@ callbacks = {
 
 p = lxp.new(callbacks)
 
-io.input("/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/10、管理资源/xml/baidu.xml")
+io.input("/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/11、管理资源/xml/baidu.xml")
 for l in io.lines() do
     assert(p:parse(l))
     assert(p:parse("\n"))
