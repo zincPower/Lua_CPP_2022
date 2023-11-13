@@ -8,24 +8,50 @@ static const std::string META = "Jiang.user";
 
 #define checkUser(L) (User *)luaL_checkudata(L, 1, META.c_str())
 
-typedef struct User {
+class User {
+private:
     std::string name;
     long long age;
-} User;
+public:
+    std::string introduce() {
+        std::stringstream info;
+        info << "大家好。我叫" << name << "。今年" << age << "岁。请关注我。";
+        return info.str();
+    }
 
-/**
- * 创建数组
- * @param L
- * @return
- */
+    void setName(std::string name) {
+        this->name = std::move(name);
+    }
+
+    void setAge(long long age) {
+        this->age = age;
+    }
+
+    std::string getName() {
+        return this->name;
+    }
+
+    long long getAge() {
+        return this->age;
+    }
+
+    ~User() {
+        release();
+    }
+
+    void release() {
+        printf("释放 User\n");
+    };
+};
+
 static int newUserForObj(lua_State *L) {
     std::string name = luaL_checkstring(L, 1);
     long long age = luaL_checkinteger(L, 2);
 
     // 生成一个 User Data 并压入栈中
     auto *user = (User *) lua_newuserdata(L, sizeof(User));
-    user->name = std::string(name);
-    user->age = age;
+    user->setName(std::string(name));
+    user->setAge(age);
 
     // 将 META.c_str() 的对应表入栈，然后关联到 -2 的表做元表
     luaL_getmetatable(L, META.c_str());
@@ -36,36 +62,40 @@ static int newUserForObj(lua_State *L) {
 
 static int introduceForObj(lua_State *L) {
     User *user = checkUser(L);
-    std::stringstream info;
-    info << "大家好。我叫" << user->name << "。今年" << user->age << "岁。请关注我。";
-    lua_pushstring(L, info.str().c_str());
+    lua_pushstring(L, user->introduce().c_str());
     return 1;
 }
 
 static int setNameForObj(lua_State *L) {
     User *user = checkUser(L);
     std::string name = luaL_checkstring(L, 2);
-    user->name = std::string(name);
+    user->setName(std::string(name));
     return 0;
 }
 
 static int setAgeForObj(lua_State *L) {
     User *user = checkUser(L);
     long long age = luaL_checkinteger(L, 2);
-    user->age = age;
+    user->setAge(age);
     return 0;
 }
 
 static int getNameForObj(lua_State *L) {
     User *user = checkUser(L);
-    lua_pushstring(L, user->name.c_str());
+    lua_pushstring(L, user->getName().c_str());
     return 1;
 }
 
 static int getAgeForObj(lua_State *L) {
     User *user = checkUser(L);
-    lua_pushinteger(L, user->age);
+    lua_pushinteger(L, user->getAge());
     return 1;
+}
+
+static int release(lua_State *L) {
+    User *user = checkUser(L);
+    user->release();
+    return 0;
 }
 
 static const struct luaL_Reg userlib[] = {
@@ -79,6 +109,7 @@ static const struct luaL_Reg userlib_function[] = {
         {"setAge",    setAgeForObj},
         {"getName",   getNameForObj},
         {"getAge",    getAgeForObj},
+        {"__gc",      release},
         {nullptr,     nullptr}
 };
 

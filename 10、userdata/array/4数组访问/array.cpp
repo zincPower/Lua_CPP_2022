@@ -116,10 +116,6 @@ static const struct luaL_Reg arraylib_m_array[] = {
 int luaopen_array_for_array(lua_State *L) {
     // 创建元表
     luaL_newmetatable(L, META.c_str());
-    // 复制元表（因为下面的设置会弹出一个元表）
-    lua_pushvalue(L, -1);
-    // mt.__index = mt
-    lua_setfield(L, -2, "__index");
     // 注册元方法
     luaL_setfuncs(L, arraylib_m_array, 0);
     // 创建库
