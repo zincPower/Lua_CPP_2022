@@ -11,3 +11,7 @@ myUser:setName("jiang")
 print("姓名：", myUser:getName())
 myUser:setAge(28)
 print("年龄：", myUser:getAge())
+
+myUser = nil;
+
+collectgarbage();
