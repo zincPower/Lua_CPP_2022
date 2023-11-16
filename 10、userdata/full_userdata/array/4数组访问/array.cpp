@@ -130,7 +130,7 @@ void arrayArrayDemo() {
     luaopen_array_for_array(L);
     lua_setglobal(L, "array");
 
-    std::string fileName = PROJECT_PATH + "/10、userdata/array/4数组访问/array.lua";
+    std::string fileName = PROJECT_PATH + "/10、userdata/full_userdata/array/4数组访问/array.lua";
     if (luaL_loadfile(L, fileName.c_str()) || lua_pcall(L, 0, 0, 0)) {
         printf("can't run config. file: %s\n", lua_tostring(L, -1));
     }

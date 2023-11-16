@@ -4,9 +4,7 @@
 
 #include "user.h"
 
-static const std::string META = "Jiang.user";
-
-#define checkUser(L) (User *)luaL_checkudata(L, 1, META.c_str())
+#include <utility>
 
 class User {
 private:
@@ -34,17 +32,9 @@ public:
     long long getAge() {
         return this->age;
     }
-
-    ~User() {
-        release();
-    }
-
-    void release() {
-        printf("释放 User\n");
-    };
 };
 
-static int newUserForObj(lua_State *L) {
+static int newUser(lua_State *L) {
     std::string name = luaL_checkstring(L, 1);
     long long age = luaL_checkinteger(L, 2);
 
@@ -53,86 +43,64 @@ static int newUserForObj(lua_State *L) {
     user->setName(std::string(name));
     user->setAge(age);
 
-    // 将 META.c_str() 的对应表入栈，然后关联到 -2 的表做元表
-    luaL_getmetatable(L, META.c_str());
-    lua_setmetatable(L, -2);
-
     return 1;
 }
 
-static int introduceForObj(lua_State *L) {
-    User *user = checkUser(L);
+static int introduce(lua_State *L) {
+    User *user = (User *) lua_touserdata(L, 1);
     lua_pushstring(L, user->introduce().c_str());
     return 1;
 }
 
-static int setNameForObj(lua_State *L) {
-    User *user = checkUser(L);
+static int setName(lua_State *L) {
+    User *user = (User *) lua_touserdata(L, 1);
     std::string name = luaL_checkstring(L, 2);
     user->setName(std::string(name));
     return 0;
 }
 
-static int setAgeForObj(lua_State *L) {
-    User *user = checkUser(L);
+static int setAge(lua_State *L) {
+    User *user = (User *) lua_touserdata(L, 1);
     long long age = luaL_checkinteger(L, 2);
     user->setAge(age);
     return 0;
 }
 
-static int getNameForObj(lua_State *L) {
-    User *user = checkUser(L);
+static int getName(lua_State *L) {
+    User *user = (User *) lua_touserdata(L, 1);
     lua_pushstring(L, user->getName().c_str());
     return 1;
 }
 
-static int getAgeForObj(lua_State *L) {
-    User *user = checkUser(L);
+static int getAge(lua_State *L) {
+    User *user = (User *) lua_touserdata(L, 1);
     lua_pushinteger(L, user->getAge());
     return 1;
 }
 
-static int release(lua_State *L) {
-    User *user = checkUser(L);
-    user->release();
-    return 0;
-}
-
 static const struct luaL_Reg userlib[] = {
-        {"new",   newUserForObj},
-        {nullptr, nullptr}
-};
-
-static const struct luaL_Reg userlib_function[] = {
-        {"introduce", introduceForObj},
-        {"setName",   setNameForObj},
-        {"setAge",    setAgeForObj},
-        {"getName",   getNameForObj},
-        {"getAge",    getAgeForObj},
-        {"__gc",      release},
+        {"new",       newUser},
+        {"introduce", introduce},
+        {"setName",   setName},
+        {"setAge",    setAge},
+        {"getName",   getName},
+        {"getAge",    getAge},
         {nullptr,     nullptr}
 };
 
-int luaopen_userForObj(lua_State *L) {
-    luaL_newmetatable(L, META.c_str());
-    // 复制元表
-    lua_pushvalue(L, -1);
-    // metatable.__index = metatable
-    lua_setfield(L, -2, "__index");
-    // 组册元方法
-    luaL_setfuncs(L, userlib_function, 0);
+int luaopen_user(lua_State *L) {
     luaL_newlib(L, userlib);
     return 1;
 }
 
-void userObjDemo() {
+void userSimpleDemo() {
     lua_State *L = luaL_newstate();
     luaL_openlibs(L);
 
-    luaopen_userForObj(L);
+    luaopen_user(L);
     lua_setglobal(L, "user");
 
-    std::string fileName = PROJECT_PATH + "/10、userdata/user/3面向对象/user.lua";
+    std::string fileName = PROJECT_PATH + "/10、userdata/full_userdata/user/1普通版本/user.lua";
     if (luaL_loadfile(L, fileName.c_str()) || lua_pcall(L, 0, 0, 0)) {
         printf("can't run config. file: %s\n", lua_tostring(L, -1));
     }

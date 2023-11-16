@@ -9,8 +9,8 @@
 #include <limits>
 #include <string>
 #include "lua.hpp"
-#include "../../../config/env_config.h"
-#include "../../../utils/lua_ext.h"
+#include "../../../../config/env_config.h"
+#include "../../../../utils/lua_ext.h"
 
 using namespace LuaExt;
 

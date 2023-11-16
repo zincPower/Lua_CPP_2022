@@ -48,7 +48,7 @@
 */
 typedef union Value {
   struct GCObject *gc;    /* collectable objects */
-  void *p;         /* light userdata */
+  void *p;         /* light_userdata */
   lua_CFunction f; /* light C functions */
   lua_Integer i;   /* integer numbers */
   lua_Number n;    /* float numbers */

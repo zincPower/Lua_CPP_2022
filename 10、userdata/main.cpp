@@ -3,13 +3,14 @@
 //
 
 #include <cstdio>
-#include "user/1普通版本/user.h"
-#include "user/2增加元表检查/user.h"
-#include "user/3面向对象/user.h"
-#include "array/1普通版本/array.h"
-#include "array/2增加元表/array.h"
-#include "array/3面向对象/array.h"
-#include "array/4数组访问/array.h"
+#include "full_userdata/user/1普通版本/user.h"
+#include "full_userdata/user/2增加元表检查/user.h"
+#include "full_userdata/user/3面向对象/user.h"
+#include "full_userdata/array/1普通版本/array.h"
+#include "full_userdata/array/2增加元表/array.h"
+#include "full_userdata/array/3面向对象/array.h"
+#include "full_userdata/array/4数组访问/array.h"
+
 
 int main() {
     printf("\n");

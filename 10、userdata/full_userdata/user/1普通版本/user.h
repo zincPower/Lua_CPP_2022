@@ -9,7 +9,7 @@
 #include <limits>
 #include <string>
 #include "lua.hpp"
-#include "../../../config/env_config.h"
+#include "../../../../config/env_config.h"
 
 void userSimpleDemo();
 

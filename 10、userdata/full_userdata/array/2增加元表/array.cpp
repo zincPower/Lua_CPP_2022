@@ -139,7 +139,7 @@ void arrayUseMetatableDemo() {
     luaopen_arrayForMetatable(L);
     lua_setglobal(L, "array");
 
-    std::string fileName = PROJECT_PATH + "/10、userdata/array/2增加元表/array.lua";
+    std::string fileName = PROJECT_PATH + "/10、userdata/full_userdata/array/2增加元表/array.lua";
     if (luaL_loadfile(L, fileName.c_str()) || lua_pcall(L, 0, 0, 0)) {
         printf("can't run config. file: %s\n", lua_tostring(L, -1));
     }

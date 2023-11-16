@@ -126,13 +126,13 @@ target_link_libraries(9_C_Save_State LuaLib)
 add_executable(
         10_Userdata
         10、userdata/main.cpp
-        10、userdata/user/1普通版本/user.cpp
-        10、userdata/user/2增加元表检查/user.cpp
-        10、userdata/user/3面向对象/user.cpp
-        10、userdata/array/1普通版本/array.cpp
-        10、userdata/array/2增加元表/array.cpp
-        10、userdata/array/3面向对象/array.cpp
-        10、userdata/array/4数组访问/array.cpp
+        10、userdata/full_userdata/user/1普通版本/user.cpp
+        10、userdata/full_userdata/user/2增加元表检查/user.cpp
+        10、userdata/full_userdata/user/3面向对象/user.cpp
+        10、userdata/full_userdata/array/1普通版本/array.cpp
+        10、userdata/full_userdata/array/2增加元表/array.cpp
+        10、userdata/full_userdata/array/3面向对象/array.cpp
+        10、userdata/full_userdata/array/4数组访问/array.cpp
         utils/lua_ext.cpp
         config/env_config.cpp
 )
