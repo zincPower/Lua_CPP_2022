@@ -6,9 +6,9 @@
 #include "xml/xml_parser.h"
 
 int main(){
-//    printf("=================== file ===================\n");
-//    resourceManageDemo();
-//
+    printf("=================== file ===================\n");
+    resourceManageDemo();
+
     printf("=================== xml ===================\n");
     xmlParserDemo();
 }

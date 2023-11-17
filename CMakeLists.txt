@@ -133,9 +133,10 @@ add_executable(
         10、userdata/full_userdata/array/2增加元表/array.cpp
         10、userdata/full_userdata/array/3面向对象/array.cpp
         10、userdata/full_userdata/array/4数组访问/array.cpp
+        10、userdata/light_userdata/user.cpp
         utils/lua_ext.cpp
         config/env_config.cpp
-        10、userdata/light_userdata/user.cpp 10、userdata/light_userdata/user.h)
+)
 target_link_libraries(10_Userdata LuaLib)
 
 # 11、管理资源
@@ -148,6 +149,7 @@ add_executable(
         11、管理资源/xml/xml_parser.cpp
         utils/lua_error.cpp
         utils/lua_ext.cpp
+        config/env_config.cpp
 )
 target_link_libraries(11_Manage_Resource PUBLIC LuaLib EXPAT::EXPAT)
 target_include_directories(11_Manage_Resource PRIVATE ${EXPAT_INCLUDE_DIRS})
@@ -157,9 +159,10 @@ target_link_libraries(11_Manage_Resource PUBLIC ${EXPAT_LIBRARIES})
 add_executable(
         12_Thread_And_State
         12、线程和状态/main.cpp
-        12、线程和状态/thread/ThreadDemo.cpp
+        12、线程和状态/thread/thread_demo.cpp
         12、线程和状态/lproc/lproc.cpp
         utils/lua_error.cpp
         utils/lua_ext.cpp
+        config/env_config.cpp
 )
 target_link_libraries(12_Thread_And_State LuaLib)

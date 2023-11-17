@@ -3,8 +3,6 @@
 //
 
 #include "file.h"
-#include "../../utils/lua_error.h"
-#include "../../utils/stack_dump.h"
 
 static const std::string DIR_METE_TABLE = "Jiang.dir";
 

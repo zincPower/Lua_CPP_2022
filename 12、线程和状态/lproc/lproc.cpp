@@ -4,10 +4,6 @@
 
 #include "lproc.h"
 
-#include <pthread.h>
-#include <cstring>
-#include "lua.hpp"
-
 typedef struct Proc {
     lua_State *L;
     pthread_t thread;
