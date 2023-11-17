@@ -10,6 +10,7 @@
 #include "full_userdata/array/2增加元表/array.h"
 #include "full_userdata/array/3面向对象/array.h"
 #include "full_userdata/array/4数组访问/array.h"
+#include "light_userdata/user.h"
 
 
 int main() {
@@ -48,6 +49,13 @@ int main() {
     printf("\n");
     printf("================ 4数组访问 ================\n");
     arrayArrayDemo();
+
+    printf("\n");
+    printf("===============================================\n");
+    printf("================ light userdata================\n");
+    printf("===============================================\n");
+
+    lightUserdataDemo();
 
     return 1;
 }

@@ -135,7 +135,7 @@ add_executable(
         10、userdata/full_userdata/array/4数组访问/array.cpp
         utils/lua_ext.cpp
         config/env_config.cpp
-)
+        10、userdata/light_userdata/user.cpp 10、userdata/light_userdata/user.h)
 target_link_libraries(10_Userdata LuaLib)
 
 # 11、管理资源
