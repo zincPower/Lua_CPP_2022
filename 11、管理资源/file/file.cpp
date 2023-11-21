@@ -7,6 +7,9 @@
 static const std::string DIR_METE_TABLE = "Jiang.dir";
 
 static int dir_iter(lua_State *L) {
+//    printf("不可变量 %s\n", lua_tostring(L, -2));
+//    printf("上一次循环变量 %s\n", lua_tostring(L, -1));
+
     DIR *d = *(DIR **) lua_touserdata(L, lua_upvalueindex(1));
     struct dirent *entry = readdir(d);
     if (entry != nullptr) {

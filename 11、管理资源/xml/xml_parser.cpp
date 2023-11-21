@@ -33,11 +33,16 @@ static int lxp_make_parser(lua_State *L) {
         luaL_error(L, "XML_ParserCreate failed.");
     }
 
+    // 栈顶
+    // ^ typename: userdata, value: userdata
+    // ^ typename: table, value: table
+    // 栈底
+//    stackDump(L);
     // 检查并保存回调函数表
     // 第一个参数就是 Lua 中的 callback 函数
     luaL_checktype(L, 1, LUA_TTABLE);
     lua_pushvalue(L, 1);
-    // lua_setuservalue 从堆栈中弹出一个值并将其设置为与给定索引处的完整用户数据关联的新值
+    // lua_setuservalue 从堆栈中弹出一个值并将其设置为与给定索引处的完整用户数据 userdata 关联的新值。
     // 每个用户数据（user data）都可以有一个与其直接关联的唯一的 Lua 语言值，这个值为用户值（user value）
     // -2 是一个 user data
     // -1 是一个 callback
@@ -64,7 +69,7 @@ static int lxp_parse(lua_State *L) {
     // 获取第二个参数
     s = luaL_optlstring(L, 2, nullptr, &len);
 
-    // 将回调函数表放在栈索引为 3 的位置
+    // 确保 user value 即 Lua 回调函数表放在栈索引为 3 的位置，所将栈深度确保为 2
     lua_settop(L, 2);
     // 获取 user data 的 user value ，即 lua 文件设置的 callback
     lua_getuservalue(L, 1);
@@ -77,7 +82,7 @@ static int lxp_parse(lua_State *L) {
     // 1、user data
     status = XML_Parse(xpu->parser, s, (int) len, s == nullptr);
 
-    // 返回错误码
+    // 返回解析状态，如果错误则为 false ，正确则为 true 。
     lua_pushboolean(L, status);
     return 1;
 }
@@ -128,12 +133,16 @@ static void f_StartElement(void *ud, const char *name, const char **atts) {
         return;
     }
 
+    // 返回值
+    // 第一个 解析器压栈
     lua_pushvalue(L, 1);
+    // 第二个 压入表签名
     lua_pushstring(L, name);
-
+    // 第三个 创建并填充表
     lua_newtable(L);
     for (; *atts; atts += 2) {
         lua_pushstring(L, *(atts + 1));
+        // table[*atts] = *(atts+1)
         lua_setfield(L, -2, *atts);
     }
 
