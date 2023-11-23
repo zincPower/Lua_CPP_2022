@@ -30,7 +30,7 @@ void call_va(lua_State *L, const char *func, const char *sig, ...) {
             case '>':
                 goto endargs;
             default:
-                error(L, "invalid option (%c)", *(sig - 1));
+                printf("invalid option (%c)", *(sig - 1));
         }
     }
     endargs:
@@ -38,7 +38,7 @@ void call_va(lua_State *L, const char *func, const char *sig, ...) {
     nres = strlen(sig);
 
     if (lua_pcall(L, narg, nres, 0) != 0) {
-        error(L, "error calling '%s'", func, lua_tostring(L, -1));
+        printf("error calling '%s'", func, lua_tostring(L, -1));
     }
 
     // 获取输出
@@ -49,7 +49,7 @@ void call_va(lua_State *L, const char *func, const char *sig, ...) {
                 int isNum;
                 double n = lua_tonumberx(L, nres, &isNum);
                 if (!isNum) {
-                    error(L, "wrong result type");
+                    printf("wrong result type");
                 }
                 *va_arg(vl, double *) = n;
                 break;
@@ -58,7 +58,7 @@ void call_va(lua_State *L, const char *func, const char *sig, ...) {
                 int isNum;
                 long n = lua_tointegerx(L, nres, &isNum);
                 if (!isNum) {
-                    error(L, "wrong result type");
+                    printf("wrong result type");
                 }
                 *va_arg(vl, long *) = n;
                 break;
@@ -66,13 +66,13 @@ void call_va(lua_State *L, const char *func, const char *sig, ...) {
             case 's': {
                 const char *s = lua_tostring(L, nres);
                 if (s == nullptr) {
-                    error(L, "wrong result type");
+                    printf("wrong result type");
                 }
                 *va_arg(vl, const char **) = s;
                 break;
             }
             default:
-                error(L, "invalid option (%c)", *(sig - 1));
+                printf("invalid option (%c)", *(sig - 1));
         }
         nres++;
     }
@@ -80,7 +80,7 @@ void call_va(lua_State *L, const char *func, const char *sig, ...) {
     va_end(vl);
 }
 
-void commonCallLuaDemo(){
+void commonCallLuaDemo() {
     std::string fname = PROJECT_PATH + "/5、C++调用Lua代码/调用Lua函数/调用Lua函数.lua";
     lua_State *L = luaL_newstate();
     // 需要使用 lua_openlibs 进行开启库，否则 lua 中无法使用

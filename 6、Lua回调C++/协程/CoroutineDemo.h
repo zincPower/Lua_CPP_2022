@@ -6,7 +6,6 @@
 #define CPP2022_COROUTINEDEMO_H
 
 #include "lua.hpp"
-#include "../../utils/lua_error.h"
 #include "../../config/env_config.h"
 #include <string>
 

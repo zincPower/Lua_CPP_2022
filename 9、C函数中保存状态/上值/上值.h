@@ -7,7 +7,6 @@
 
 #include <string>
 #include "lua.hpp"
-#include "../../utils/lua_error.h"
 #include "../../config/env_config.h"
 #include "../../utils/lua_ext.h"
 

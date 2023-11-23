@@ -6,8 +6,10 @@
 #include "lproc/lproc.h"
 
 int main(){
+    printf("=================== 多线程使用 ===================\n");
     threadDemo();
 
+    printf("=================== 多线程封装 ===================");
     lprocDemo();
 
     return 1;

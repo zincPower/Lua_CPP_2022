@@ -22,7 +22,7 @@ void threadDemo() {
 
     std::string fname = PROJECT_PATH + "/12、线程和状态/thread/thread.lua";
     if (luaL_loadfile(L1, fname.c_str()) || lua_pcall(L1, 0, 0, 0)) {
-        error(L, "can't run config. file: %s", lua_tostring(L1, -1));
+        printf("can't run config. file: %s", lua_tostring(L1, -1));
     }
 
     printf("---------------- 线程栈元素拷贝 ----------------\n");

@@ -80,7 +80,7 @@ void resourceManageDemo() {
 
     std::string fileName = "/Users/jiangpengyong/Desktop/code/Lua/Lua_CPP_2022/11、管理资源/file/file.lua";
     if (luaL_loadfile(L, fileName.c_str()) || lua_pcall(L, 0, 0, 0)) {
-        error(L, "can't run file. file: %s", lua_tostring(L, -1));
+        printf("can't run file. file: %s", lua_tostring(L, -1));
     }
 
     lua_close(L);

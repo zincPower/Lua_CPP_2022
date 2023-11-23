@@ -63,7 +63,6 @@ add_executable(
         5、C++调用Lua代码/调用Lua函数/调用Lua函数.cpp
         5、C++调用Lua代码/通用调用lua函数/call_va.cpp
         config/env_config.cpp
-        utils/lua_error.cpp
         utils/lua_ext.cpp
 )
 target_link_libraries(5_CPP_Call_Lua LuaLib)
@@ -102,7 +101,6 @@ add_executable(
         9、C函数中保存状态/tuple/tuplelib.cpp
         9、C函数中保存状态/共享上值/共享上值.cpp
         config/env_config.cpp
-        utils/lua_error.cpp
         utils/lua_ext.cpp
 )
 target_link_libraries(8_C_Function_Skill LuaLib)
@@ -117,7 +115,6 @@ add_executable(
         9、C函数中保存状态/tuple/tuplelib.cpp
         9、C函数中保存状态/共享上值/共享上值.cpp
         config/env_config.cpp
-        utils/lua_error.cpp
         utils/lua_ext.cpp
 )
 target_link_libraries(9_C_Save_State LuaLib)
@@ -147,7 +144,6 @@ add_executable(
         11、管理资源/main.cpp
         11、管理资源/file/file.cpp
         11、管理资源/xml/xml_parser.cpp
-        utils/lua_error.cpp
         utils/lua_ext.cpp
         config/env_config.cpp
 )
@@ -161,7 +157,6 @@ add_executable(
         12、线程和状态/main.cpp
         12、线程和状态/thread/thread_demo.cpp
         12、线程和状态/lproc/lproc.cpp
-        utils/lua_error.cpp
         utils/lua_ext.cpp
         config/env_config.cpp
 )

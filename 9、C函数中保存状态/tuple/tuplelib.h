@@ -6,7 +6,6 @@
 #define CPP2022_TUPLELIB_H
 
 #include <iostream>
-#include "../../utils/lua_error.h"
 #include "lua.hpp"
 #include "../../config/env_config.h"
 

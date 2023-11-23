@@ -79,7 +79,7 @@ void shareUpValueDemo() {
 
     std::string fileName = PROJECT_PATH + "/9、C函数中保存状态/共享上值/共享上值.lua";
     if (luaL_loadfile(L, fileName.c_str()) || lua_pcall(L, 0, 0, 0)) {
-        error(L, "can't run config. file: %s", lua_tostring(L, -1));
+        printf("can't run config. file: %s", lua_tostring(L, -1));
     }
 
     lua_close(L);

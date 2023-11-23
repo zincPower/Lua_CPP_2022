@@ -8,7 +8,6 @@
 #include <iostream>
 #include "thread_demo.h"
 #include "lua.hpp"
-#include "../../utils/lua_error.h"
 #include "../../utils/lua_ext.h"
 #include "../../config/env_config.h"
 
