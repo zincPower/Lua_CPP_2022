@@ -58,7 +58,7 @@
 
 博客：[Lua 调用 C 模块中的函数](https://mp.weixin.qq.com/s?__biz=Mzg2MzQ0MDA1OA==&mid=2247484368&idx=1&sn=281086598f91eb653d576a2268c00d8c&chksm=ce79de05f90e5713c1bc03ce594a261ea105783da9c5de3fbbf25c92cc5f450511518a7d0c9d&scene=178&cur_album_id=3071437744473948163#rd)
 
-代码：[传送门](https://github.com/zincPower/Lua_CPP_2022/tree/main/6%E3%80%81Lua%E5%9B%9E%E8%B0%83C%2B%2B)
+代码：[传送门](https://github.com/zincPower/Lua_CPP_2022/tree/main/7%E3%80%81Lua%E8%B0%83%E7%94%A8C%2B%2B%E7%9A%84lib)
 
 ## 三、其他项目推荐
 
