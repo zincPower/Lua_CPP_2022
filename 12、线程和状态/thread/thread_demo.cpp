@@ -4,65 +4,160 @@
 
 #include "thread_demo.h"
 
-void threadDemo() {
+// 将协程的返回值转换为字符串
+std::string getResumeState(int state) {
+    switch (state) {
+        case LUA_OK:
+            return "LUA_OK";
+        case LUA_YIELD:
+            return "LUA_YIELD";
+        case LUA_ERRRUN:
+            return "LUA_ERRRUN";
+        case LUA_ERRSYNTAX:
+            return "LUA_ERRSYNTAX";
+        case LUA_ERRMEM:
+            return "LUA_ERRMEM";
+        case LUA_ERRERR:
+            return "LUA_ERRERR";
+        default:
+            return "Unknown";
+    }
+}
 
+// 延续函数
+int cfooK(lua_State *L, int status, lua_KContext ctx) {
+    printf("恢复协程体后，调用 C++ 延续函数\n");
+    return 1;
+}
+
+// 暴露给 lua 调用的 C++ 函数
+int primCFunction(lua_State *L) {
+    lua_pushstring(L, "调用 C++ 函数，会进行挂起");
+
+    // 设置了 cfooK 作为延续函数，恢复协程之后，会进入 cfook 这一延续函数
+    lua_yieldk(L, 1, 0, &cfooK);
+
+    // 这两种的使用结果是一样的，都不舍之延续函数
+//    lua_yieldk(L, 1, 0, nullptr);
+//    lua_yield(L, 1);
+
+    // 不会被执行，恢复之后会运行延续函数，不会执行后续的语句
+    printf("挂起之后的输（不会被输出）");
+
+    return 1;
+}
+
+void createThread() {
     lua_State *L = luaL_newstate();
     luaL_openlibs(L);
 
     // 用 L 创建一个新的线程
-    // L 和 L1 两者内部都是引用同一个 lua_State
     // L 和 L1 各自有一个栈
     // L 的栈顶是 L1 的 thread
     // L1 的栈是空
     lua_State *L1 = lua_newthread(L);
 
-    printf("---------------- 线程内部栈深度 ----------------\n");
-    printf("L1 栈内容长度：%d\n", lua_gettop(L1));
-    printf("L 栈内容长度：%d - %s\n", lua_gettop(L), luaL_typename(L, -1));
+    printf("主线程 L 栈深度：%d\n", lua_gettop(L));
+    printf("------------ 主线程 L 栈内容：------------\n");
+    stackDump(L);
 
-    std::string fname = PROJECT_PATH + "/12、线程和状态/thread/thread.lua";
+    printf("新线程 L1 栈深度：%d\n", lua_gettop(L1));
+    printf("------------ 新线程 L1 栈内容：------------\n");
+    stackDump(L1);
+
+    lua_close(L);
+}
+
+void useThread() {
+    lua_State *L = luaL_newstate();
+    luaL_openlibs(L);
+    lua_State *L1 = lua_newthread(L);
+
+    lua_pushcfunction(L1, primCFunction);
+    lua_setglobal(L1, "primCFunction");
+
+    std::string fname = PROJECT_PATH + "/12、线程和状态/thread/coroutine.lua";
     if (luaL_loadfile(L1, fname.c_str()) || lua_pcall(L1, 0, 0, 0)) {
         printf("can't run config. file: %s", lua_tostring(L1, -1));
     }
 
-    printf("---------------- 线程栈元素拷贝 ----------------\n");
-    // 获取 L1 中的 lua 文件的函数 foo1
-    lua_getglobal(L1, "foo2");
-    // 压入 integer
-    lua_pushinteger(L1, 5);
-    // 调用函数 foo2(5) -> 25
-    lua_call(L1, 1, 1);
-    printf("L1 栈元素(xmove 前)：\n");
-    stackDump(L1);
-    // 从 L1 中拷贝 1 个元素到 L 中（会将 L1 元素弹出）
-    lua_xmove(L1, L, 1);
-    printf("L1 栈元素(xmove 后)：\n");
-    stackDump(L1);
-    printf("L 栈元素：\n");
-    stackDump(L);
+    printf("LUA_YIELD=%d\n", LUA_YIELD);
+    printf("LUA_OK=%d\n", LUA_OK);
 
-    printf("---------------- 协程 ----------------\n");
+    // 返回值个数
     int result = 0;
     // 获取 L1 中的 lua 文件的函数 foo1
     lua_getglobal(L1, "foo1");
     // 压入 integer
     lua_pushinteger(L1, 20);
-    printf("第一次调用：\n");
-    // nres 是结果个数
-    printf("lua_resume: %d\n", lua_resume(L1, L, 1, &result));
-    printf("LUA_YIELD: %d\n", LUA_YIELD);
-    printf("result: %d\n", result);
-    printf("top: %d\n", lua_gettop(L1));
-    printf("yield 返回 num1: %lld\n", lua_tointeger(L1, 1));
-    printf("yield 返回 num2: %lld\n", lua_tointeger(L1, 2));
 
-    printf("第二次调用：\n");
-    printf("lua_resume: %d\n", lua_resume(L1, L, 0, &result));
-    printf("LUA_OK: %d\n", LUA_OK);
-    printf("result: %d\n", result);
-    printf("top: %d\n", lua_gettop(L1));
-    printf("num: %lld\n", lua_tointeger(L1, 1));
+    printf("第一次调用，Lua 脚本中挂起：\n");
+    auto state = lua_resume(L1, L, 1, &result);
+    printf("协程状态: %s\n", getResumeState(state).c_str());
+    printf("L1 栈深度: %d\n", lua_gettop(L1));
+    printf("返回值个数: %d\n", result);
+    printf("------------ L1 栈内容：------------\n");
+    stackDump(L1);
+
+    printf("第二次调用，Lua 调用 C++ ，C++ 中挂起：\n");
+    state = lua_resume(L1, L, 0, &result);
+    printf("协程状态: %s\n", getResumeState(state).c_str());
+    printf("L1 栈深度: %d\n", lua_gettop(L1));
+    printf("返回值个数: %d\n", result);
+    printf("------------ L1 栈内容：------------\n");
+    stackDump(L1);
+
+    printf("第三次调用，运行 C++ 延续函数，协程体结束：：\n");
+    state = lua_resume(L1, L, 0, &result);
+    printf("协程状态: %s\n", getResumeState(state).c_str());
+    printf("L1 栈深度: %d\n", lua_gettop(L1));
+    printf("返回值个数: %d\n", result);
+    printf("------------ L1 栈内容：------------\n");
+    stackDump(L1);
 
     lua_close(L);
+}
 
+void copyStackElement() {
+    lua_State *L = luaL_newstate();
+    luaL_openlibs(L);
+    lua_State *L1 = lua_newthread(L);
+
+    // 新线程中执行 Lua 脚本
+    std::string fname = PROJECT_PATH + "/12、线程和状态/thread/copy_statck.lua";
+    if (luaL_loadfile(L1, fname.c_str()) || lua_pcall(L1, 0, 0, 0)) {
+        printf("can't run config. file: %s", lua_tostring(L1, -1));
+    }
+
+    // 获取 L1 中的 lua 文件的函数 foo
+    lua_getglobal(L1, "foo");
+    // 压入 integer
+    lua_pushinteger(L1, 5);
+    // 调用函数 foo(5) -> "江澎涌", 25
+    lua_call(L1, 1, 2);
+
+    printf("------------ 主线程 L 栈内容（xmove 前）：--------------\n");
+    stackDump(L);
+
+    printf("------------ 新线程 L1 栈内容（xmove 前）：--------------\n");
+    stackDump(L1);
+    // 从 L1 中拷贝 1 个元素到 L 中（会将 L1 元素弹出）
+    lua_xmove(L1, L, 2);
+
+    printf("------------ 主线程 L 栈内容（xmove 后）：--------------\n");
+    stackDump(L);
+
+    printf("------------ 新线程 L1 栈内容（xmove 后）：--------------\n");
+    stackDump(L1);
+}
+
+void threadDemo() {
+    printf("=================== 创建新线程 ===================\n");
+    createThread();
+
+    printf("=================== 协程 ===================\n");
+    useThread();
+
+    printf("=================== 线程栈元素拷贝 ===================\n");
+    copyStackElement();
 }

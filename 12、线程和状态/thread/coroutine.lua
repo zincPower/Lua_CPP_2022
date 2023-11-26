@@ -5,14 +5,14 @@
 ---
 
 function foo(x)
+    -- 协程挂起，并返回两个数据
     coroutine.yield(10, x)
 end
 
 function foo1(x)
     foo(x + 1)
-    return 3
-end
 
-function foo2(x)
-    return x * x
+    primCFunction()
+
+    return 3
 end
