@@ -56,7 +56,7 @@ void tupleDemo() {
     luaL_openlibs(L);
     luaopen_tuple(L);
 
-    std::string filename = PROJECT_PATH + "/9、C函数中保存状态/tuple/tuple.lua";
+    std::string filename = PROJECT_PATH + "/9、C函数中如何保存Lua的数据/tuple/tuple.lua";
     if (luaL_loadfile(L, filename.c_str()) || lua_pcall(L, 0, 0, 0)) {
         printf("can't run config. file: %s", lua_tostring(L, -1));
     }

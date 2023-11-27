@@ -95,25 +95,25 @@ add_executable(
         8、编写C函数便捷技巧/main.cpp
         8、编写C函数便捷技巧/数组便捷存取/LuaArray.cpp
         8、编写C函数便捷技巧/字符串便捷操作/LuaString.cpp
-        9、C函数中保存状态/注册表/注册表.cpp
-        9、C函数中保存状态/共享上值/共享上值.cpp
-        9、C函数中保存状态/上值/上值.cpp
-        9、C函数中保存状态/tuple/tuplelib.cpp
-        9、C函数中保存状态/共享上值/共享上值.cpp
+        9、C函数中如何保存Lua的数据/注册表/注册表.cpp
+        9、C函数中如何保存Lua的数据/共享上值/共享上值.cpp
+        9、C函数中如何保存Lua的数据/上值/上值.cpp
+        9、C函数中如何保存Lua的数据/tuple/tuplelib.cpp
+        9、C函数中如何保存Lua的数据/共享上值/共享上值.cpp
         config/env_config.cpp
         utils/lua_ext.cpp
 )
 target_link_libraries(8_C_Function_Skill LuaLib)
 
-# 9、C函数中保存状态
+# 9、C函数中如何保存Lua的数据
 add_executable(
         9_C_Save_State
-        9、C函数中保存状态/main.cpp
-        9、C函数中保存状态/注册表/注册表.cpp
-        9、C函数中保存状态/共享上值/共享上值.cpp
-        9、C函数中保存状态/上值/上值.cpp
-        9、C函数中保存状态/tuple/tuplelib.cpp
-        9、C函数中保存状态/共享上值/共享上值.cpp
+        9、C函数中如何保存Lua的数据/main.cpp
+        9、C函数中如何保存Lua的数据/注册表/注册表.cpp
+        9、C函数中如何保存Lua的数据/共享上值/共享上值.cpp
+        9、C函数中如何保存Lua的数据/上值/上值.cpp
+        9、C函数中如何保存Lua的数据/tuple/tuplelib.cpp
+        9、C函数中如何保存Lua的数据/共享上值/共享上值.cpp
         config/env_config.cpp
         utils/lua_ext.cpp
 )
