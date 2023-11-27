@@ -65,6 +65,23 @@ void createThread() {
     printf("------------ 新线程 L1 栈内容：------------\n");
     stackDump(L1);
 
+    // 向 L 的注册表插入数据，从 L1 中获取数据
+    printf("L 注册表插入数据，L1 获取对应数据\n");
+    const char *key = "thread-demo-name";
+    lua_pushstring(L, "江澎涌");
+    lua_setfield(L, LUA_REGISTRYINDEX, key);
+    lua_getfield(L1, LUA_REGISTRYINDEX, key);
+    stackDump(L1);
+    lua_pop(L1, 1);
+
+    // 向 L 插入全局数据，从 L1 获取全局数据
+    printf("L 插入全局数据，L1 获取全局数据\n");
+    lua_pushstring(L, "29");
+    lua_setglobal(L, "age");
+    lua_getglobal(L1, "age");
+    stackDump(L1);
+    lua_pop(L1, 1);
+
     lua_close(L);
 }
 
@@ -124,7 +141,7 @@ void copyStackElement() {
     lua_State *L1 = lua_newthread(L);
 
     // 新线程中执行 Lua 脚本
-    std::string fname = PROJECT_PATH + "/12、线程和状态/thread/copy_statck.lua";
+    std::string fname = PROJECT_PATH + "/12、线程和状态/thread/copy_stack.lua";
     if (luaL_loadfile(L1, fname.c_str()) || lua_pcall(L1, 0, 0, 0)) {
         printf("can't run config. file: %s", lua_tostring(L1, -1));
     }
